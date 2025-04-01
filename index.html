@@ -1177,9 +1177,9 @@
           <p><strong>Necessity of SFT.</strong> Initial SFT (blue) provides a better starting point for OFT, leading to stable performance gains. Without it (purple), OFT struggles, highlighting SFT's role in establishing a good base for effective training.
           </p>
 
-          <p><strong>Masking Strategy As A Denoiser.</strong> Without masking (yellow), performance is erratic with collapse. Lowering the learning rate (red) prevents collapse but doesn't improve the model. Masking likely prevents the model from treating all features as equally important, reducing noise and enabling stable improvement (green).
+          <p><strong>Masking Strategy As A Denoiser.</strong> Without masking (yellow), performance is erratic with collapse. Lowering the learning rate (red) prevents collapse but doesn't improve the model. Masking likely prevents the model from treating all features as equally important, reducing noise and enabling stable improvement.
           </p>
-          
+
           <d-figure id="fig-vision_connector">
             <figure>
                 <img data-zoomable="" draggable="false" src="static/images/case.png" style="width: 80%;display: block; margin: 0 auto;">
@@ -1221,6 +1221,19 @@
   // 默认显示 Table 1
   showTable1Button.classList.add('active');
 </script>
+
+
+<footer class="footer">
+  <div align="center" class="container">
+      <div class="columns is-centered">
+          <div class="content is-small">
+              This website templated is borrowed from <a
+                  href="https://github.com/nerfies/nerfies.github.io">nerfies</a>.
+          </div>
+      </div>
+  </div>
+</footer>
+
 </body>
 </html>
 
