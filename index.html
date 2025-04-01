@@ -1158,17 +1158,28 @@
           </p>
 
           <p><strong>Online fine-tuning.</strong> In this phase, we implement a masked online fine-tuning approach, incorporating SciScore as a reward model to direct the learning process through the DPO training objective.
+          </p>
 
           <d-figure id="fig-vision_connector">
             <figure>
                 <img data-zoomable="" draggable="false" src="static/images/train_pipeline.png" style="width: 80%;display: block; margin: 0 auto;">
                 <figcaption>
-                  <strong>Fig 5:</strong> Online fine-tuning pipeline. For each prompt, two images are generated to compute SciScore preference metric. Simultaneously, GroundingDINO extracts segmentation masks from these images based on the prompts, which are then used to block gradient propagation in the corresponding spatial regions.
+                  <strong>Fig 5:</strong> Online fine-tuning pipeline. For each prompt, two images are generated to compute SciScore preference metric. Simultaneously, GroundingDINO extracts segmentation masks from these images based on the prompts, which are then used to block gradient propagation in the corresponding regions.
                 </figcaption>
             </figure>
           </d-figure>
 
           <h3 class="title is-4">Experiment & Ablation Study</h3>
+
+          <p><strong>Generalization to Complex Scenes.</strong> Finetuned FLUX on Science-T2I-C generalizes well to complex scenes. This suggests the model learned scientific principles, not just memorized examples.
+          </p>
+
+          <p><strong>Necessity of SFT.</strong> Initial SFT (blue) provides a better starting point for OFT, leading to stable performance gains. Without it (purple), OFT struggles, highlighting SFT's role in establishing a good base for effective training.
+          </p>
+
+          <p><strong>Masking Strategy As A Denoiser.</strong> Without masking (yellow), performance is erratic with collapse. Lowering the learning rate (red) prevents collapse but doesn't improve the model. Masking likely prevents the model from treating all features as equally important, reducing noise and enabling stable improvement (green).
+          </p>
+          
           <d-figure id="fig-vision_connector">
             <figure>
                 <img data-zoomable="" draggable="false" src="static/images/case.png" style="width: 80%;display: block; margin: 0 auto;">
