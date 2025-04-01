@@ -1163,7 +1163,17 @@
             <figure>
                 <img data-zoomable="" draggable="false" src="static/images/train_pipeline.png" style="width: 80%;display: block; margin: 0 auto;">
                 <figcaption>
-                  <strong>Fig 5:</strong> Online fine-tuning pipeline.
+                  <strong>Fig 5:</strong> Online fine-tuning pipeline. For each prompt, two images are generated to compute SciScore preference metric. Simultaneously, GroundingDINO extracts segmentation masks from these images based on the prompts, which are then used to block gradient propagation in the corresponding spatial regions.
+                </figcaption>
+            </figure>
+          </d-figure>
+
+          <h3 class="title is-4">Experiment & Ablation Study</h3>
+          <d-figure id="fig-vision_connector">
+            <figure>
+                <img data-zoomable="" draggable="false" src="static/images/case.png" style="width: 80%;display: block; margin: 0 auto;">
+                <figcaption>
+                  <strong>Fig 7:</strong> Case study. The upper images are generated using the base FLUX.1[dev], whereas the lower images are produced with our fine-tuning method. Each image pair utilizes an identical random seed to ensure consistency in comparison. Note that the displayed prompts are summaries of the original prompts.
                 </figcaption>
             </figure>
           </d-figure>
