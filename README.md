@@ -1,1 +1,1 @@
-# video-mme.github.io
+# jialuo-li.github.io/Science-T2I-Web/
