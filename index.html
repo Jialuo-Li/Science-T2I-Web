@@ -1171,8 +1171,26 @@
 
           <h3 class="title is-4">Experiment & Ablation Study</h3>
 
+          <d-figure id="fig-vision_connector">
+            <figure>
+                <img data-zoomable="" draggable="false" src="static/images/exp_tuning.png" style="width: 80%;display: block; margin: 0 auto;">
+                <figcaption>
+                  <strong>Tab 3:</strong> Average SciScore on various methods.
+                </figcaption>
+            </figure>
+          </d-figure>
+
           <p><strong>Generalization to Complex Scenes.</strong> Finetuned FLUX on Science-T2I-C generalizes well to complex scenes. This suggests the model learned scientific principles, not just memorized examples.
           </p>
+
+          <d-figure id="fig-vision_connector">
+            <figure>
+                <img data-zoomable="" draggable="false" src="static/images/score_averages.png" style="width: 80%;display: block; margin: 0 auto;">
+                <figcaption>
+                  <strong>Fig 6:</strong> Ablation study of two-stage training. 
+                </figcaption>
+            </figure>
+          </d-figure>
 
           <p><strong>Necessity of SFT.</strong> Initial SFT (blue) provides a better starting point for OFT, leading to stable performance gains. Without it (purple), OFT struggles, highlighting SFT's role in establishing a good base for effective training.
           </p>
