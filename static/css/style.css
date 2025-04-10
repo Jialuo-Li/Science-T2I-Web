@@ -266,23 +266,6 @@ body {
     text-align: center;  /* Center align the text */
 }
 
-@media (max-width: 768px) {
-
-  .byline-column {
-    margin-bottom: 20px; /* Space between columns */
-    flex: 1;
-  }
-
-  .byline-column h3 {
-    font-size: 16px;
-  }
-
-  .byline-column p {
-    font-size: 14px;
-    line-height: 1em;
-    margin-bottom: 0.45em;
-  }
-}
 .author-link, .affiliation-link {
     font-size: larger;
     color: black; /* Set the color to match the other text */
