@@ -1556,13 +1556,6 @@ body {
   display: flex;
 }
 
-.icon-item img {
-  width: 30px;
-  height: 30px;
-  margin-right: 1em;
-  filter: invert(87%) sepia(11%) saturate(748%) hue-rotate(340deg) brightness(110%) contrast(100%);
-}
-
 .icon-item-world {
 align-items: center;
 display: flex;
@@ -1581,4 +1574,30 @@ border: 1px solid red;
 .icon-item img {
   margin-bottom: 1em;
 }
+}
+
+
+.icon-item img {
+  width: 30px;
+  height: 30px;
+  margin-right: 1em;
+  filter: invert(60%) sepia(57%) saturate(2133%) hue-rotate(208deg) brightness(92%) contrast(90%);
+
+}
+
+.icon-jump {
+  height: 1.8em; /* Set a fixed height for all icons */
+  width: auto; /* Adjust width to maintain aspect ratio */
+  margin-bottom: 5px; /* Space between icon and text */
+  filter: invert(100%); /* Invert the color of the icon */
+}
+
+.icon-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap; /* Allow wrapping to the next line */
+  width: 100%;
+  padding: 20px; /* Padding around the images */
+  line-height: 1rem;
 }
