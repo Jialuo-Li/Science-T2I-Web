@@ -1,12 +1,12 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <title>PISA Experiments: Exploring Physics Post-Training for Video Diffusion Models by Watching Stuff Drop</title>
-        <link rel="icon" type="image/x-icon" href="static/img/icons/tower_icon.png">
+        <title>Science-T2I: Addressing Scientific Illusions in Image Synthesis</title>
+        <link rel="icon" type="image/x-icon" href="static/img/icon/Science-T2I.png">
 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta property="og:url" content="https://vision-x-nyu.github.io/pisa-experiments.github.io/" />
+        <meta property="og:url" content="https://jialuo-li.github.io/Science-T2I-Web/" />
         <meta property="og:image" content="https://vision-x-nyu.github.io/pisa-experiments.github.io/static/img/preview.png" />
         <meta property="og:title" content="PISA Experiments: Exploring Physics Post-Training for Video Diffusion Models by Watching Stuff Drop" />
         <meta property="og:description" content="We introduce the PISA (Physics-Informed Simulation and Alignment) framework for studying physics post-training in the context of the dropping task." />
@@ -79,13 +79,13 @@
                             </span>
                             <span>pdf</span>
                         </a>
-                        <a href="https://github.com/vision-x-nyu/pisa-experiments" class="button" target="_blank">
+                        <a href="https://github.com/Jialuo-Li/Science-T2I" class="button" target="_blank">
                             <span class="icon is-small">
                                 <i class="fab fa-github"></i>
                             </span>
                             <span>Code</span>
                         </a>
-                        <a href="https://huggingface.co/datasets/nyu-visionx/pisa-experiments" class="button" target="_blank">
+                        <a href="https://huggingface.co/collections/Jialuo21/science-t2i-67d3bfe43253da2bc7cfaf06" class="button" target="_blank">
                             <span class="icon is-small">
                                 <img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" alt="Hugging Face logo" style="height: 1em;">
                             </span>
@@ -103,40 +103,48 @@
             <div class="byline-container">
                 <div class="byline-column">
                     <h3>Authors</h3>
-                    <p><a href="https://lichenyu20.github.io/" class="author-link" target="_blank">Chenyu Li</a> <sup>△*</sup></p>
-                    <p><a href="https://ojmichel.github.io/" class="author-link" target="_blank">Oscar Michel</a> <sup>△*</sup></p>
-                    <p><a href="https://xichenpan.com/" class="author-link" target="_blank">Xichen Pan</a> <sup>△</sup></p>
-                    <p><a href="https://www.linkedin.cn/incareer/in/sainan-stephanie-liu" class="author-link" target="_blank">Sainan Liu</a> <sup>▲</sup></p>
-                    <p><a href="https://mikeroberts3000.github.io/" class="author-link" target="_blank">Mike Roberts</a> <sup>▲</sup></p>
+                    <p><a href="https://jialuo-li.github.io/" class="author-link" target="_blank">Jialuo Li</a> <sup>△</sup></p>
+                    <p><a href="https://rese1f.github.io/" class="author-link" target="_blank">Wenhao Chai</a> <sup>▲</sup></p>
+                    <p><a href="https://zeyofu.github.io/" class="author-link" target="_blank">Xingyu Fu</a> <sup>◆</sup></p>
+                    <p><a href="https://xxuhaiyang.github.io/" class="author-link" target="_blank">Haiyang Xu</a> <sup>◇</sup></p>
                     <p><a href="https://www.sainingxie.com/" class="author-link" target="_blank">Saining Xie</a> <sup>△</sup></p>
                 </div>
                 <div class="byline-column">
                     <h3>Affiliations</h3>
                     <p>
                         <sup>△</sup>
-                        <a href="https://cs.nyu.edu/home/index.html" class="affiliation-link" target="_blank">New York University</a>
+                        <a class="affiliation-link" target="_blank">New York University</a>
                     </p>
                     <p>
                         <sup>▲</sup>
-                        <a href="https://www.intel.com/content/www/us/en/research/overview.html" class="affiliation-link" target="_blank">Intel Labs</a>
+                        <a class="affiliation-link" target="_blank">University of Washington</a>
                     </p>
-                    <br>
-                    <br>
-                    <br>
-                    <p style="text-align: center; margin: 0;">
-                        <span class="author-note">
-                            <sup>*</sup>Equal contribution
-                        </span>
+                    <p>
+                        <sup>◆</sup>
+                        <a class="affiliation-link" target="_blank">University of Pennsylvania</a>
+                    </p>
+                    <p>
+                        <sup>◇</sup>
+                        <a class="affiliation-link" target="_blank">University of California, San Diego</a>
                     </p>
                 </div>
                 <div class="byline-column">
                     <h3>Date</h3>
                     <p>
-                        Mar. 12<sup>th</sup>, 2025
+                        April. 10<sup>th</sup>, 2025
                     </p>
                 </div>
             </div>
         </div>
+        
+        <d-figure id="fig-real-stat">
+            <figure>
+                <img data-zoomable="" draggable="false" src="static/img/teaser.png" alt="Real World Data Statistics">
+                <figcaption>
+                    <strong>Fig 1:</strong> When presented with knowledge-implicit prompts, can LMMs and VLMs effectively distinguish between real and fake scientific images? Can generative models produce scientifically plausible images from such prompts? Does fine-tuning generative models with relevant data enhance their ability to generalize based on knowledge? To explore these questions, we establish a benchmark for evaluating LMMs and VLMs, construct a dataset to train a reward model which can then serve as a reliable tool for assessing generative models, and fine-tune generative models to investigate the generalization.
+                </figcaption>
+            </figure>
+        </d-figure>
 
         <p class="text abstract">
             <strong>TLDR:</strong> Large-scale pre-trained video generation models excel in content creation but are not reliable as physically accurate world simulators out of the box, even for tasks as simple as modeling object freefall. To remedy this problem, we zoom in on the task of gravitational freefall and introduce PisaBench, a benchmark to study physics post-training for video diffusion models. We find a two-stage post-training process on simulated data consisting of supervised finetuning followed by a novel reward modeling process to be highly effective. Our post-trained open-source models outperforms state-of-the-art commercial models like Sora on unseen real-world data. We conclude our study by revealing some key limitations of post-training in generalization and distribution modeling. 
