@@ -240,82 +240,77 @@
             <p class="text"><strong>Data curation.</strong> We utilize GPT-4o to create templates and generate corresponding prompts during the data curation process. These outputs are then used to guide T2I models for image generation. Following this, human annotators review and filter the data, incorporating insights from an additional website knowledgebase to ensure the reliability and accuracy of the final dataset.
             </p>
             
-            <p class="text">
-                <p class="text">
-                    As shown in <a href="#tab:evaluation_results">Table 1</a>, the results of running the baseline models on the benchmark indicate a consistent failure to generate physically accurate dropping behavior, despite the visual realism of their generated frames.
-                    Qualitatively, we see common failure cases in the above showcases, such as implausible object deformations, floating, hallucination of new objects, and unrealistic special effects. We further visualize a random subset of generated trajectories on the left of <a href="#fig:trajectory">Figure 3</a>. In many cases, the object remains completely static, and sometimes the object even moves upward. When downward motion is present, it is often slow or contains unrealistic horizontal movement.
-                </p>
-            </p>
-            <d-figure id="fig:trajectory">
-                <figure>
-                    <img data-zoomable="" draggable="false" src="static/img/trajectory.png" alt="trajectory visulization">
-                    <figcaption>
-                        <strong>Figure 3: Trajectory visualization. </strong>On the left, we plot random trajectories from the baseline models in Table 1. On the right, we show random trajectories from our fine-tuned model. The baseline trajectories exhibit unrealistic behavior, and most of them stay completely static. On the right, we see the trajectories consistently falling downward with collision and rolling behavior being modeled after the point of contact.
-                    </figcaption>
-                </figure>
-            </d-figure>
-        </div>
-        
-        <div id="post-training">
-            <h1 class="text">Physics Post-Training</h1>
-            <p class="text">
-                <p class="text">
-                    We present a post-training process to address the limitations of current models. We utilize simulated videos that demonstrate realistic dropping behavior. Our approach for post-training is inspired by the two-stage pipeline consisting of supervised fine-tuning followed by reward modeling commonly used in LLMs.
-                </p>
-            </p>
-            <p class="text">
-                <p class="text">
-                    <strong>Simulated Adaptation Data. </strong>
-                    We use Kubric to create simulated videos of objects dropping and colliding with other objects on the ground. Each video consists of 1-6 dropping objects onto a (possibly empty) pile of up to 4 objects underneath them. The videos are 2 seconds long, consisting of 32 frames at 16 fps. The objects are sourced from the Google Scanned Objects (GSO) dataset, which provides true-to-scale 3D models created from real-world scans across diverse categories.
-                </p>
-            </p>
-            <p class="text">
-                <p class="text">
-                    <strong>Physics Supervised Fine-Tuning (PSFT). </strong>
-                    In the first stage, we use the pretrained Open-Sora v1.2 as our base model and fine-tune it on our simulated video dataset. We employ Open-Sora v1.2's rectified flow training objective without modification.
-                    We have the following findings:
-                    <ol class="text">
-                        <li>Fine-tuning with this data alone is sufficient to induce realistic dropping behavior in the model. (See <a href="#tab:evaluation_results">Table 1</a>)</li>
-                        <li>Only 5,000 samples are needed to achieve optimal results. (See <a href="fig:training_curve">Figure 4</a>)</li>
-                        <li>The learned knowledge from Open-Sora's pretraining plays a critical role in our task. (See <a href="fig:training_curve">Figure 4</a>)</li>
-                    </ol>
-                </p>
-                <d-figure id="fig:training_curve">
-                    <figure>
-                        <img data-zoomable="" draggable="false" src="static/img/training_curve.png" alt="training curve">
-                        <figcaption>
-                            <strong>Figure 4. </strong>Plots (a), (b), and (c) demonstrate that our metrics tend to improve with further training and that leveraging a pre-trained video diffusion model enhances performance compared to random initialization. In plot (d), the size of the training dataset varies in each training run (each consisting of 5k steps). With only 5k samples, we can achieve optimal results.
-                        </figcaption>
-                    </figure>
-                </d-figure>
-            </p>
-            <p class="text">
-                <p class="text">
-                    <strong>Object Reward Optimization (ORO). </strong>
-                    In the second stage, we propose an approach Object Reward Optimization (ORO) to use reward gradients to guide the video generation model toward generating videos where the object's motion and shape more closely align with the ground truth. We use a pretrained vision model (depth, optical flow, and segmentation) to compare the signals derived from the model's generation with the ground truth. This reward can then be backprobagated to the model through its denoising steps. Our approach is similar to the <a href="https://vader-vid.github.io/" target="_blank">VADER</a> framework, please see our paper for more details.
-                </p>
-            </p>
-            <p class="text">
-                <p class="text">
-                We utilize SAM 2, RAFT, and Depth-Anything-V2 to generate segmenation masks, optical flow, and depth maps of the falling objects and define <strong>Segmentation Reward</strong>, <strong>Optical Flow Reward</strong>, and <strong>Depth Reward</strong> as follows:
-                \[
-                \begin{equation}
-                R_{\text{seg}}(x_0', x_0) = \operatorname{IoU}(M^{\text{gen}}, M^{\text{gt}})\\
-                R_{\text{flow}}(x_0', x_0) = -|V^{\text{gen}} - V^{\text{gt}}| \\
-                R_{\text{depth}}(x_0', x_0) = -|D^{\text{gen}} - D^{\text{gt}}|
-                \end{equation}
-                \]
-                </p>
-            </p>
-            <p class="text">
-                <p class="text">
-                We begin from the checkpoint of the first stage, which is trained on 5,000 samples trained over 5,000 gradient steps. We then fine-tune the model with ORO on the smiulated dataset. We have the following findings:
-                <ol class="text">
-                    <li>Incorporating ORO in reward modeling further improves performance. (See <a href="#tab:evaluation_results">Table 1</a>)</li>
-                    <li>Each reward function enhances the aspect of physicality that aligns with its intended purpose—segmentation rewards improve shape accuracy, while flow rewards and depth rewards improve motion accuracy. (See <a href="#tab:evaluation_results">Table 1</a>)</li>
-                </ol>
-            </p>
-        </div>
+            
+            <h2 class="title is-3" style="text-align: center;">Science-T2I Examples</h2>
+            <div id="results-carousel" class="carousel results-carousel">  
+            
+                <div class="content has-text-centered">
+                <img src="static/images/cases/absorption.png" style="width: 90%; margin-left: 60px;"/>
+                <br>
+                </div>
+                <div class="content has-text-centered">
+                <img src="static/images/cases/buoyancy.png" style="width: 90%; margin-left: 60px;"/>
+                <br>
+                </div>
+                <div class="content has-text-centered">
+                <img src="static/images/cases/dark.png" style="width: 90%; margin-left: 60px;"/>
+                <br>
+                </div>
+                <div class="content has-text-centered">
+                <img src="static/images/cases/diffusion.png" style="width: 90%; margin-left: 60px;"/>
+                <br>
+                </div>
+                <div class="content has-text-centered">
+                <img src="static/images/cases/electricity.png" style="width: 90%; margin-left: 60px;"/>
+                <br>
+                </div>
+                <div class="content has-text-centered">
+                <img src="static/images/cases/evaporation.png" style="width: 90%; margin-left: 60px;"/>
+                <br>
+                </div>
+                <div class="content has-text-centered">
+                <img src="static/images/cases/flame.png" style="width: 90%; margin-left: 60px;"/>
+                <br>
+                </div>
+                <div class="content has-text-centered">
+                <img src="static/images/cases/gravity.png" style="width: 90%; margin-left: 60px;"/>
+                <br>
+                </div>
+                <div class="content has-text-centered">
+                <img src="static/images/cases/immisciblity.png" style="width: 90%; margin-left: 60px;"/>
+                <br>
+                </div>
+                <div class="content has-text-centered">
+                <img src="static/images/cases/liquidation.png" style="width: 90%; margin-left: 60px;"/>
+                <br>
+                </div>
+                <div class="content has-text-centered">
+                <img src="static/images/cases/melting.png" style="width: 90%; margin-left: 60px;"/>
+                <br>
+                </div>
+                <div class="content has-text-centered">
+                <img src="static/images/cases/ripeness.png" style="width: 90%; margin-left: 60px;"/>
+                <br>
+                </div>
+                <div class="content has-text-centered">
+                <img src="static/images/cases/rust.png" style="width: 90%; margin-left: 60px;"/>
+                <br>
+                </div>
+                <div class="content has-text-centered">
+                <img src="static/images/cases/solidification.png" style="width: 90%; margin-left: 60px;"/>
+                <br>
+                </div>
+                <div class="content has-text-centered">
+                <img src="static/images/cases/tree.png" style="width: 90%; margin-left: 60px;"/>
+                <br>
+                </div>
+                <div class="content has-text-centered">
+                <img src="static/images/cases/water.png" style="width: 90%; margin-left: 60px;"/>
+                <br>
+                </div>
+
+            </div>
+
         <div id="generalization">
             <h1 class="text">Generalization Analysis</h1>
             <p class="text">
