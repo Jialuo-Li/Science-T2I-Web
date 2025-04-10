@@ -41,7 +41,7 @@
             integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
             crossorigin="anonymous"></script>
         <script type="text/javascript" src="https://unpkg.com/tabulator-tables@5.5.2/dist/js/tabulator.min.js"></script>
-
+        <script type="text/javascript" src="static/js/sort-table.js" defer></script>
 
         <!-- Stylesheets -->
         <link rel="stylesheet" href="./static/css/style.css">
@@ -53,7 +53,8 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
                 integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <link href="https://unpkg.com/tabulator-tables@5.5.2/dist/css/tabulator_bootstrap4.min.css" rel="stylesheet">
-                
+        <link rel="stylesheet" href="./static/css/leaderboard.css">
+
         <!-- KaTeX -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
         <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script>
@@ -363,6 +364,622 @@
                 </script>
             </div>
         </div>
+
+        <div id="table1Container">
+            <div style="width: 100%; margin:0 auto; text-align: center">
+              <table id="sortableTable1">
+                <thead>
+                    <tr>
+                        <th style="vertical-align: middle; text-align: center;" rowspan="2">#</th>
+                        <th style="vertical-align: middle; text-align: center;" rowspan="2">Model</th>
+                        <th colspan="1">Overall</th>
+                        <th colspan="10">Physics</th>
+                        <th colspan="4">Chemistry</th>
+                        <th colspan="5">Biology</th>
+                    </tr>
+                    <tr>
+                        <th onclick="sortTable('sortableTable1', 2)">Acc</th>
+                        <th onclick="sortTable('sortableTable1', 3)">GR</th>
+                        <th onclick="sortTable('sortableTable1', 4)">SO</th>
+                        <th onclick="sortTable('sortableTable1', 5)">ME</th>
+                        <th onclick="sortTable('sortableTable1', 6)">AB</th>
+                        <th onclick="sortTable('sortableTable1', 7)">BU</th>
+                        <th onclick="sortTable('sortableTable1', 8)">DI</th>
+                        <th onclick="sortTable('sortableTable1', 9)">EL</th>
+                        <th onclick="sortTable('sortableTable1', 10)">EV</th>
+                        <th onclick="sortTable('sortableTable1', 11)">LI</th>
+                        <th onclick="sortTable('sortableTable1', 12)">Avg</th>
+                        <th onclick="sortTable('sortableTable1', 13)">RU</th>
+                        <th onclick="sortTable('sortableTable1', 14)">IM</th>
+                        <th onclick="sortTable('sortableTable1', 15)">FR</th>
+                        <th onclick="sortTable('sortableTable1', 16)">Avg</th>
+                        <th onclick="sortTable('sortableTable1', 17)">LR</th>
+                        <th onclick="sortTable('sortableTable1', 18)">WR</th>
+                        <th onclick="sortTable('sortableTable1', 19)">SC</th>
+                        <th onclick="sortTable('sortableTable1', 20)">RI</th>
+                        <th onclick="sortTable('sortableTable1', 21)">Avg</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>
+                      <div style="display: inline-block; text-align: center;">
+                          <a href="https://github.com/openai/CLIP">CLIP-H</a>
+                          <div style="display: block; font-size: 8px; color: #858383;">VLM</div>
+                      </div>
+                    </td>
+                    <td>54.7</td>
+                    <td>78.3</td>
+                    <td>40.5</td>
+                    <td>25.0</td>
+                    <td>57.1</td>
+                    <td>63.9</td>
+                    <td>71.4</td>
+                    <td>47.6</td>
+                    <td>26.7</td>
+                    <td>77.8</td>
+                    <td>55.1</td>
+                    <td>16.7</td>
+                    <td>54.2</td>
+                    <td>77.8</td>
+                    <td>52.4</td>
+                    <td>62.2</td>
+                    <td>31.1</td>
+                    <td>81.5</td>
+                    <td>34.6</td>
+                    <td>55.9</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>
+                      <div style="display: inline-block; text-align: center;">
+                          <a href="https://github.com/salesforce/BLIP">BLIPScore</a>
+                          <div style="display: block; font-size: 8px; color: #858383;">VLM</div>
+                      </div>
+                    </td>
+                    <td>55.0</td>
+                    <td>47.5</td>
+                    <td>44.1</td>
+                    <td>56.9</td>
+                    <td>38.1</td>
+                    <td>50.0</td>
+                    <td>50.0</td>
+                    <td>52.4</td>
+                    <td>20.0</td>
+                    <td>33.3</td>
+                    <td>50.4</td>
+                    <td>42.9</td>
+                    <td>53.1</td>
+                    <td>76.7</td>
+                    <td>43.1</td>
+                    <td>76.7</td>
+                    <td>38.9</td>
+                    <td>58.3</td>
+                    <td>38.5</td>
+                    <td>59.9</td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>
+                      <div style="display: inline-block; text-align: center;">
+                          <a href="https://huggingface.co/docs/transformers/model_doc/siglip">SigLIP</a>
+                          <div style="display: block; font-size: 8px; color: #858383;">VLM</div>
+                      </div>
+                    </td>
+                    <td>57.2</td> <!-- overall -->
+                    <td>78.3</td> <!-- GR -->
+                    <td>45.2</td> <!-- SO -->
+                    <td>44.4</td> <!-- ME -->
+                    <td>57.1</td> <!-- AB --> 
+                    <td>58.3</td> <!-- BU -->
+                    <td>83.3</td> <!-- DI -->
+                    <td>47.6</td> <!-- EL -->
+                    <td>63.3</td> <!-- EV -->
+                    <td>58.3</td> <!-- LI -->
+                    <td>59.6</td> <!-- Avg phy -->
+                    <td>23.8</td> <!-- RU -->
+                    <td>60.4</td> <!-- IM -->
+                    <td>62.2</td> <!-- FR -->
+                    <td>53.2</td> <!-- Avg chem -->
+                    <td>46.7</td> <!-- LR -->
+                    <td>33.3</td> <!-- WR -->
+                    <td>83.3</td> <!-- SC -->
+                    <td>53.9</td> <!-- RI -->
+                    <td>55.9</td> <!-- Avg bio -->
+                  </tr>
+    
+                  <tr>
+                    <td>4</td>
+                    <td>
+                      <div style="display: inline-block; text-align: center;">
+                          <a href="https://huggingface.co/Qwen/Qwen2-VL-7B-Instruct">Qwen2-VL-7B</a>
+                          <div style="display: block; font-size: 8px; color: #858383;">LMM</div>
+                      </div>
+                    </td>
+                    <td>63.8</td> <!-- overall -->
+                    <td>83.3</td> <!-- GR -->
+                    <td>42.9</td> <!-- SO -->
+                    <td>26.4</td> <!-- ME -->
+                    <td>40.5</td> <!-- AB --> 
+                    <td>47.2</td> <!-- BU -->
+                    <td>70.2</td> <!-- DI -->
+                    <td>77.4</td> <!-- EL -->
+                    <td>68.3</td> <!-- EV -->
+                    <td>84.7</td> <!-- LI -->
+                    <td>60.0</td> <!-- Avg phy -->
+                    <td>73.8</td> <!-- RU -->
+                    <td>66.7</td> <!-- IM -->
+                    <td>52.2</td> <!-- FR -->
+                    <td>67.0</td> <!-- Avg chem -->
+                    <td>57.8</td> <!-- LR -->
+                    <td>67.8</td> <!-- WR -->
+                    <td>95.4</td> <!-- SC -->
+                    <td>34.6</td> <!-- RI -->
+                    <td>68.8</td> <!-- Avg bio -->
+                  </tr>
+    
+                  <tr>
+                    <td>5</td>
+                    <td>
+                      <div style="display: inline-block; text-align: center;">
+                          <a href="https://huggingface.co/lmms-lab/llava-onevision-qwen2-7b-ov">LLaVA-OV-7B</a>
+                          <div style="display: block; font-size: 8px; color: #858383;">LMM</div>
+                      </div>
+                    </td>
+                    <td>65.1</td> <!-- overall -->
+                    <td>92.5</td> <!-- GR -->
+                    <td>56.0</td> <!-- SO -->
+                    <td>36.1</td> <!-- ME -->
+                    <td>38.1</td> <!-- AB --> 
+                    <td>45.8</td> <!-- BU -->
+                    <td>75.0</td> <!-- DI -->
+                    <td>77.4</td> <!-- EL -->
+                    <td>100</td> <!-- EV -->
+                    <td>95.8</td> <!-- LI -->
+                    <td>68.2</td> <!-- Avg phy -->
+                    <td>59.5</td> <!-- RU -->
+                    <td>55.2</td> <!-- IM -->
+                    <td>48.9</td> <!-- FR -->
+                    <td>57.8</td> <!-- Avg chem -->
+                    <td>51.1</td> <!-- LR -->
+                    <td>72.2</td> <!-- WR -->
+                    <td>78.7</td> <!-- SC -->
+                    <td>46.2</td> <!-- RI -->
+                    <td>64.7</td> <!-- Avg bio -->
+                  </tr>
+    
+                  <tr>
+                    <td>6</td>
+                    <td>
+                      <div style="display: inline-block; text-align: center;">
+                          <a>Human Eval</a>
+                      </div>
+                    </td>
+                    <td>87.0</td> <!-- overall -->
+                    <td>93.0</td> <!-- GR -->
+                    <td>86.1</td> <!-- SO -->
+                    <td>98.2</td> <!-- ME -->
+                    <td>66.7</td> <!-- AB --> 
+                    <td>74.6</td> <!-- BU -->
+                    <td>65.9</td> <!-- DI -->
+                    <td>95.6</td> <!-- EL -->
+                    <td>100</td> <!-- EV -->
+                    <td>82.1</td> <!-- LI -->
+                    <td>87.7</td> <!-- Avg phy -->
+                    <td>92.9</td> <!-- RU -->
+                    <td>77.8</td> <!-- IM -->
+                    <td>81.0</td> <!-- FR -->
+                    <td>75.9</td> <!-- Avg chem -->
+                    <td>96.9</td> <!-- LR -->
+                    <td>99.6</td> <!-- WR -->
+                    <td>90.7</td> <!-- SC -->
+                    <td>94.6</td> <!-- RI -->
+                    <td>95.3</td> <!-- Avg bio -->
+                  </tr>
+    
+                  <tr>
+                    <td>7</td>
+                    <td>
+                      <div style="display: inline-block; text-align: center;">
+                        <a href="https://huggingface.co/OpenGVLab/InternVL2_5-8B">InternVL2.5-8B</a>
+                        <div style="display: block; font-size: 8px; color: #858383;">LMM</div>
+                      </div>
+                    </td>
+                    <td>70.8</td> <!-- overall -->
+                    <td>96.7</td> <!-- GR -->
+                    <td>52.4</td> <!-- SO -->
+                    <td>41.7</td> <!-- ME -->
+                    <td>47.6</td> <!-- AB --> 
+                    <td>55.6</td> <!-- BU -->
+                    <td>63.1</td> <!-- DI -->
+                    <td>72.6</td> <!-- EL -->
+                    <td>91.7</td> <!-- EV -->
+                    <td>90.3</td> <!-- LI -->
+                    <td>67.8</td> <!-- Avg phy -->
+                    <td>69.1</td> <!-- RU -->
+                    <td>56.3</td> <!-- IM -->
+                    <td>52.2</td> <!-- FR -->
+                    <td>62.2</td> <!-- Avg chem -->
+                    <td>84.4</td> <!-- LR -->
+                    <td>90.0</td> <!-- WR -->
+                    <td>84.3</td> <!-- SC -->
+                    <td>75.0</td> <!-- RI -->
+                    <td>84.4</td> <!-- Avg bio -->
+                  </tr>
+    
+                  <tr>
+                    <td>8</td>
+                    <td>
+                      <div style="display: inline-block; text-align: center;">
+                        <a href="https://openai.com/index/gpt-4o-mini-advancing-cost-efficient-intelligence/">GPT-4o mini</a>
+                        <div style="display: block; font-size: 8px; color: #858383;">LMM</div>
+                      </div>
+                    </td>
+                    <td>70.8</td> <!-- overall -->
+                    <td>71.3</td> <!-- GR -->
+                    <td>35.7</td> <!-- SO -->
+                    <td>36.1</td> <!-- ME -->
+                    <td>33.3</td> <!-- AB --> 
+                    <td>56.9</td> <!-- BU -->
+                    <td>77.4</td> <!-- DI -->
+                    <td>82.1</td> <!-- EL -->
+                    <td>100</td> <!-- EV -->
+                    <td>76.4</td> <!-- LI -->
+                    <td>62.0</td> <!-- Avg phy -->
+                    <td>95.2</td> <!-- RU -->
+                    <td>65.6</td> <!-- IM -->
+                    <td>58.9</td> <!-- FR -->
+                    <td>73.8</td> <!-- Avg chem -->
+                    <td>96.7</td> <!-- LR -->
+                    <td>83.3</td> <!-- WR -->
+                    <td>97.2</td> <!-- SC -->
+                    <td>53.9</td> <!-- RI -->
+                    <td>86.8</td> <!-- Avg bio -->
+                  </tr>
+    
+                  <tr>
+                    <td>9</td>
+                    <td>
+                      <div style="display: inline-block; text-align: center;">
+                        <a><strong>SciScore</strong></a>
+                        <div style="display: block; font-size: 8px; color: #858383;">VLM</div>
+                      </div>
+                    </td>
+                    <td>93.1</td> <!-- overall -->
+                    <td>98.3</td> <!-- GR -->
+                    <td>90.5</td> <!-- SO -->
+                    <td>100</td> <!-- ME -->
+                    <td>71.4</td> <!-- AB --> 
+                    <td>66.7</td> <!-- BU -->
+                    <td>97.6</td> <!-- DI -->
+                    <td>100</td> <!-- EL -->
+                    <td>100</td> <!-- EV -->
+                    <td>100</td> <!-- LI -->
+                    <td>94.9</td> <!-- Avg phy -->
+                    <td>100</td> <!-- RU -->
+                    <td>68.8</td> <!-- IM -->
+                    <td>97.8</td> <!-- FR -->
+                    <td>81.0</td> <!-- Avg chem -->
+                    <td>100</td> <!-- LR -->
+                    <td>100</td> <!-- WR -->
+                    <td>100</td> <!-- SC -->
+                    <td>100</td> <!-- RI -->
+                    <td>100</td> <!-- Avg bio -->
+                  </tr>
+    
+                </tbody>
+              </table>
+            </div>
+          </div>
+    
+          <div id="table2Container" style="display: none;">
+            <div style="width: 100%; margin:0 auto; text-align: center">
+              <table id="sortableTable2">
+                <thead>
+                    <tr>
+                        <th style="vertical-align: middle; text-align: center;" rowspan="2">#</th>
+                        <th style="vertical-align: middle; text-align: center;" rowspan="2">Model</th>
+                        <th colspan="1">Overall</th>
+                        <th colspan="10">Physics</th>
+                        <th colspan="4">Chemistry</th>
+                        <th colspan="5">Biology</th>
+                    </tr>
+                    <tr>
+                        <th onclick="sortTable('sortableTable2', 2)">Acc</th>
+                        <th onclick="sortTable('sortableTable2', 3)">GR</th>
+                        <th onclick="sortTable('sortableTable2', 4)">SO</th>
+                        <th onclick="sortTable('sortableTable2', 5)">ME</th>
+                        <th onclick="sortTable('sortableTable2', 6)">AB</th>
+                        <th onclick="sortTable('sortableTable2', 7)">BU</th>
+                        <th onclick="sortTable('sortableTable2', 8)">DI</th>
+                        <th onclick="sortTable('sortableTable2', 9)">EL</th>
+                        <th onclick="sortTable('sortableTable2', 10)">EV</th>
+                        <th onclick="sortTable('sortableTable2', 11)">LI</th>
+                        <th onclick="sortTable('sortableTable2', 12)">Avg</th>
+                        <th onclick="sortTable('sortableTable2', 13)">RU</th>
+                        <th onclick="sortTable('sortableTable2', 14)">IM</th>
+                        <th onclick="sortTable('sortableTable2', 15)">FR</th>
+                        <th onclick="sortTable('sortableTable2', 16)">Avg</th>
+                        <th onclick="sortTable('sortableTable2', 17)">LR</th>
+                        <th onclick="sortTable('sortableTable2', 18)">WR</th>
+                        <th onclick="sortTable('sortableTable2', 19)">SC</th>
+                        <th onclick="sortTable('sortableTable2', 20)">RI</th>
+                        <th onclick="sortTable('sortableTable2', 21)">Avg</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>
+                      <div style="display: inline-block; text-align: center;">
+                          <a href="https://github.com/openai/CLIP">CLIP-H</a>
+                          <div style="display: block; font-size: 8px; color: #858383;">VLM</div>
+                      </div>
+                    </td>
+                    <td>59.5</td> <!-- overall -->
+                    <td>75.0</td> <!-- GR -->
+                    <td>57.1</td> <!-- SO -->
+                    <td>66.7</td> <!-- ME -->
+                    <td>64.3</td> <!-- AB --> 
+                    <td>58.3</td> <!-- BU -->
+                    <td>78.6</td> <!-- DI -->
+                    <td>21.4</td> <!-- EL -->
+                    <td>0.0</td> <!-- EV -->
+                    <td>66.7</td> <!-- LI -->
+                    <td>56.6</td> <!-- Avg phy -->
+                    <td>35.7</td> <!-- RU -->
+                    <td>50.0</td> <!-- IM -->
+                    <td>46.7</td> <!-- FR -->
+                    <td>44.4</td> <!-- Avg chem -->
+                    <td>80.0</td> <!-- LR -->
+                    <td>60.0</td> <!-- WR -->
+                    <td>88.9</td> <!-- SC -->
+                    <td>75.0</td> <!-- RI -->
+                    <td>76.7</td> <!-- Avg bio -->
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>
+                      <div style="display: inline-block; text-align: center;">
+                          <a href="https://github.com/salesforce/BLIP">BLIPScore</a>
+                          <div style="display: block; font-size: 8px; color: #858383;">VLM</div>
+                      </div>
+                    </td>
+                    <td>51.5</td> <!-- overall -->
+                    <td>40.0</td> <!-- GR -->
+                    <td>42.9</td> <!-- SO -->
+                    <td>58.3</td> <!-- ME -->
+                    <td>50.0</td> <!-- AB --> 
+                    <td>62.5</td> <!-- BU -->
+                    <td>50.0</td> <!-- DI -->
+                    <td>28.6</td> <!-- EL -->
+                    <td>50.0</td> <!-- EV -->
+                    <td>29.2</td> <!-- LI -->
+                    <td>49.8</td> <!-- Avg phy -->
+                    <td>57.1</td> <!-- RU -->
+                    <td>62.5</td> <!-- IM -->
+                    <td>60.0</td> <!-- FR -->
+                    <td>60.0</td> <!-- Avg chem -->
+                    <td>53.3</td> <!-- LR -->
+                    <td>46.7</td> <!-- WR -->
+                    <td>75.0</td> <!-- SC -->
+                    <td>54.2</td> <!-- RI -->
+                    <td>58.3</td> <!-- Avg bio -->
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td>
+                      <div style="display: inline-block; text-align: center;">
+                          <a href="https://huggingface.co/docs/transformers/model_doc/siglip">SigLIP</a>
+                          <div style="display: block; font-size: 8px; color: #858383;">VLM</div>
+                      </div>
+                    </td>
+                    <td>61.7</td> <!-- overall -->
+                    <td>95.0</td> <!-- GR -->
+                    <td>42.9</td> <!-- SO -->
+                    <td>58.3</td> <!-- ME -->
+                    <td>64.3</td> <!-- AB --> 
+                    <td>66.7</td> <!-- BU -->
+                    <td>85.7</td> <!-- DI -->
+                    <td>42.9</td> <!-- EL -->
+                    <td>30.0</td> <!-- EV -->
+                    <td>41.7</td> <!-- LI -->
+                    <td>61.5</td> <!-- Avg phy -->
+                    <td>28.6</td> <!-- RU -->
+                    <td>62.5</td> <!-- IM -->
+                    <td>60.0</td> <!-- FR -->
+                    <td>51.1</td> <!-- Avg chem -->
+                    <td>46.7</td> <!-- LR -->
+                    <td>53.3</td> <!-- WR -->
+                    <td>94.4</td> <!-- SC -->
+                    <td>83.3</td> <!-- RI -->
+                    <td>70.0</td> <!-- Avg bio -->
+                  </tr>
+    
+                  <tr>
+                    <td>4</td>
+                    <td>
+                      <div style="display: inline-block; text-align: center;">
+                          <a href="https://huggingface.co/Qwen/Qwen2-VL-7B-Instruct">Qwen2-VL-7B</a>
+                          <div style="display: block; font-size: 8px; color: #858383;">LMM</div>
+                      </div>
+                    </td>
+                    <td>69.8</td> <!-- overall -->
+                    <td>100</td> <!-- GR -->
+                    <td>57.1</td> <!-- SO -->
+                    <td>41.7</td> <!-- ME -->
+                    <td>57.1</td> <!-- AB --> 
+                    <td>66.7</td> <!-- BU -->
+                    <td>64.3</td> <!-- DI -->
+                    <td>67.9</td> <!-- EL -->
+                    <td>55.0</td> <!-- EV -->
+                    <td>70.8</td> <!-- LI -->
+                    <td>66.8</td> <!-- Avg phy -->
+                    <td>60.7</td> <!-- RU -->
+                    <td>53.1</td> <!-- IM -->
+                    <td>36.7</td> <!-- FR -->
+                    <td>50.0</td> <!-- Avg chem -->
+                    <td>93.3</td> <!-- LR -->
+                    <td>96.7</td> <!-- WR -->
+                    <td>94.4</td> <!-- SC -->
+                    <td>75.0</td> <!-- RI -->
+                    <td>90.8</td> <!-- Avg bio -->
+                  </tr>
+    
+                  <tr>
+                    <td>5</td>
+                    <td>
+                      <div style="display: inline-block; text-align: center;">
+                          <a href="https://huggingface.co/lmms-lab/llava-onevision-qwen2-7b-ov">LLaVA-OV-7B</a>
+                          <div style="display: block; font-size: 8px; color: #858383;">LMM</div>
+                      </div>
+                    </td>
+                    <td>70.3</td> <!-- overall -->
+                    <td>100</td> <!-- GR -->
+                    <td>71.4</td> <!-- SO -->
+                    <td>45.8</td> <!-- ME -->
+                    <td>57.1</td> <!-- AB --> 
+                    <td>75.0</td> <!-- BU -->
+                    <td>71.4</td> <!-- DI -->
+                    <td>64.3</td> <!-- EL -->
+                    <td>100</td> <!-- EV -->
+                    <td>79.2</td> <!-- LI -->
+                    <td>74.6</td> <!-- Avg phy -->
+                    <td>53.6</td> <!-- RU -->
+                    <td>59.4</td> <!-- IM -->
+                    <td>36.7</td> <!-- FR -->
+                    <td>50.0</td> <!-- Avg chem -->
+                    <td>63.3</td> <!-- LR -->
+                    <td>86.7</td> <!-- WR -->
+                    <td>77.8</td> <!-- SC -->
+                    <td>79.2</td> <!-- RI -->
+                    <td>76.7</td> <!-- Avg bio -->
+                  </tr>
+    
+                  <tr>
+                    <td>6</td>
+                    <td>
+                      <div style="display: inline-block; text-align: center;">
+                          <a>Human Eval</a>
+                      </div>
+                    </td>
+                    <td>86.0</td> <!-- overall -->
+                    <td>98.6</td> <!-- GR -->
+                    <td>77.6</td> <!-- SO -->
+                    <td>91.0</td> <!-- ME -->
+                    <td>78.6</td> <!-- AB --> 
+                    <td>83.3</td> <!-- BU -->
+                    <td>66.8</td> <!-- DI -->
+                    <td>90.9</td> <!-- EL -->
+                    <td>95.7</td> <!-- EV -->
+                    <td>76.8</td> <!-- LI -->
+                    <td>84.7</td> <!-- Avg phy -->
+                    <td>92.9</td> <!-- RU -->
+                    <td>86.6</td> <!-- IM -->
+                    <td>77.1</td> <!-- FR -->
+                    <td>85.4</td> <!-- Avg chem -->
+                    <td>88.6</td> <!-- LR -->
+                    <td>84.8</td> <!-- WR -->
+                    <td>96.8</td> <!-- SC -->
+                    <td>83.8</td> <!-- RI -->
+                    <td>89.1</td> <!-- Avg bio -->
+                  </tr>
+    
+                  <tr>
+                    <td>7</td>
+                    <td>
+                      <div style="display: inline-block; text-align: center;">
+                        <a href="https://huggingface.co/OpenGVLab/InternVL2_5-8B">InternVL2.5-8B</a>
+                        <div style="display: block; font-size: 8px; color: #858383;">LMM</div>
+                      </div>
+                    </td>
+                    <td>75.3</td> <!-- overall -->
+                    <td>97.5</td> <!-- GR -->
+                    <td>53.6</td> <!-- SO -->
+                    <td>58.3</td> <!-- ME -->
+                    <td>57.1</td> <!-- AB --> 
+                    <td>75.0</td> <!-- BU -->
+                    <td>92.9</td> <!-- DI -->
+                    <td>57.1</td> <!-- EL -->
+                    <td>95.0</td> <!-- EV -->
+                    <td>70.8</td> <!-- LI -->
+                    <td>73.8</td> <!-- Avg phy -->
+                    <td>75.0</td> <!-- RU -->
+                    <td>71.9</td> <!-- IM -->
+                    <td>50.0</td> <!-- FR -->
+                    <td>65.6</td> <!-- Avg chem -->
+                    <td>90.0</td> <!-- LR -->
+                    <td>93.3</td> <!-- WR -->
+                    <td>75.0</td> <!-- SC -->
+                    <td>87.5</td> <!-- RI -->
+                    <td>85.8</td> <!-- Avg bio -->
+                  </tr>
+    
+                  <tr>
+                    <td>8</td>
+                    <td>
+                      <div style="display: inline-block; text-align: center;">
+                        <a href="https://openai.com/index/gpt-4o-mini-advancing-cost-efficient-intelligence/">GPT-4o mini</a>
+                        <div style="display: block; font-size: 8px; color: #858383;">LMM</div>
+                      </div>
+                    </td>
+                    <td>74.8</td> <!-- overall -->
+                    <td>97.5</td> <!-- GR -->
+                    <td>50.0</td> <!-- SO -->
+                    <td>67.7</td> <!-- ME -->
+                    <td>50.0</td> <!-- AB --> 
+                    <td>54.2</td> <!-- BU -->
+                    <td>67.9</td> <!-- DI -->
+                    <td>64.3</td> <!-- EL -->
+                    <td>90.0</td> <!-- EV -->
+                    <td>75.0</td> <!-- LI -->
+                    <td>69.3</td> <!-- Avg phy -->
+                    <td>89.3</td> <!-- RU -->
+                    <td>68.8</td> <!-- IM -->
+                    <td>53.3</td> <!-- FR -->
+                    <td>70.0</td> <!-- Avg chem -->
+                    <td>100</td> <!-- LR -->
+                    <td>83.3</td> <!-- WR -->
+                    <td>88.9</td> <!-- SC -->
+                    <td>87.5</td> <!-- RI -->
+                    <td>90.0</td> <!-- Avg bio -->
+                  </tr>
+    
+                  <tr>
+                    <td>9</td>
+                    <td>
+                      <div style="display: inline-block; text-align: center;">
+                        <a><strong>SciScore</strong></a>
+                        <div style="display: block; font-size: 8px; color: #858383;">VLM</div>
+                      </div>
+                    </td>
+                    <td>91.2</td> <!-- overall -->
+                    <td>100</td> <!-- GR -->
+                    <td>92.9</td> <!-- SO -->
+                    <td>100</td> <!-- ME -->
+                    <td>71.4</td> <!-- AB --> 
+                    <td>41.7</td> <!-- BU -->
+                    <td>85.7</td> <!-- DI -->
+                    <td>85.7</td> <!-- EL -->
+                    <td>100</td> <!-- EV -->
+                    <td>100</td> <!-- LI -->
+                    <td>86.9</td> <!-- Avg phy -->
+                    <td>92.9</td> <!-- RU -->
+                    <td>81.3</td> <!-- IM -->
+                    <td>100</td> <!-- FR -->
+                    <td>91.1</td> <!-- Avg chem -->
+                    <td>100</td> <!-- LR -->
+                    <td>100</td> <!-- WR -->
+                    <td>100</td> <!-- SC -->
+                    <td>100</td> <!-- RI -->
+                    <td>100</td> <!-- Avg bio -->
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+        </div>
+
         <div id="generalization">
             <h1 class="text">Generalization Analysis</h1>
             <p class="text">
