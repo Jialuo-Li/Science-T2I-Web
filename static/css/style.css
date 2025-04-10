@@ -21,86 +21,6 @@ body {
   margin: 0 auto;
 }
 
-
-.icon {
-    height: 1.8em; 
-    width: auto; 
-    margin-bottom: 5px; 
-}
-
-.icon-row {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap; 
-    width: 100%;
-    padding: 20px; 
-    line-height: 1rem;
-}
-
-.icon-link {
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
-    text-align: center; 
-    color: inherit; 
-    padding: 10px; 
-    margin: 10px; 
-    border: 3px solid #508af6;
-    border-radius: 10px;
-    background-color: #d6eefb;
-    flex: 1 1 100px; 
-}
-
-.icon-link:hover {
-    background-color: #88c2fa;
-}
-
-@media (max-width: 600px) {
-    .icon-link {
-        flex: 1 1 45%; 
-    }
-}
-
-
-.icon-container {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.icon-item {
-    align-items: center;
-    display: flex;
-}
-
-.icon-item img {
-    width: 30px;
-    height: 30px;
-    margin-right: 1em;
-    filter: invert(87%) sepia(11%) saturate(748%) hue-rotate(340deg) brightness(110%) contrast(100%);
-}
-
-.icon-item-world {
-  align-items: center;
-  display: flex;
-  border: 1px solid red;
-}
-
-.icon-item-world img {
-  width: 30px;
-  height: 30px;
-  margin-right: 1em;
-  border: 1px solid red; 
-  /* filter: invert(87%) sepia(11%) saturate(748%) hue-rotate(340deg) brightness(110%) contrast(100%); */
-}
-
-@media (max-width: 768px) {
-  .icon-item img {
-    margin-bottom: 1em;
-  }
-}
-
 .header-content strong {
     color: #ffe099;
 }
@@ -1580,4 +1500,85 @@ body {
 .click-hint2 strong {
   color: #007bff; /* Highlight the 'strong' element with a different color */
   /* text-decoration: underline; Underline the 'strong' text */
+}
+
+
+
+.icon {
+  height: 1.8em; 
+  width: auto; 
+  margin-bottom: 5px; 
+}
+
+.icon-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap; 
+  width: 100%;
+  padding: 20px; 
+  line-height: 1rem;
+}
+
+.icon-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  text-align: center; 
+  color: inherit; 
+  padding: 10px; 
+  margin: 10px; 
+  border: 3px solid #508af6;
+  border-radius: 10px;
+  background-color: #d6eefb;
+  flex: 1 1 100px; 
+}
+
+.icon-link:hover {
+  background-color: #88c2fa;
+}
+
+@media (max-width: 600px) {
+  .icon-link {
+      flex: 1 1 45%; 
+  }
+}
+
+
+.icon-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.icon-item {
+  align-items: center;
+  display: flex;
+}
+
+.icon-item img {
+  width: 30px;
+  height: 30px;
+  margin-right: 1em;
+  filter: invert(87%) sepia(11%) saturate(748%) hue-rotate(340deg) brightness(110%) contrast(100%);
+}
+
+.icon-item-world {
+align-items: center;
+display: flex;
+border: 1px solid red;
+}
+
+.icon-item-world img {
+width: 30px;
+height: 30px;
+margin-right: 1em;
+border: 1px solid red; 
+/* filter: invert(87%) sepia(11%) saturate(748%) hue-rotate(340deg) brightness(110%) contrast(100%); */
+}
+
+@media (max-width: 768px) {
+.icon-item img {
+  margin-bottom: 1em;
+}
 }
