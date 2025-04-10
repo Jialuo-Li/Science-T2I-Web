@@ -183,7 +183,8 @@
 
         <div id="science-t2i">
             <h1 class="text">Science-T2I: An Adversarial Dataset Spanning Scientific Disciplines</h1>
-            <p class="text"><strong>Task overview.</strong> Science-T2I consists of 16 tasks spanning physics, chemistry and biology that require the model to infer or visualize concepts not explicitly stated in the prompts but rooted in underlying scientific principles.
+            <p class="text">
+                <strong>Task overview.</strong> Science-T2I consists of 16 tasks spanning physics, chemistry and biology that require the model to infer or visualize concepts not explicitly stated in the prompts but rooted in underlying scientific principles.
             </p>
             
             <d-figure id="fig-data-stat">
@@ -197,16 +198,15 @@
   
             <p class="text">
                 <strong>Task classification.</strong> Beyond a classification based on scientific disciplines, the tasks can be categorized into two distinct groups:
-                <ol style="width: 150%; margin: -20%">
-                    <li style="margin-bottom: 3px;"><strong>Subject-oriented task (ST)</strong>
-                        require scientific reasoning to discern how inherent differences between subjects lead to varying visual features under identical conditions.
-                    </li>
-                    <li style="margin-bottom: 3px;"><strong>Condition-oriented task (CT)</strong>
-                        focus on how a single condition affects various subjects. Scientific reasoning in these tasks centers on the applied condition, not the subject's individual properties. 
-                    </li>
-                </ol>
             </p>
             
+            <p class="text">
+                1. <strong>Subject-oriented task (ST)</strong> require scientific reasoning to discern how inherent differences between subjects lead to varying visual features under identical conditions.
+            </p>
+
+            <p class="text">
+                2. <strong>Condition-oriented task (CT)</strong> focus on how a single condition affects various subjects. Scientific reasoning in these tasks centers on the applied condition, not the subject's individual properties.
+            </p>
             <d-figure id="fig-classification">
               <figure>
                   <img data-zoomable="" draggable="false" src="static/img/classification.png">
