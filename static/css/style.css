@@ -699,9 +699,9 @@ figcaption .table-caption {
 }
 
 
-* {
+/* * {
   box-sizing: border-box;
-}
+} */
 
 .img-magnifier-container {
   position:relative;
