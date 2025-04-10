@@ -80,6 +80,16 @@
             .collapse-content.is-active {
                 display: block;
             }
+            .button-container a.button {
+                display: inline-flex; /* Or inline-block if you prefer */
+                align-items: center; /* Vertically aligns items in the flex container */
+                justify-content: center; /* Horizontally aligns items in the flex container (optional, but often desired for buttons) */
+            }
+
+            .button-container a.button .icon {
+                /* You might need to adjust margins here depending on your icon size */
+                margin-right: 5px; /* Add some spacing between the icon and text */
+            }
         </style>
     </head>
     <body>
