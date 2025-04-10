@@ -261,11 +261,9 @@ body {
 }
 
 .byline-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start; /* Align columns by the top */
-  max-width: 1000px; /* Adjust as needed for your design */
-  margin: 0 auto; /* Center the container */
+    padding-top: 2rem;
+    padding-bottom: 0.5rem;
+    text-align: center;  /* Center align the text */
 }
 
 @media (max-width: 768px) {
