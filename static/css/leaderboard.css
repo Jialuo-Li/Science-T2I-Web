@@ -733,6 +733,6 @@ a:hover::after {
   .leaderboard-main {
     /* width: 150%; */
     width: 200%;
-    margin: 1em 0 1em -45%;
+    margin: 1em 0 1em -50%;
     font-size: 1.2rem;
   }
