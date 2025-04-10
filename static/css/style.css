@@ -1038,27 +1038,6 @@ aside blockquote {
   /* text-decoration: underline; Underline the 'strong' text */
 }
 
-.click-hint2{
-  display: block;
-  margin: auto;
-  width: 60%;
-  font-size: 15px; /* Adjust the font size */
-  color: #333333; /* Set text color */
-  /* background-color: #f2f2f2; */
-  border: 2px solid #cccccc; /* Add border */
-  padding: 10px; /* Add padding around text */
-  border-radius: 5px; /* Rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
-  text-align: center; /* Center the text */
-  margin-bottom: 20px; /* Add some margin at the bottom */
-}
-
-.click-hint2 strong {
-  color: #007bff; /* Highlight the 'strong' element with a different color */
-  /* text-decoration: underline; Underline the 'strong' text */
-}
-
-
 .grey-overlay {
   position: absolute; /* Change to absolute positioning */
   top: 0;
@@ -1580,4 +1559,24 @@ body {
 
 .results-carousel video {
   margin: 0;
+}
+
+.click-hint2{
+  display: block;
+  margin: auto;
+  width: 60%;
+  font-size: 15px; /* Adjust the font size */
+  color: #333333; /* Set text color */
+  /* background-color: #f2f2f2; */
+  border: 2px solid #cccccc; /* Add border */
+  padding: 10px; /* Add padding around text */
+  border-radius: 5px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  text-align: center; /* Center the text */
+  margin-bottom: 20px; /* Add some margin at the bottom */
+}
+
+.click-hint2 strong {
+  color: #007bff; /* Highlight the 'strong' element with a different color */
+  /* text-decoration: underline; Underline the 'strong' text */
 }
