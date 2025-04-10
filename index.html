@@ -81,14 +81,24 @@
                 display: block;
             }
             .button-container a.button {
-                display: inline-flex; /* Or inline-block if you prefer */
-                align-items: center; /* Vertically aligns items in the flex container */
-                justify-content: center; /* Horizontally aligns items in the flex container (optional, but often desired for buttons) */
+                display: inline-block; /* Or keep inline-flex, try both */
+                height: 2.5em; /* Adjust to your button's height */
+                line-height: 2.5em; /* Should match the height */
+                padding: 0 1em; /* Adjust padding as needed */
+                /* ... other button styles ... */
             }
 
             .button-container a.button .icon {
-                /* You might need to adjust margins here depending on your icon size */
-                margin-right: 5px; /* Add some spacing between the icon and text */
+                margin-right: 5px;
+                vertical-align: middle; /* Still might be needed */
+            }
+
+            .button-container a.button span:not(.icon) {
+                vertical-align: middle; /* Still might be needed */
+            }
+
+            .button-container a.button img {
+                vertical-align: middle; /* Still might be needed */
             }
         </style>
     </head>
