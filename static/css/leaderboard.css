@@ -576,31 +576,10 @@ img {
     margin: 5px;
 } */
 
-.button:hover {
+/* .button:hover {
     background-color: #2b6cb0;
     transform: translateY(-3px);
-}
-
-.styled-button {
-    font-size: 20px;
-    font-weight: bold;
-    color: #000000; /* 黑色文字 */
-    background-color: #ffffff; /* 白色背景 */
-    border: 2px solid #3182ce; /* 蓝色边框 */
-    border-radius: 5px;
-    padding: 10px 20px;
-    text-decoration: none;
-    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
-    display: inline-block;
-    margin: 5px;
-}
-
-.styled-button:hover {
-    background-color: #2b6cb0; /* 深蓝色背景 */
-    color: #ffffff; /* 白色文字 */
-    transform: translateY(-3px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
+} */
 
 .fade-in {
     opacity: 0;
@@ -692,33 +671,6 @@ a:hover::after {
       gap: 10px;
       z-index: 1000;
   }
-
-  .font-button {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      border: none;
-      background-color: #4a5568;
-      color: white;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-      transition: all 0.3s ease;
-  }
-
-  .font-button:hover {
-      background-color: #2d3748;
-      transform: scale(1.1);
-  }
-
-  .font-button span {
-      font-size: 16px;
-  }
-
-
 
   .a-button {
     padding: 10px 20px;
