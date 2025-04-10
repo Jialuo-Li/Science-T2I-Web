@@ -1049,7 +1049,7 @@ h2.text {
 
 @media (max-width: 768px) {
     .figure {
-        width: 100%;
+        width: 200%;
         margin-left: -1%;
     }
 }
