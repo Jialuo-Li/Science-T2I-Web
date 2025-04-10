@@ -1155,18 +1155,11 @@ h2.text {
     flex-direction: row;
 }
 
-figure {
-    width: 150%;
-    margin-left: -20%;
-}
 
 #fig-teaser {
       margin-top: -10px; 
       padding-top: 0;
   }
-
-
-
 
 
 
@@ -1583,4 +1576,10 @@ body {
       background: linear-gradient(to top, #fff, rgba(255, 255, 255, 0));
       pointer-events: none; 
   }
+}
+
+
+figure {
+  width: 150%;
+  margin-left: -20%;
 }
