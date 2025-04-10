@@ -1,3 +1,4 @@
+
 body {
   font-family: Charter;
 }
@@ -261,30 +262,11 @@ body {
 }
 
 .byline-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start; /* Align columns by the top */
-  max-width: 1000px; /* Adjust as needed for your design */
-  margin: 0 auto; /* Center the container */
+    padding-top: 2rem;
+    padding-bottom: 0.5rem;
+    text-align: center;  /* Center align the text */
 }
 
-@media (max-width: 768px) {
-
-  .byline-column {
-    margin-bottom: 20px; /* Space between columns */
-    flex: 1;
-  }
-
-  .byline-column h3 {
-    font-size: 16px;
-  }
-
-  .byline-column p {
-    font-size: 14px;
-    line-height: 1em;
-    margin-bottom: 0.45em;
-  }
-}
 .author-link, .affiliation-link {
     font-size: larger;
     color: black; /* Set the color to match the other text */
@@ -718,9 +700,9 @@ figcaption .table-caption {
 }
 
 
-* {
+/* * {
   box-sizing: border-box;
-}
+} */
 
 .img-magnifier-container {
   position:relative;
@@ -1057,27 +1039,6 @@ aside blockquote {
   /* text-decoration: underline; Underline the 'strong' text */
 }
 
-.click-hint2{
-  display: block;
-  margin: auto;
-  width: 60%;
-  font-size: 15px; /* Adjust the font size */
-  color: #333333; /* Set text color */
-  /* background-color: #f2f2f2; */
-  border: 2px solid #cccccc; /* Add border */
-  padding: 10px; /* Add padding around text */
-  border-radius: 5px; /* Rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
-  text-align: center; /* Center the text */
-  margin-bottom: 20px; /* Add some margin at the bottom */
-}
-
-.click-hint2 strong {
-  color: #007bff; /* Highlight the 'strong' element with a different color */
-  /* text-decoration: underline; Underline the 'strong' text */
-}
-
-
 .grey-overlay {
   position: absolute; /* Change to absolute positioning */
   top: 0;
@@ -1104,6 +1065,7 @@ d-article > div > h3 {
   width: 150%;
   margin: 1em 0 1em -20%;
   font-size: 1.2rem;
+  text-align: justify;
 }
 
 h1.text {
@@ -1156,17 +1118,15 @@ h2.text {
 }
 
 figure {
-    width: 150%;
-    margin-left: -20%;
+  width: 150%;
+  margin-left: -20%;
 }
+
 
 #fig-teaser {
       margin-top: -10px; 
       padding-top: 0;
   }
-
-
-
 
 
 
@@ -1583,4 +1543,41 @@ body {
       background: linear-gradient(to top, #fff, rgba(255, 255, 255, 0));
       pointer-events: none; 
   }
+}
+
+.results-carousel {
+  overflow: hidden;
+}
+
+.results-carousel .item {
+  margin: 5px;
+  overflow: hidden;
+  border: 1px solid #bbb;
+  border-radius: 10px;
+  padding: 0;
+  font-size: 0;
+}
+
+.results-carousel video {
+  margin: 0;
+}
+
+.click-hint2{
+  display: block;
+  margin: auto;
+  width: 60%;
+  font-size: 15px; /* Adjust the font size */
+  color: #333333; /* Set text color */
+  /* background-color: #f2f2f2; */
+  border: 2px solid #cccccc; /* Add border */
+  padding: 10px; /* Add padding around text */
+  border-radius: 5px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  text-align: center; /* Center the text */
+  margin-bottom: 20px; /* Add some margin at the bottom */
+}
+
+.click-hint2 strong {
+  color: #007bff; /* Highlight the 'strong' element with a different color */
+  /* text-decoration: underline; Underline the 'strong' text */
 }
