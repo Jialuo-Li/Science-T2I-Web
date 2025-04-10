@@ -81,6 +81,28 @@
                 display: block;
             }
         </style>
+        <script>
+            const showTable1Button = document.getElementById('showTable1');
+            const showTable2Button = document.getElementById('showTable2');
+            const table1Container = document.getElementById('table1Container');
+            const table2Container = document.getElementById('table2Container');
+          
+            showTable1Button.addEventListener('click', () => {
+              table1Container.style.display = 'block';
+              table2Container.style.display = 'none';
+              showTable1Button.classList.add('active'); 
+              showTable2Button.classList.remove('active'); 
+            });
+          
+            showTable2Button.addEventListener('click', () => {
+              table1Container.style.display = 'none';
+              table2Container.style.display = 'block';
+              showTable2Button.classList.add('active'); 
+              showTable1Button.classList.remove('active'); 
+            });
+          
+            showTable1Button.classList.add('active');
+          </script>
     </head>
     <body>
         <div class="header-wrapper">
