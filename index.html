@@ -59,7 +59,7 @@
         <script defer src="./static/js/zoom.js"></script>
         <script src="./static/js/bulma-carousel.min.js"></script>
         <script src="./static/js/bulma-slider.min.js"></script>
-        
+
         <style>
             figure {
                 width: 150%;
@@ -209,6 +209,7 @@
             <p class="text">
                 2. <strong>Condition-oriented task (CT)</strong> focus on how a single condition affects various subjects. Scientific reasoning in these tasks centers on the applied condition, not the subject's individual properties.
             </p>
+
             <d-figure id="fig-classification">
               <figure>
                   <img data-zoomable="" draggable="false" src="static/img/classification.png">
@@ -218,20 +219,22 @@
               </figure>
             </d-figure>
   
-            <p class="text"><strong>Prompt design.</strong> In Science-T2I, we categorize prompts into three types based on their use in scientific reasoning:
+            <p class="text">
+                <strong>Prompt design.</strong> In Science-T2I, we categorize prompts into three types based on their use in scientific reasoning:
             </p>
-            <ol style="margin-left: 10px;">
-              <li style="margin-bottom: 3px;"><strong>Implicit prompt (IP).</strong>
-                Contains terms implying visual characteristics or phenomena requiring scientific interpretation (e.g., "an unripe apple" suggesting greenness).
-              </li>
-              <li style="margin-bottom: 3px;"><strong>Explicit prompt (EP).</strong>
-                Reformulates the IP into a clear, descriptive statement that results in a scientifically accurate depiction (e.g., "a green apple" explicitly conveying immaturity).
-              </li>
-              <li style="margin-bottom: 3px;"><strong>Superficial prompt (SP).</strong>
-                Provides explicit but scientifically inaccurate descriptions, focusing on surface-level interpretations (e.g., interpreting "an unripe apple" as "a red apple").
-              </li>
-            </ol>
-  
+
+            <p class="text">
+                1. <strong>Implicit prompt (IP)</strong> refers to prompts that imply visual characteristics or phenomena requiring scientific interpretation. For example, "an unripe apple" suggests the apple's color is green, but this is not explicitly stated.
+            </p>
+
+            <p class="text">
+                2. <strong>Explicit prompt (EP)</strong> reformulates the IP into a clear, descriptive statement that results in a scientifically accurate depiction. For instance, "a green apple" explicitly conveys the apple's immaturity.
+            </p>
+
+            <p class="text">
+                3. <strong>Superficial prompt (SP)</strong> provides explicit but scientifically inaccurate descriptions, focusing on surface-level interpretations. For example, interpreting "an unripe apple" as "a red apple" is a superficial interpretation that lacks scientific accuracy.
+            </p>
+            
             <d-figure id="fig-data-pipeline">
               <figure>
                   <img data-zoomable="" draggable="false" src="static/img/dataset_pipeline.png">
