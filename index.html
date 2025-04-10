@@ -1063,7 +1063,7 @@
             <p class="text"><strong>Generalization of SciScore across ST and CT.</strong> A significant performance gap emerged between ST and CT, with most failures in ST. This is expected, as CT relies on generalizable visual features, while ST depends on subject-specific details. Lacking exposure to novel subjects, SciScore struggles to identify accurate visual contents.
             </p>
 
-            <h3 class="title is-4">Benchmarking T2I Generation with SciScore</h3>
+            <h3 class="title is-4" style="text-align: center;">Benchmarking T2I Generation with SciScore</h3>
 
             <p class="text"><strong>Three-dimensional evaluation.</strong> We evaluated T2I models' scientific reasoning by assessing the alignment between images generated from implicit prompts and those from (1) explicit prompts, (2) superficial prompts, and (3) implicit prompts themselves. 
             </p>
@@ -1077,26 +1077,33 @@
                 </figure>
             </d-figure>
 
-            <p><strong>Analysis on reasoning capability.</strong> We introduce the 'Normalized Difference' (ND) metric to assess T2I models' ability to interpret implicit prompts by comparing generated images to those from explicit prompts. Low ND scores (average ~35, mostly &lt; 50) indicate a significant failure of current models to move beyond literal prompt interpretations, especially for implicit scientific concepts.
+            <p class="text"><strong>Analysis on reasoning capability.</strong> We introduce the 'Normalized Difference' (ND) metric to assess T2I models' ability to interpret implicit prompts by comparing generated images to those from explicit prompts. Low ND scores (average ~35, mostly &lt; 50) indicate a significant failure of current models to move beyond literal prompt interpretations, especially for implicit scientific concepts.
             </p>
         </div>
 
         <div id="finetuning">
             <h1 class="text">Two-stage Fine-tuning Framework</h1>
-            <p class="text">We propose a two-stage training framework, comprising a supervised fine-tuning phase and a masked online fine-tuning phase, to incorporate scientific knowledge into existing generative models utilizing Science-T2I.
+            <p class="text">
+                We propose a two-stage training framework, comprising a supervised fine-tuning phase and a masked online fine-tuning phase, to incorporate scientific knowledge into existing generative models utilizing Science-T2I.
             </p>
   
-            <p class="text">We propose a two-stage training framework, comprising a supervised fine-tuning phase and a masked online fine-tuning phase, to incorporate scientific knowledge into existing generative models utilizing Science-T2I.
-            </p><strong>Supervised fine-tuning.</strong> For this phase, we utilize FLUX as our base model and train it on the Science-T2I, employing FLUX's native rectified flow training objective without any modifications.
+            <p class="text">
+                We propose a two-stage training framework, comprising a supervised fine-tuning phase and a masked online fine-tuning phase, to incorporate scientific knowledge into existing generative models utilizing Science-T2I.
+            </p>
+            <p class="text">
+                <strong>Supervised fine-tuning.</strong> For this phase, we utilize FLUX as our base model and train it on the Science-T2I, employing FLUX's native rectified flow training objective without any modifications.
             </p>
   
-            <p class="text">We propose a two-stage training framework, comprising a supervised fine-tuning phase and a masked online fine-tuning phase, to incorporate scientific knowledge into existing generative models utilizing Science-T2I.
-            </p><strong>Online fine-tuning.</strong> In this phase, we implement a masked online fine-tuning approach, incorporating SciScore as a reward model to direct the learning process through the DPO training objective.
+            <p class="text">
+                We propose a two-stage training framework, comprising a supervised fine-tuning phase and a masked online fine-tuning phase, to incorporate scientific knowledge into existing generative models utilizing Science-T2I.
+            </p>
+            <p class="text">
+                <strong>Online fine-tuning.</strong> In this phase, we implement a masked online fine-tuning approach, incorporating SciScore as a reward model to direct the learning process through the DPO training objective.
             </p>
   
             <d-figure id="fig-vision_connector">
               <figure>
-                  <img data-zoomable="" draggable="false" src="static/images/train_pipeline.png" style="width: 80%;display: block; margin: 0 auto;">
+                  <img data-zoomable="" draggable="false" src="static/img/train_pipeline.png">
                   <figcaption>
                     <strong>Fig 5:</strong> Online fine-tuning pipeline. For each prompt, two images are generated to compute SciScore preference metric. Simultaneously, GroundingDINO extracts segmentation masks from these images based on the prompts, which are then used to block gradient propagation in the corresponding regions.
                   </figcaption>
@@ -1107,15 +1114,18 @@
   
             <d-figure id="fig-vision_connector">
               <figure>
-                  <img data-zoomable="" draggable="false" src="static/images/exp_tuning.png" style="width: 50%;display: block; margin: 0 auto;">
+                  <img data-zoomable="" draggable="false" src="static/img/exp_tuning.png">
                   <figcaption>
                     <strong>Tab 3:</strong> Average SciScore on various methods.
                   </figcaption>
               </figure>
             </d-figure>
   
-            <p class="text">We propose a two-stage training framework, comprising a supervised fine-tuning phase and a masked online fine-tuning phase, to incorporate scientific knowledge into existing generative models utilizing Science-T2I.
-            </p><strong>Generalization to Complex Scenes.</strong> Finetuned FLUX on Science-T2I-C generalizes well to complex scenes. This suggests the model learned scientific principles, not just memorized examples.
+            <p class="text">
+                We propose a two-stage training framework, comprising a supervised fine-tuning phase and a masked online fine-tuning phase, to incorporate scientific knowledge into existing generative models utilizing Science-T2I.
+            </p>
+            <p class="text">
+                <strong>Generalization to Complex Scenes.</strong> Finetuned FLUX on Science-T2I-C generalizes well to complex scenes. This suggests the model learned scientific principles, not just memorized examples.
             </p>
   
             <d-figure id="fig-vision_connector">
@@ -1127,12 +1137,18 @@
               </figure>
             </d-figure>
   
-            <p class="text">We propose a two-stage training framework, comprising a supervised fine-tuning phase and a masked online fine-tuning phase, to incorporate scientific knowledge into existing generative models utilizing Science-T2I.
-            </p><strong>Necessity of SFT.</strong> Initial SFT (blue) provides a better starting point for OFT, leading to stable performance gains. Without it (purple), OFT struggles, highlighting SFT's role in establishing a good base for effective training.
+            <p class="text">
+                We propose a two-stage training framework, comprising a supervised fine-tuning phase and a masked online fine-tuning phase, to incorporate scientific knowledge into existing generative models utilizing Science-T2I.
+            </p>
+            <p class="text">
+                <strong>Necessity of SFT.</strong> Initial SFT (blue) provides a better starting point for OFT, leading to stable performance gains. Without it (purple), OFT struggles, highlighting SFT's role in establishing a good base for effective training.
             </p>
   
-            <p class="text">We propose a two-stage training framework, comprising a supervised fine-tuning phase and a masked online fine-tuning phase, to incorporate scientific knowledge into existing generative models utilizing Science-T2I.
-            </p><strong>Masking Strategy As A Denoiser.</strong> Without masking (yellow), performance is erratic with collapse. Lowering the learning rate (red) prevents collapse but doesn't improve the model. Masking likely prevents the model from treating all features as equally important, reducing noise and enabling stable improvement.
+            <p class="text">
+                We propose a two-stage training framework, comprising a supervised fine-tuning phase and a masked online fine-tuning phase, to incorporate scientific knowledge into existing generative models utilizing Science-T2I.
+            </p>
+            <p class="text">
+                <strong>Masking Strategy As A Denoiser.</strong> Without masking (yellow), performance is erratic with collapse. Lowering the learning rate (red) prevents collapse but doesn't improve the model. Masking likely prevents the model from treating all features as equally important, reducing noise and enabling stable improvement.
             </p>
   
             <d-figure id="fig-vision_connector">
