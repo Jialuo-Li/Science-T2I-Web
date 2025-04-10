@@ -1085,6 +1085,7 @@ d-article > div > h3 {
   width: 150%;
   margin: 1em 0 1em -20%;
   font-size: 1.2rem;
+  text-align: justify;
 }
 
 h1.text {
