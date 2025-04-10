@@ -182,7 +182,7 @@
         </d-figure>
 
         <p class="text abstract">
-            We introduce a novel method for integrating scientific knowledge into generative models to enhance their realism and consistency in image synthesis. Central to our approach is <b>Science-T2I</p>b> , an expert-annotated adversarial dataset of 20k image pairs and 9k prompts spanning diverse scientific categories. Building on <b>Science-T2I</d-article>b> , we develop <b>SciScore</b>, an end-to-end reward model that refines the evaluation of generated images by enhancing the scientific and visual capabilities of a pre-trained CLIP model. Furthermore, we propose a two-stage training framework—combining supervised fine-tuning and masked online fine-tuning—to embed scientific knowledge into existing generative models. Extensive experiments validate the framework's effectiveness in setting new benchmarks for assessing the scientific realism of generated content.
+            We introduce a novel method for integrating scientific knowledge into generative models to enhance their realism and consistency in image synthesis. Central to our approach is <b>Science-T2I</b> , an expert-annotated adversarial dataset of 20k image pairs and 9k prompts spanning diverse scientific categories. Building on <b>Science-T2I</b> , we develop <b>SciScore</b>, an end-to-end reward model that refines the evaluation of generated images by enhancing the scientific and visual capabilities of a pre-trained CLIP model. Furthermore, we propose a two-stage training framework—combining supervised fine-tuning and masked online fine-tuning—to embed scientific knowledge into existing generative models. Extensive experiments validate the framework's effectiveness in setting new benchmarks for assessing the scientific realism of generated content.
         </p>
         <div class="icon-row">
             <a href="#pisabench" class="icon-link">
@@ -205,7 +205,7 @@
         <hr>
 
         <div id="science-t2i">
-            <h1 class="text">Science-T2I: An Adversarial Dataset Spanning Scientific Disciplines</h1>
+            <h1 class="text">Science-T2I: An Adversarial Scientific Dataset</h1>
             <p class="text">
                 <strong>Task overview.</strong> Science-T2I consists of 16 tasks spanning physics, chemistry and biology that require the model to infer or visualize concepts not explicitly stated in the prompts but rooted in underlying scientific principles.
             </p>
@@ -265,7 +265,8 @@
               </figure>
             </d-figure>
   
-            <p class="text"><strong>Data curation.</strong> We utilize GPT-4o to create templates and generate corresponding prompts during the data curation process. These outputs are then used to guide T2I models for image generation. Following this, human annotators review and filter the data, incorporating insights from an additional website knowledgebase to ensure the reliability and accuracy of the final dataset.
+            <p class="text">
+                <strong>Data curation.</strong> We utilize GPT-4o to create templates and generate corresponding prompts during the data curation process. These outputs are then used to guide T2I models for image generation. Following this, human annotators review and filter the data, incorporating insights from an additional website knowledgebase to ensure the reliability and accuracy of the final dataset.
             </p>
             
             
