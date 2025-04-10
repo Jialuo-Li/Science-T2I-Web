@@ -1042,132 +1042,107 @@
                 </script>
             </div>
         </div>  
-        <div id="generalization">
-            <h1 class="text">Generalization Analysis</h1>
-            <p class="text">
-                <p class="text">
-                Having introduced our post-training methodology, we probe further into the model's understanding of the interaction between gravity and perspective, the two laws that determine the dynamics of our videos. We first test if the learned physical behavior of our model can generalize to dropping heights and depths beyond its training distribution. Then, we study the ability of the model to learn the probability distribution induced by the uncertainty of perspective.
-                </p>
-            </p> 
-            <p class="text">
-                <p class="text">
-                    <strong>Generalization to Unseen Depths and Heights. </strong>
-                    Depth and height are the main factors that affect the dynamics of a falling object in our videos. We can see this by combining the laws of gravity with perspective under our camera assumptions to model the object's image \(y\) coordinate as a function of time: 
-                    \[
-                    y(t) = \frac{f}{Z} (Y_0 - \frac{1}{2} g t^2)
-                    \]
-                </p>
+        <div id="sciscore">
+            <h1 class="text">SciScore: Evaluating Scientific Authenticity of Images</h1>
+
+            <p class="text">Leveraging Science-T2I, we present SciScore, an end-to-end reward model that refines the assessment of generated images based on scientific knowledge, which is achieved by augmenting both the scientific comprehension and visual capabilities of pre-trained CLIP model. The qualitative performance of SciScore is demonstrated in Fig. 1.
             </p>
-            <p class="text">
-                <p class="text">
-                    We create a simulated test set in which a single object is dropped from varying depths and heights, using objects and backgrounds unseen during training. We create an in-distribution (ID) and out-of-distribution (OOD) test set respectively.
-                </p>
-            </p> 
-            <div id="tab:depth_height_tab" style="display: flex; flex-direction: column; align-items: center;">
-                <div class="table-container">
-                    <table class="data-table">
-                        <thead>
-                        <tr>
-                            <th colspan="1" class="tb-hdr">Setting</th>
-                            <th colspan="1" class="tb-hdr">L2 (\(\downarrow\))</th>
-                            <th colspan="1" class="tb-hdr">Chamfer Distance (\(\downarrow\))</th>
-                            <th colspan="1" class="tb-hdr">IoU (\(\uparrow\))</th>
-                            <th colspan="1" class="tb-hdr">Time Error (\(\downarrow\))</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td class="section-border">ID</td>
-                            <td class="highlight">0.036</td>
-                            <td class="highlight">0.088</td>
-                            <td class="highlight">0.155</td>
-                            <td class="highlight">0.049</td>
-                        </tr>
-                        <tr>
-                            <tr>
-                                <td class="section-border">OOD</td>
-                                <td>0.044</td>
-                                <td>0.143</td>
-                                <td>0.049</td>
-                                <td>0.187</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <figcaption>
-                    <strong>Table 2: Results of our metrics on in-distribution (ID) and out-of-distribution (OOD) depth-height combinations. </strong> Depth values range from 1-5m (ID range \([1,3]\)) and height values range from 0.5-2.5 (ID range \([0.5,1.5]\)).
-                </figcaption>
-            </div>
-            <p class="text">
-                <p class="text">
-                    As shown in <a href="#tab:depth_height_tab">Table 2</a>, our analysis shows that performance degrades for out-of-distribution scenarios. Since depth and height are the main physical quantities that affect falling dynamics, this finding indicates that our model may struggle to learn a fully generalizable law that accounts for the interaction of perspective and gravity.
-                </p>
-            </p>
-            <p class="text">
-                <p class="text">
-                    <strong>Distributional Analysis.</strong>
-                    The evolution of a physical system is not uniquely determined by a single initial image, since the lossy uncertainty of perspective induces a distribution of possible outcomes as shown in <a href="fig:ambiguity">Figure 5</a>. An ideal video world model should (1) output videos that are faithful to the evolution of some plausible world state and (2) provide accurate coverage across the entire distribution of the world that is possible from its conditioning signal. In this section, we examine these two facets by studying \(p(t|y)\): the distribution of dropping times possible from an object at coordinate y in the image plane. To do this, we create a simulated dataset that has a much wider distribution \(p(t|y)\) than our PSFT dataset.
-                </p>
-            </p>
-            <d-figure id="fig:ambiguity">
+
+            <d-figure id="fig-vision_connector">
                 <figure>
-                    <img data-zoomable="" draggable="false" src="static/img/ambiguity.png" alt="ambiguity figure">
+                    <img data-zoomable="" draggable="false" src="static/img/SciScore_results.jpg">
                     <figcaption>
-                        <strong>Figure 5. </strong>Demonstration of ambiguity in 2D perspective projections. Each of the three clouds appears the exact same in the camera's image. The right side shows how we perform a scale and translation augmentation to generate deliberately ambiguous data.
-                    </figcaption>
-                </figure>
-            </d-figure>
-            <p class="text">
-                <p class="text">
-                    <strong>Testing (1): 3D faithfulness of trajectories.</strong>
-                    After training our model on this new dataset, we test whether its trajectories are consistent with a valid 3D world state. We first obtain an estimated dropping time from generated videos using SAM2 masks. Using knowledge of the camera position, focal length, sensor width, and \(y\), we can obtain an implied depth and height of the trajectory. We can then back-project the video trajectory to 3D and analyze whether they constitute physically accurate trajectories. As show in in <a href="#fig:testing1">Figure 6</a>, we find that our model's lifted trajectories consistently align with the 3D trajectory at the height and depth implied by its dropping time, giving evidence that the model's visual outputs are faithful to some plausible real-world state.
-                </p>
-            </p>
-            <d-figure id="fig:testing1">
-                <figure>
-                    <img data-zoomable="" draggable="false" src="static/img/testing1.png" alt="testing1 figure">
-                    <figcaption>
-                        <strong>Figure 6: Examples of model trajectories lifted to 3D. </strong>The blue line represents the height of the camera ray passing through the bottom of the dropping object as a function of depth. The set of possible dropping trajectories at a given depth are depicted in gray. The lifted trajectory of the model is depicted in green.
+                    <strong>Tab 1:</strong> (Left) Performance comparison of different models on Science-T2I-S&C across different subjects. (Right) Performance of SciScore in ST and CT.
                     </figcaption>
                 </figure>
             </d-figure>
 
-            <p class="text">
-                <p class="text">
-                    <strong>Testing (2): distributional alignment.</strong>
-                    Going beyond the level of individual trajectories, we study the model's learned conditional distribution \(p(t|y)\). We create 50 different initial images with differing values of y, generate 128 different videos from each, and estimate the dropping time in each video. Using the laws of gravity, the laws of perspective, and the assumption of uniform depth sampling in our dataset, we can analytically derive the probability \(p(t|y)\) as: 
-                    \[
-                    \begin{equation}
-                    p(t | y) =
-                    \begin{cases}
-                        \frac{gt}{(Z_{\max} - Z_{\min})\beta}, & t_{\min} \leq t \leq t_{\max} \\
-                        0, & \text{otherwise}
-                    \end{cases}
-                    \end{equation}
-                    \]
-                </p>
+            <p class="text"><strong>Generalization of SciScore to complex scenes.</strong> SciScore generalizes well to complex scenes Science-T2I-C beyond simple ones Science-T2I-S, showing it can focus on relevant regions and ignore distractions.
             </p>
-            <p class="text">
-                <p class="text">
-                    We then measure goodness-of-fit for each of the 50 experiments using the Kolmogorov-Smirnov (KS). The null hypothesis of our KS test is that the two distributions being compared are equal, and we consider p-values less than 0.05 as evidence of misalignment. Since our measured times have limited precision and can only take 32 distinct values—due to estimating the contact frame—we approximate the ground truth \(p(t|y)\) using a Monte Carlo method. We sample 1000 values from the ground truth distribution and then quantized them into 32 bins corresponding to their frame, which we use as ground truth observations in the KS test. We find that in all 50/50 cases, the p-value from the test is less than 0.05, which provides evidence that the model does not learn the correct distribution of dropping times. We visualize the misalignment between the empirical cdf of the model's in <a href="fig:testing2">Figure 7</a>.
-                </p>
+
+            <p class="text"><strong>Generalization of SciScore across ST and CT.</strong> A significant performance gap emerged between ST and CT, with most failures in ST. This is expected, as CT relies on generalizable visual features, while ST depends on subject-specific details. Lacking exposure to novel subjects, SciScore struggles to identify accurate visual contents.
             </p>
-            <d-figure id="fig:testing1">
+
+            <h3 class="title is-4">Benchmarking T2I Generation with SciScore</h3>
+
+            <p class="text"><strong>Three-dimensional evaluation.</strong> We evaluated T2I models' scientific reasoning by assessing the alignment between images generated from implicit prompts and those from (1) explicit prompts, (2) superficial prompts, and (3) implicit prompts themselves. 
+            </p>
+
+            <d-figure id="fig-benchmark">
                 <figure>
-                    <img data-zoomable="" draggable="false" src="static/img/testing2.png" alt="testing1 figure">
+                    <img data-zoomable="" draggable="false" src="static/img/benchmark.png">
                     <figcaption>
-                        <strong>Figure 7: Visualizing \(p(t|y)\) misalignment for different images.</strong>Green shows the ground-truth CDF, orange is the 32-frame quantized version, and blue is the empirical CDF of 128 different samples of dropping times from the model.
+                    <strong>Tab 2:</strong> Performance of T2I Models on SciScore.
                     </figcaption>
                 </figure>
             </d-figure>
-        </div>
-        <div id="Conclusion">
-            <h1 class="text">Conclusion</h1>
-            <p class="text">
-                <p class="text">
-                    This work studies post-training as an avenue for adapting adapting pre-trained video generator into world models. We introduce a post-training strategy that is highly effective in aligning our model. Our work raises interesting insights into the learned distributions of generative models. Qualitatively, large scale image or video generative models appear to excel at generating likely samples from the data distribution, but this alone does not imply that they match the data distribution well in its entirety. As long as a model is able to generate likely samples, global distributional misalignment is not necessarily a problem for content creation. However, this problem becomes critical for world models, where alignment across the entire distribution is necessary for faithful world simulation. The insights revealed by our study, made possible by our constrained and tractable setting, indicate that although post-training improves per-sample accuracy, general distributional alignment remains unsolved.
-                </p>
+
+            <p><strong>Analysis on reasoning capability.</strong> We introduce the 'Normalized Difference' (ND) metric to assess T2I models' ability to interpret implicit prompts by comparing generated images to those from explicit prompts. Low ND scores (average ~35, mostly &lt; 50) indicate a significant failure of current models to move beyond literal prompt interpretations, especially for implicit scientific concepts.
             </p>
+        </div>
+
+        <div id="finetuning">
+            <h1 class="text">Two-stage Fine-tuning Framework</h1>
+            <p class="text">We propose a two-stage training framework, comprising a supervised fine-tuning phase and a masked online fine-tuning phase, to incorporate scientific knowledge into existing generative models utilizing Science-T2I.
+            </p>
+  
+            <p class="text">We propose a two-stage training framework, comprising a supervised fine-tuning phase and a masked online fine-tuning phase, to incorporate scientific knowledge into existing generative models utilizing Science-T2I.
+            </p><strong>Supervised fine-tuning.</strong> For this phase, we utilize FLUX as our base model and train it on the Science-T2I, employing FLUX's native rectified flow training objective without any modifications.
+            </p>
+  
+            <p class="text">We propose a two-stage training framework, comprising a supervised fine-tuning phase and a masked online fine-tuning phase, to incorporate scientific knowledge into existing generative models utilizing Science-T2I.
+            </p><strong>Online fine-tuning.</strong> In this phase, we implement a masked online fine-tuning approach, incorporating SciScore as a reward model to direct the learning process through the DPO training objective.
+            </p>
+  
+            <d-figure id="fig-vision_connector">
+              <figure>
+                  <img data-zoomable="" draggable="false" src="static/images/train_pipeline.png" style="width: 80%;display: block; margin: 0 auto;">
+                  <figcaption>
+                    <strong>Fig 5:</strong> Online fine-tuning pipeline. For each prompt, two images are generated to compute SciScore preference metric. Simultaneously, GroundingDINO extracts segmentation masks from these images based on the prompts, which are then used to block gradient propagation in the corresponding regions.
+                  </figcaption>
+              </figure>
+            </d-figure>
+  
+            <h3 class="title is-4">Experiment & Ablation Study</h3>
+  
+            <d-figure id="fig-vision_connector">
+              <figure>
+                  <img data-zoomable="" draggable="false" src="static/images/exp_tuning.png" style="width: 50%;display: block; margin: 0 auto;">
+                  <figcaption>
+                    <strong>Tab 3:</strong> Average SciScore on various methods.
+                  </figcaption>
+              </figure>
+            </d-figure>
+  
+            <p class="text">We propose a two-stage training framework, comprising a supervised fine-tuning phase and a masked online fine-tuning phase, to incorporate scientific knowledge into existing generative models utilizing Science-T2I.
+            </p><strong>Generalization to Complex Scenes.</strong> Finetuned FLUX on Science-T2I-C generalizes well to complex scenes. This suggests the model learned scientific principles, not just memorized examples.
+            </p>
+  
+            <d-figure id="fig-vision_connector">
+              <figure>
+                  <img data-zoomable="" draggable="false" src="static/img/score_averages.png">
+                  <figcaption>
+                    <strong>Fig 6:</strong> Ablation study of two-stage training. 
+                  </figcaption>
+              </figure>
+            </d-figure>
+  
+            <p class="text">We propose a two-stage training framework, comprising a supervised fine-tuning phase and a masked online fine-tuning phase, to incorporate scientific knowledge into existing generative models utilizing Science-T2I.
+            </p><strong>Necessity of SFT.</strong> Initial SFT (blue) provides a better starting point for OFT, leading to stable performance gains. Without it (purple), OFT struggles, highlighting SFT's role in establishing a good base for effective training.
+            </p>
+  
+            <p class="text">We propose a two-stage training framework, comprising a supervised fine-tuning phase and a masked online fine-tuning phase, to incorporate scientific knowledge into existing generative models utilizing Science-T2I.
+            </p><strong>Masking Strategy As A Denoiser.</strong> Without masking (yellow), performance is erratic with collapse. Lowering the learning rate (red) prevents collapse but doesn't improve the model. Masking likely prevents the model from treating all features as equally important, reducing noise and enabling stable improvement.
+            </p>
+  
+            <d-figure id="fig-vision_connector">
+              <figure>
+                  <img data-zoomable="" draggable="false" src="static/img/case.png">
+                  <figcaption>
+                    <strong>Fig 7:</strong> Case study. The upper images are generated using the base FLUX.1[dev], whereas the lower images are produced with our fine-tuning method. Each image pair utilizes an identical random seed to ensure consistency in comparison. Note that the displayed prompts are summaries of the original prompts.
+                  </figcaption>
+              </figure>
+            </d-figure>
         </div>
 
         </d-article>
