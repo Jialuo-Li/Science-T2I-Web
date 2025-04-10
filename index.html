@@ -199,7 +199,7 @@
             
             <d-figure id="fig-vision_connector">
               <figure>
-                  <img data-zoomable="" draggable="false" src="static/images/data_stat.png" style="width: 80%;display: block; margin: 0 auto;">
+                  <img data-zoomable="" draggable="false" src="static/img/data_stat.png" style="width: 80%;display: block; margin: 0 auto;">
                   <figcaption>
                     <strong>Fig 2:</strong> Data statistics (left) of and wordcloud (right) of Science-T2I.
                   </figcaption>
@@ -219,7 +219,7 @@
             
             <d-figure id="fig-vision_connector">
               <figure>
-                  <img data-zoomable="" draggable="false" src="static/images/classification.png" style="width: 80%;display: block; margin: 0 auto;">
+                  <img data-zoomable="" draggable="false" src="static/img/classification.png" style="width: 80%;display: block; margin: 0 auto;">
                   <figcaption>
                     <strong>Fig 3:</strong> Task classification of Science-T2I.
                   </figcaption>
@@ -242,7 +242,7 @@
   
             <d-figure id="fig-vision_connector">
               <figure>
-                  <img data-zoomable="" draggable="false" src="static/images/dataset_pipeline.png" style="width: 80%;display: block; margin: 0 auto;">
+                  <img data-zoomable="" draggable="false" src="static/img/dataset_pipeline.png" style="width: 80%;display: block; margin: 0 auto;">
                   <figcaption>
                     <strong>Fig 4:</strong> Data curation pipeline of Science-T2I.
                   </figcaption>
@@ -251,96 +251,7 @@
   
             <p><strong>Data curation.</strong> We utilize GPT-4o to create templates and generate corresponding prompts during the data curation process. These outputs are then used to guide T2I models for image generation. Following this, human annotators review and filter the data, incorporating insights from an additional website knowledgebase to ensure the reliability and accuracy of the final dataset.
             </p>
-            <div id="tab:showcases" style="display: flex; flex-direction: column; align-items: center; margin-left: -250px">
-                <div class="table-container">
-                    <table class="data-table">
-                        <tbody class="showcases">
-                            <tr>
-                                <td><span class="badge bg-dark" style="font-size: 16px; padding: 12px 20px;">GT</span></td>
-                                <td><video autoplay loop muted playsinline><source src="static/videos/GT/real.mp4" type="video/mp4"></video></td>
-                                <td><video autoplay loop muted playsinline><source src="static/videos/GT/seen.mp4" type="video/mp4"></video></td>
-                                <td><video autoplay loop muted playsinline><source src="static/videos/GT/unseen.mp4" type="video/mp4"></video></td>
-                            </tr>
-                            <tr>
-                                <td><span class="badge bg-dark" style="font-size: 16px; padding: 12px 20px;">Sora</span></td>
-                                <td><video autoplay loop muted playsinline><source src="static/videos/sora/real.mp4" type="video/mp4"></video></td>
-                                <td><video autoplay loop muted playsinline><source src="static/videos/sora/seen.mp4" type="video/mp4"></video></td>
-                                <td><video autoplay loop muted playsinline><source src="static/videos/sora/unseen.mp4" type="video/mp4"></video></td>
-                            </tr>
-                            <tr>
-                                <td><span class="badge bg-dark" style="font-size: 16px; padding: 12px 20px;">Kling V1</span></td>
-                                <td><video autoplay loop muted playsinline><source src="static/videos/kling_v1/real.mp4" type="video/mp4"></video></td>
-                                <td><video autoplay loop muted playsinline><source src="static/videos/kling_v1/seen.mp4" type="video/mp4"></video></td>
-                                <td><video autoplay loop muted playsinline><source src="static/videos/kling_v1/unseen.mp4" type="video/mp4"></video></td>
-                            </tr>
-                            <tr>
-                                <td><span class="badge bg-dark" style="font-size: 16px; padding: 12px 20px;">Kling V1.5</span></td>
-                                <td><video autoplay loop muted playsinline><source src="static/videos/kling_v1_5/real.mp4" type="video/mp4"></video></td>
-                                <td><video autoplay loop muted playsinline><source src="static/videos/kling_v1_5/seen.mp4" type="video/mp4"></video></td>
-                                <td><video autoplay loop muted playsinline><source src="static/videos/kling_v1_5/unseen.mp4" type="video/mp4"></video></td>
-                            </tr>
-                            <tr>
-                                <td><span class="badge bg-dark" style="font-size: 16px; padding: 12px 20px;">Runway Gen3</span></td>
-                                <td><video autoplay loop muted playsinline><source src="static/videos/runway_gen3/real.mp4" type="video/mp4"></video></td>
-                                <td><video autoplay loop muted playsinline><source src="static/videos/runway_gen3/seen.mp4" type="video/mp4"></video></td>
-                                <td><video autoplay loop muted playsinline><source src="static/videos/runway_gen3/unseen.mp4" type="video/mp4"></video></td>
-                            </tr>
-                            <tr>
-                                <td><span class="badge bg-dark" style="font-size: 16px; padding: 12px 20px;">CogVideoX-5B-I2V</span></td>
-                                <td><video autoplay loop muted playsinline><source src="static/videos/cogvideo/real.mp4" type="video/mp4"></video></td>
-                                <td><video autoplay loop muted playsinline><source src="static/videos/cogvideo/seen.mp4" type="video/mp4"></video></td>
-                                <td><video autoplay loop muted playsinline><source src="static/videos/cogvideo/unseen.mp4" type="video/mp4"></video></td>
-                            </tr>
-                            <tr>
-                                <td><span class="badge bg-dark" style="font-size: 16px; padding: 12px 20px;">DynamiCrafter</span></td>
-                                <td><video autoplay loop muted playsinline><source src="static/videos/dynamicrafter/real.mp4" type="video/mp4"></video></td>
-                                <td><video autoplay loop muted playsinline><source src="static/videos/dynamicrafter/seen.mp4" type="video/mp4"></video></td>
-                                <td><video autoplay loop muted playsinline><source src="static/videos/dynamicrafter/unseen.mp4" type="video/mp4"></video></td>
-                            </tr>
-                            <tr>
-                                <td><span class="badge bg-dark" style="font-size: 16px; padding: 12px 20px;">Pyramid-Flow</span></td>
-                                <td><video autoplay loop muted playsinline><source src="static/videos/pyramid_flow/real.mp4" type="video/mp4"></video></td>
-                                <td><video autoplay loop muted playsinline><source src="static/videos/pyramid_flow/seen.mp4" type="video/mp4"></video></td>
-                                <td><video autoplay loop muted playsinline><source src="static/videos/pyramid_flow/unseen.mp4" type="video/mp4"></video></td>
-                            </tr>
-                            <tr>
-                                <td><span class="badge bg-dark" style="font-size: 16px; padding: 12px 20px;">Open-Sora</span></td>
-                                <td><video autoplay loop muted playsinline><source src="static/videos/opensora/real.mp4" type="video/mp4"></video></td>
-                                <td><video autoplay loop muted playsinline><source src="static/videos/opensora/seen.mp4" type="video/mp4"></video></td>
-                                <td><video autoplay loop muted playsinline><source src="static/videos/opensora/unseen.mp4" type="video/mp4"></video></td>
-                            </tr>
-                            <tr>
-                                <td><span class="badge bg-dark" style="font-size: 16px; padding: 12px 20px;">Open-Sora + PSFT (base)</span></td>
-                                <td><video autoplay loop muted playsinline><source src="static/videos/base/real.mp4" type="video/mp4"></video></td>
-                                <td><video autoplay loop muted playsinline><source src="static/videos/base/seen.mp4" type="video/mp4"></video></td>
-                                <td><video autoplay loop muted playsinline><source src="static/videos/base/unseen.mp4" type="video/mp4"></video></td>
-                            </tr>
-                            <tr>
-                                <td><span class="badge bg-dark" style="font-size: 16px; padding: 12px 20px;">base + ORO (Seg)</span></td>
-                                <td><video autoplay loop muted playsinline><source src="static/videos/oro_seg/real.mp4" type="video/mp4"></video></td>
-                                <td><video autoplay loop muted playsinline><source src="static/videos/oro_seg/seen.mp4" type="video/mp4"></video></td>
-                                <td><video autoplay loop muted playsinline><source src="static/videos/oro_seg/unseen.mp4" type="video/mp4"></video></td>
-                            </tr>
-                            <tr>
-                                <td><span class="badge bg-dark" style="font-size: 16px; padding: 12px 20px;">base + ORO (Flow)</span></td>
-                                <td><video autoplay loop muted playsinline><source src="static/videos/oro_flow/real.mp4" type="video/mp4"></video></td>
-                                <td><video autoplay loop muted playsinline><source src="static/videos/oro_flow/seen.mp4" type="video/mp4"></video></td>
-                                <td><video autoplay loop muted playsinline><source src="static/videos/oro_flow/unseen.mp4" type="video/mp4"></video></td>
-                            </tr>
-                            <tr>
-                                <td><span class="badge bg-dark" style="font-size: 16px; padding: 12px 20px;">base + ORO (Depth)</span></td>
-                                <td><video autoplay loop muted playsinline><source src="static/videos/oro_depth/real.mp4" type="video/mp4"></video></td>
-                                <td><video autoplay loop muted playsinline><source src="static/videos/oro_depth/seen.mp4" type="video/mp4"></video></td>
-                                <td><video autoplay loop muted playsinline><source src="static/videos/oro_depth/unseen.mp4" type="video/mp4"></video></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <figcaption>
-                <strong>Qualitative comparison of results on real test set (column 1), simulated seen test set (column 2) and simulated unseen test set (column 3).</strong>
-                We present the results of popular open-source and commercially available models alongside those of models fine-tuned through our method. Existing models often struggle to generate videos depicting objects falling, whereas our method effectively introduces knowledge of free-fall into the model. ORO enables the model to more accurately learn object motion and shape.
-            </figcaption>
+            
             <p class="text">
                 <p class="text">
                     As shown in <a href="#tab:evaluation_results">Table 1</a>, the results of running the baseline models on the benchmark indicate a consistent failure to generate physically accurate dropping behavior, despite the visual realism of their generated frames.
