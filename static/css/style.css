@@ -1155,6 +1155,11 @@ h2.text {
     flex-direction: row;
 }
 
+figure {
+  width: 150%;
+  margin-left: -20%;
+}
+
 
 #fig-teaser {
       margin-top: -10px; 
@@ -1578,8 +1583,3 @@ body {
   }
 }
 
-
-/* figure {
-  width: 150%;
-  margin-left: -20%;
-} */
