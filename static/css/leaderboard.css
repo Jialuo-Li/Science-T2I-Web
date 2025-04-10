@@ -672,7 +672,7 @@ a:hover::after {
       z-index: 1000;
   }
 
-  /* .a-button {
+  .a-button {
     padding: 10px 20px;
     border: none;
     border-radius: 25px;
@@ -686,7 +686,7 @@ a:hover::after {
     gap: 8px;
     position: relative;
     overflow: hidden;
-  } */
+  }
 
   /* 按钮1渐变背景 */
   #showTable1 {
@@ -699,13 +699,13 @@ a:hover::after {
   }
 
   /* 悬停效果 */
-  /* .a-button:hover {
+  .a-button:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-  } */
+  }
 
   /* 悬浮时的背景动画 */
-  /* .a-button::after {
+  .a-button::after {
     content: '';
     position: absolute;
     top: 50%;
@@ -716,8 +716,8 @@ a:hover::after {
     transform: translate(-50%, -50%) rotate(45deg);
     transition: all 0.5s ease;
     opacity: 0;
-  } */
-/* 
+  }
+
   .a-button:hover::after {
     opacity: 1;
     width: 100%;
@@ -728,7 +728,7 @@ a:hover::after {
     transform: translateY(-2px);
     box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3) !important;
     filter: brightness(1.1) !important;
-  } */
+  }
 
   .leaderboard-main {
     /* width: 150%; */
