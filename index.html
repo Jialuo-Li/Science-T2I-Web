@@ -192,82 +192,63 @@
         <hr>
 
         <div id="pisabench">
-            <h1 class="text">PisaBench</h1>
-            <p class="text">
-                <p class="text">
-                    <strong>Task Definition & Assumptions. </strong>
-                    Our task can be summarized as follows: given an image of an object suspended in midair, generate a video of the object falling and colliding with the ground and potentially other objects.
-                    We assume that the falling object is completely still in the initial frame, that only the force of gravity is acting on the object while it falls, and that the camera does not move.
-                </p>
+            <h1 class="text">Science-T2I: An Adversarial Dataset Spanning Scientific Disciplines</h1>
+            <p><strong>Task overview.</strong> Science-T2I consists of 16 tasks spanning physics, chemistry and biology that require the model to infer or visualize concepts not explicitly stated in the prompts but rooted in underlying scientific principles.
             </p>
-            <p class="text">
-                <p class="text">
-                    <strong>Task Setting. </strong>
-                    Our task takes place in the image-to-video setting. Just like a human is able to imagine a physically plausible continuation of a scene from a single image, we want our models to be able to do so as well.
-                </p>
-            </p>
-            <p class="text">
-                <p class="text">
-                    <strong>Real World Data. </strong>
-                    PisaBench includes 361 videos demonstrating the dropping task for evaluation. Each video begins with an object suspended by an invisible wire in the first frame. 
-                    We record the videos in slow-motion at 120 frames per second (fps) with cellphone cameras mounted on tripods to eliminate camera motion. As shown in <a href="#fig-real-stat">Figure 1</a>, 
-                    the dataset includes a diverse set of objects with various shapes and sizes, captured across a range of settings.
-                </p>
-            </p>
-            <d-figure id="fig-real-stat">
-                <figure>
-                    <img data-zoomable="" draggable="false" src="static/img/real_stat.jpg" alt="Real World Data Statistics">
-                    <figcaption>
-                        <strong>Figure 1: Statistics of the real-world data. </strong>(a) number of objects in each video, (b) video scenes.
-                    </figcaption>
-                </figure>
+            
+            <d-figure id="fig-vision_connector">
+              <figure>
+                  <img data-zoomable="" draggable="false" src="static/images/data_stat.png" style="width: 80%;display: block; margin: 0 auto;">
+                  <figcaption>
+                    <strong>Fig 2:</strong> Data statistics (left) of and wordcloud (right) of Science-T2I.
+                  </figcaption>
+              </figure>
             </d-figure>
-            <p class="text">
-                <p class="text">
-                    As shown in <a href="fig-real-annotation">Figure 2</a>, we annotate each video with a caption and segmentation masks estimated from 
-                    the SAM 2 video segmentation model. We create a descriptive caption for each object in the format of “{object description} falls.” 
-                    This caption is used to provide context to the task for image-to-video models that support text input.
-                </p>
+  
+            <p><strong>Task classification.</strong> Beyond a classification based on scientific disciplines, the tasks can be categorized into two distinct groups:
             </p>
-            <d-figure id="fig-real-annotation">
-                <figure>
-                    <img data-zoomable="" draggable="false" src="static/img/real_annotation.jpg" alt="Real World Data Annotation">
-                    <figcaption>
-                        <strong>Figure 2: Example of annotations in real-world data. </strong>
-                        For segmentation masks, we manually annotate first frame and utilize SAM 2 
-                        to produce segmentation masks across frames. For captions, we annotate 
-                        “{object description} falls.” for all video segments.
-                    </figcaption>
-                </figure>
+            <ol style="margin-left: 10px;">
+              <li style="margin-bottom: 3px;"><strong>Subject-oriented task (ST)</strong>
+                require scientific reasoning to discern how inherent differences between subjects lead to varying visual features under identical conditions.
+              </li>
+              <li style="margin-bottom: 3px;"><strong>Condition-oriented task (CT)</strong>
+                focus on how a single condition affects various subjects. Scientific reasoning in these tasks centers on the applied condition, not the subject's individual properties. 
+              </li>
+            </ol>
+            
+            <d-figure id="fig-vision_connector">
+              <figure>
+                  <img data-zoomable="" draggable="false" src="static/images/classification.png" style="width: 80%;display: block; margin: 0 auto;">
+                  <figcaption>
+                    <strong>Fig 3:</strong> Task classification of Science-T2I.
+                  </figcaption>
+              </figure>
             </d-figure>
-            <p class="text">
-                <p class="text">
-                    <strong>Simulated Test Videos. </strong>
-                    Since our post-training process uses a dataset of simulated videos, we also create a simulation test-set of 60 videos for understanding sim2real transfer. We create two splits of 30 videos each: one featuring objects and backgrounds seen during training, and the other featuring unseen objects and backgrounds.
-                </p>
+  
+            <p><strong>Prompt design.</strong> In Science-T2I, we categorize prompts into three types based on their use in scientific reasoning:
             </p>
-            <p class="text">
-                <p class="text">
-                    <strong>Metrics. </strong>
-                    We propose three mask-based spatial metrics to assess the physical accuracy of generated videos.
-                    Different from the text-to-video setting where the ground truth is highly ambiguous, our constrained task limits the space 
-                    of possibilities on how the scene can evolve. This allows us to use simple metrics that compare generated frames to a ground-truth video. We utilize Trajectory L2, Chamfer Distance (CD) and Intersection over Union (IoU) - three object centric metrics - to evaluate accuracy of trajectory, shape fidelity and object permanence, respectively.
-                </p>
-            </p>
-            <p class="text">
-                <p class="text">
-                    <strong>Evaluation Results. </strong>
-                    We evaluate 4 open models including CogVideoX-5B-I2V, DynamiCrafter, Pyramid-Flow, and Open-Sora-V1.2, 
-                    as well as 4 closed models including Sora, Kling-V1, Kling-V1.5, and Runway Gen3. Results of Physics Supervised Fine-Tuning (PSFT) and Object Reward Optimization (ORO) are discussed in <a href="#post-training">Physics Post-Training</a>.
-                </p>
-                <d-figure id="tab:evaluation_results">
-                    <figure>
-                        <img data-zoomable="" draggable="false" src="static/img/evaluation_results.png" alt="evaluation results">
-                        <figcaption>
-                            <strong>Table 1: PisaBench Evaluation Results. </strong>This table compares the performance of four proprietary models, four open models, and the models fine-tuned with PSFT and PSFT + ORO on our real-world and simulated test set which is decomposed into seen and unseen object splits. Across all metrics, our PSFT models outperform all other baselines, including proprietary models like Sora. Reward modeling further enhances results, with segmentation rewards improving the shape-based IoU metric and optical rewards and depth rewards enhancing the motion-based L2 and CD metrics. This suggests that rewards can be flexibly adjusted to target specific aspects of performance.
-                        </figcaption>
-                    </figure>
-                </d-figure>
+            <ol style="margin-left: 10px;">
+              <li style="margin-bottom: 3px;"><strong>Implicit prompt (IP).</strong>
+                Contains terms implying visual characteristics or phenomena requiring scientific interpretation (e.g., "an unripe apple" suggesting greenness).
+              </li>
+              <li style="margin-bottom: 3px;"><strong>Explicit prompt (EP).</strong>
+                Reformulates the IP into a clear, descriptive statement that results in a scientifically accurate depiction (e.g., "a green apple" explicitly conveying immaturity).
+              </li>
+              <li style="margin-bottom: 3px;"><strong>Superficial prompt (SP).</strong>
+                Provides explicit but scientifically inaccurate descriptions, focusing on surface-level interpretations (e.g., interpreting "an unripe apple" as "a red apple").
+              </li>
+            </ol>
+  
+            <d-figure id="fig-vision_connector">
+              <figure>
+                  <img data-zoomable="" draggable="false" src="static/images/dataset_pipeline.png" style="width: 80%;display: block; margin: 0 auto;">
+                  <figcaption>
+                    <strong>Fig 4:</strong> Data curation pipeline of Science-T2I.
+                  </figcaption>
+              </figure>
+            </d-figure>
+  
+            <p><strong>Data curation.</strong> We utilize GPT-4o to create templates and generate corresponding prompts during the data curation process. These outputs are then used to guide T2I models for image generation. Following this, human annotators review and filter the data, incorporating insights from an additional website knowledgebase to ensure the reliability and accuracy of the final dataset.
             </p>
             <div id="tab:showcases" style="display: flex; flex-direction: column; align-items: center; margin-left: -250px">
                 <div class="table-container">
