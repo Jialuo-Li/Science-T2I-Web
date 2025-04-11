@@ -119,12 +119,12 @@
                     <div class="icon-container">
                         <div class="icon-item">
                             <img src="./static/img/icon/dataset.svg" alt="Science-T2I Icon">
-                            <div><strong>Science-T2I</strong>: We develop an expert-annotated adversarial dataset comprising 20k image pairs and 9k prompts, covering a wide range of scientific knowledge categories.</div>
+                            <div><strong>Science-T2I</strong>: We develop an expert-annotated adversarial dataset comprising 20k image pairs and 9k prompts, covering a wide range of scientific knowledge categories. In addition, we introduce two benchmarks with distinct scene settings to evaluate how VLMs and LMMs handle tasks requiring vision-based scientific reasoning.</div>
                         </div>
-                        <div class="icon-item">
+                        <!-- <div class="icon-item">
                             <img src="./static/img/icon/benchmark.svg" alt="Evaluation Icon">
                             <div><strong>Science-T2I-C&S</strong>: We introduce two benchmarks with distinct scene settings to evaluate how VLMs and LMMs handle tasks requiring vision-based scientific reasoning.</div>
-                        </div>
+                        </div> -->
                         <div class="icon-item">
                             <img src="./static/img/icon/sciscore.svg" alt="Generalization Analysis Icon">
                             <div><strong>SciScore</strong>: We present an end-to-end reward model built by enhancing a pre-trained CLIP model to assess the scientific realism of generated images.</div>
@@ -207,12 +207,12 @@
         <div class="icon-row">
             <a href="#science-t2i" class="icon-link">
                 <img src="static/img/icon/dataset.svg" alt="Science-T2I Logo" class="icon-jump">
-                Science-T2I<br> &nbsp;
+                Science-T2I
             </a>
-            <a href="#benchmark" class="icon-link">
+            <!-- <a href="#benchmark" class="icon-link">
                 <img src="static/img/icon/benchmark.svg" alt=" Logo" class="icon-jump">
                 Science-T2I-C&S
-            </a>
+            </a> -->
             <a href="#sciscore" class="icon-link">
                 <img src="static/img/icon/sciscore.svg" alt="Generalization Analysis Logo" class="icon-jump">
                 SciScore
@@ -363,7 +363,7 @@
                 </div>
             </div>
             <br>
-            <div class="collapsible-section">
+            <!-- <div class="collapsible-section">
                 <button class="button is-fullwidth toggle-section" aria-controls="data_table" style="background-color: white; width: 150%; margin-left: -20%;">
                     <span>View trainset</span>
                     <span class="icon is-small">
@@ -393,10 +393,10 @@
                         }
                     });
                 </script>
-            </div>
-        </div>
+            </div> -->
+        <!-- </div>
 
-        <div id="benchmark">
+        <div id="benchmark"> -->
             <h1 class="text">Science-T2I-S&C: Assessing VLMs/LMMs in Vision-Driven Scientific Tasks.</h1>
             <p class="text">
                 To thoroughly evaluate the model's generalization ability across different environments on scientific reasoning tasks, we have created two additional manually annotated test sets, Science-T2I-S and Science-T2I-C:
@@ -1078,7 +1078,7 @@
                     });
                 </script>
             </div>
-        </div>  
+        <!-- </div>   -->
         <div id="sciscore">
             <h1 class="text">SciScore: Evaluating Scientific Authenticity of Images</h1>
 
@@ -1119,7 +1119,7 @@
         </div>
 
         <div id="finetuning">
-            <h1 class="text">Two-stage Fine-tuning Framework</h1>
+            <h1 class="text">Reality Alignment: Two-stage Fine-tuning Framework</h1>
             <p class="text">
                 We propose a two-stage training framework, comprising a supervised fine-tuning phase and a masked online fine-tuning phase, to incorporate scientific knowledge into existing generative models utilizing Science-T2I.
             </p>
@@ -1143,7 +1143,7 @@
   
             <h2 class="text" style="text-align: center;">Experiment & Ablation Study</h2>
             <p class="text">
-                <strong>Relative Improvement Metric.</strong> To better assess model performance beyond raw evaluations, we observe that explicit prompts consistently yield higher scores than implicit ones, providing an upper-bound performance estimate. To quantify the benefits of finetuning, we introduce the Relative Improvement (RI) metric. Let \(SciScore_B^{IP}\) and \(SciScore_B^{EP}\) represent the SciScore of the base model under implicit and explicit prompts, respectively, and let \(SciScore_F^{IP}\) denote the SciScore of the finetuned model under implicit prompts. The RI metric is then defined as:
+                <strong>Relative Improvement Metric.</strong> To better assess model performance beyond raw evaluations, we observe that explicit prompts consistently yield higher scores than implicit ones, providing an upper-bound performance estimate. To quantify the benefits of finetuning, we introduce the Relative Improvement (RI) metric. Let \(\text{SciScore}_B^{IP}\) and \(\text{SciScore}_B^{EP}\) represent the SciScore of the base model under implicit and explicit prompts, respectively, and let \(\text{SciScore}_F^{IP}\) denote the SciScore of the finetuned model under implicit prompts. The RI is then defined as:
                 \[
                 \begin{equation}
                     RI = \frac{\text{SciScore}_F^{IP}-\text{SciScore}_B^{IP}}{\text{SciScore}_B^{EP}-\text{SciScore}_B^{IP}}
@@ -1188,6 +1188,15 @@
                   </figcaption>
               </figure>
             </d-figure>
+        </div>
+
+        <div id="Conclusion">
+            <h1 class="text">Conclusion</h1>
+            <p class="text">
+                <p class="text">
+                    In summary, by leveraging our expert-annotated dataset, Science-T2I, which comprises over 20k adversarial image pairs and 9k prompts, we have developed a comprehensive framework for evaluating and enhancing image realism. Specifically, we introduce SciScore, a novel reward model designed to infuse scientific knowledge into image synthesis. Our results demonstrate that SciScore reaches human-level accuracy in aligning with scientific knowledge. Additionally, we propose a two-stage training framework for T2I models, utilizing SciScore as the reward model. This framework, which combines supervised fine-tuning with online fine-tuning, leads to significant performance improvements in generation tasks that require scientific reasoning.
+                </p>
+            </p>
         </div>
 
         </d-article>
