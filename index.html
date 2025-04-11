@@ -1082,7 +1082,8 @@
         <div id="sciscore">
             <h1 class="text">SciScore: Evaluating Scientific Authenticity of Images</h1>
 
-            <p class="text">Leveraging Science-T2I, we present SciScore, an end-to-end reward model that refines the assessment of generated images based on scientific knowledge, which is achieved by augmenting both the scientific comprehension and visual capabilities of pre-trained CLIP model. The qualitative performance of SciScore is demonstrated in Fig. 1.
+            <p class="text">
+                Leveraging Science-T2I, we present SciScore, an end-to-end reward model that refines the assessment of generated images based on scientific knowledge, which is achieved by augmenting both the scientific comprehension and visual capabilities of pre-trained CLIP model. The qualitative performance of SciScore is demonstrated in Fig. 1.
             </p>
 
             <d-figure id="fig-res">
@@ -1094,15 +1095,18 @@
                 </figure>
             </d-figure>
 
-            <p class="text"><strong>Generalization of SciScore to Complex Scenes.</strong> SciScore generalizes well to complex scenes Science-T2I-C beyond simple ones Science-T2I-S, showing it can focus on relevant regions and ignore distractions.
+            <p class="text">
+                <strong>Generalization of SciScore to Complex Scenes.</strong> SciScore generalizes well to complex scenes Science-T2I-C beyond simple ones Science-T2I-S, showing it can focus on relevant regions and ignore distractions.
             </p>
 
-            <p class="text"><strong>Generalization of SciScore across ST and CT.</strong> A significant performance gap emerged between ST and CT, with most failures in ST. This is expected, as CT relies on generalizable visual features, while ST depends on subject-specific details. Lacking exposure to novel subjects, SciScore struggles to identify accurate visual contents.
+            <p class="text">
+                <strong>Generalization of SciScore across ST and CT.</strong> A significant performance gap emerged between ST and CT, with most failures in ST. This is expected, as CT relies on generalizable visual features, while ST depends on subject-specific details. Lacking exposure to novel subjects, SciScore struggles to identify accurate visual contents.
             </p>
 
             <h2 class="text" style="text-align: center">Benchmarking T2I Generation with SciScore</h2>
 
-            <p class="text"><strong>Three-dimensional Evaluation.</strong> We evaluated T2I models' scientific reasoning by assessing the alignment between images generated from implicit prompts and those from (1) explicit prompts, (2) superficial prompts, and (3) implicit prompts themselves. 
+            <p class="text">
+                <strong>Three-dimensional Evaluation.</strong> We evaluated T2I models' scientific reasoning by assessing the alignment between images generated from implicit prompts and those from (1) explicit prompts, (2) superficial prompts, and (3) implicit prompts themselves. 
             </p>
 
             <d-figure id="fig-benchmark">
@@ -1114,11 +1118,13 @@
                 </figure>
             </d-figure>
 
-            <p class="text"><strong>Analysis of Reasoning Capability.</strong> To evaluate the ability of T2I models to interpret implicit prompts, we introduce the Normalized Difference (ND) metric. This metric compares images generated from implicit prompts to those produced from explicit prompts, using the formula:
+            <p class="text">
+                <strong>Analysis of Reasoning Capability.</strong> To evaluate the ability of T2I models to interpret implicit prompts, we introduce the Normalized Difference (ND) metric. This metric compares images generated from implicit prompts to those produced from explicit prompts, using the formula:
                 \[
                 \text{ND} = \frac{\text{IP} - \text{SP}}{\text{EP} - \text{SP}}
                 \]
-            Here in Tab 2, low ND scores—averaging around 35 and mostly below 50—reveal a significant limitation in current models. Specifically, they struggle to move beyond literal interpretations of prompts, particularly when dealing with implicit scientific concepts.</p>
+                Here in Tab 2, low ND scores—averaging around 35 and mostly below 50—reveal a significant limitation in current models. Specifically, they struggle to move beyond literal interpretations of prompts, particularly when dealing with implicit scientific concepts.
+            </p>
         </div>
 
         <div id="finetuning">
