@@ -294,7 +294,7 @@
             </p>
             
             
-            <h2 class="title is-3" style="text-align: center;">Science-T2I Examples</h2>
+            <h2 class="text" style="text-align: center;">Science-T2I Examples</h2>
             <div id="results-carousel" class="carousel results-carousel text">  
             
                 <div>
@@ -397,8 +397,20 @@
         </div>
 
         <div id="benchmark">
-            <h1 class="text">Science-T2I-S&C: An Adversarial Dataset</h1>
-            <h2 class="title is-3" style="text-align: center;">Science-T2I-S&C Leaderboard</h2>
+            <h1 class="text">Science-T2I-S&C</h1>
+            <p class="text">
+                To thoroughly evaluate the model's generalization ability across different environments on scientific reasoning tasks, we have created two additional manually annotated test sets, Science-T2I-S and Science-T2I-C:
+            </p>
+
+            <p class="text">
+                1. <strong>Science-T2I-S</strong>  closely replicates the stylistic and structural attributes of the training data. It emphasizes simplicity by focusing on specific regions and strictly adhering to the annotation criteria in Section~\ref{sec:data_criteria}. The goal of~\dataset~S is to assess the model's performance on data stylistically similar to its training set.
+            </p>
+
+            <p class="text">
+                2. <strong>Science-T2I-C</strong> challenges the model in more complex scenarios, introducing contextual elements like explicit scene settings and diverse scenarios. Prompts in~\dataset~C may include phrases such as "in a bedroom" or "on the street," adding spatial and contextual variability. This complexity evaluates the model's ability to adapt to nuanced, less constrained environments.
+            </p>
+
+            <h2 class="text" style="text-align: center;">Science-T2I-S&C Leaderboard</h2>
             <div class="has-text-centered">
                 <p>🤩 Submit your LMM/VLM scores now and watch the leaderboard refresh with your achievements! Email us at <a href="mailto:ljl20031007@gmail.com"><i class="fas fa-envelope"></i></a>.
                 </p>
