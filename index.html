@@ -1085,7 +1085,7 @@
             <p class="text">Leveraging Science-T2I, we present SciScore, an end-to-end reward model that refines the assessment of generated images based on scientific knowledge, which is achieved by augmenting both the scientific comprehension and visual capabilities of pre-trained CLIP model. The qualitative performance of SciScore is demonstrated in Fig. 1.
             </p>
 
-            <d-figure id="fig-vision_connector">
+            <d-figure id="fig-res">
                 <figure>
                     <img data-zoomable="" draggable="false" src="static/img/SciScore_results.jpg">
                     <figcaption>
@@ -1107,14 +1107,14 @@
 
             <d-figure id="fig-benchmark">
                 <figure>
-                    <img data-zoomable="" draggable="false" src="static/img/benchmark.png">
+                    <img data-zoomable="" draggable="false" src="static/img/benchmark.png" style="width: 60%; margin-left: 20%;">
                     <figcaption style="text-align: center; margin: 20px;">
                     <strong>Tab 2:</strong> Performance of T2I Models on SciScore.
                     </figcaption>
                 </figure>
             </d-figure>
 
-            <p class="text"><strong>Analysis on reasoning capability.</strong> We introduce the 'Normalized Difference' (ND) metric to assess T2I models' ability to interpret implicit prompts by comparing generated images to those from explicit prompts, which is defined as \[\text{ND} = (\text{IP} - \text{SP})/(\text{EP} - \text{SP})\]. Low ND scores (average ~35, mostly &lt; 50) indicate a significant failure of current models to move beyond literal prompt interpretations, especially for implicit scientific concepts.
+            <p class="text"><strong>Analysis on reasoning capability.</strong> We introduce the 'Normalized Difference' (ND) metric to assess T2I models' ability to interpret implicit prompts by comparing generated images to those from explicit prompts, which is defined as \(\text{ND} = (\text{IP} - \text{SP})/(\text{EP} - \text{SP})\). Low ND scores (average ~35, mostly &lt; 50) indicate a significant failure of current models to move beyond literal prompt interpretations, especially for implicit scientific concepts.
             </p>
         </div>
 
@@ -1143,7 +1143,7 @@
   
             <h2 class="text" style="text-align: center;">Experiment & Ablation Study</h2>
             <p class="text">
-                <strong>Relative Improvement Metric.</strong> To better assess model performance beyond raw evaluations, we observe that explicit prompts consistently yield higher scores than implicit ones, providing an upper-bound performance estimate. To quantify the benefits of finetuning, we introduce the Relative Improvement (RI) metric. Let \[\text{SciScore}_B^{IP}\] and \(\text{SciScore}_B^{EP}\) represent the SciScore of the base model under implicit and explicit prompts, respectively, and let \(\text{SciScore}_F^{IP}\) denote the SciScore of the finetuned model under implicit prompts. The RI is then defined as:
+                <strong>Relative Improvement Metric.</strong> To better assess model performance beyond raw evaluations, we observe that explicit prompts consistently yield higher scores than implicit ones, providing an upper-bound performance estimate. To quantify the benefits of finetuning, we introduce the Relative Improvement (RI) metric. Let \(\text{SciScore}_B^{IP}\) and \(\text{SciScore}_B^{EP}\) represent the SciScore of the base model under implicit and explicit prompts, respectively, and let \(\text{SciScore}_F^{IP}\) denote the SciScore of the finetuned model under implicit prompts. The RI is then defined as:
                 \[
                 \begin{equation}
                     RI = \frac{\text{SciScore}_F^{IP}-\text{SciScore}_B^{IP}}{\text{SciScore}_B^{EP}-\text{SciScore}_B^{IP}}
@@ -1152,7 +1152,7 @@
             </p>
             <d-figure id="fig-exp_tuning">
               <figure>
-                  <img data-zoomable="" draggable="false" src="static/img/exp_tuning.png" style="width: 70%; margin-left: 15%;">
+                  <img data-zoomable="" draggable="false" src="static/img/exp_tuning.png" style="width: 60%; margin-left: 20%;">
                   <figcaption style="text-align: center; margin: 20px;">
                     <strong>Tab 3:</strong> Average SciScore on various methods.
                   </figcaption>
@@ -1200,20 +1200,15 @@
         </div>
 
         </d-article>
-        <!-- <d-appendix>
+        <d-appendix>
             <h3>BibTeX</h3>
             <p class="bibtex">
-                @article{li2025pisa,<br>
-                &nbsp;&nbsp;title={PISA Experiments: Exploring Physics Post-Training for Video Diffusion Models by Watching Stuff Drop},<br>
-                &nbsp;&nbsp;author={Li, Chenyu and Michel, Oscar and Pan, Xichen and Liu, Sainan and Roberts, Mike and Xie, Saining},<br>
-                &nbsp;&nbsp;journal={arXiv preprint arXiv:2503.09595},<br>
-                &nbsp;&nbsp;year={2025}<br>
-                }
+               
             </p>
 
             <d-footnote-list></d-footnote-list>
             <d-citation-list></d-citation-list>
-        </d-appendix> -->
+        </d-appendix>
         
         <!-- bibliography will be inlined during Distill pipeline's pre-rendering -->
         <d-bibliography src="bibliography.bib"></d-bibliography>
