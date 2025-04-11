@@ -231,7 +231,7 @@
         <div id="science-t2i">
             <h1 class="text">Science-T2I: An Adversarial Scientific Dataset</h1>
             <p class="text">
-                <strong>Task overview.</strong> Science-T2I consists of 16 tasks spanning physics, chemistry and biology that require the model to infer or visualize concepts not explicitly stated in the prompts but rooted in underlying scientific principles.
+                <strong>Task Overview.</strong> Science-T2I consists of 16 tasks spanning physics, chemistry and biology that require the model to infer or visualize concepts not explicitly stated in the prompts but rooted in underlying scientific principles.
             </p>
             
             <d-figure id="fig-data-stat">
@@ -244,7 +244,7 @@
             </d-figure>
   
             <p class="text">
-                <strong>Task classification.</strong> Beyond a classification based on scientific disciplines, the tasks can be categorized into two distinct groups:
+                <strong>Task Classification.</strong> Beyond a classification based on scientific disciplines, the tasks can be categorized into two distinct groups:
             </p>
             
             <p class="text">
@@ -265,19 +265,19 @@
             </d-figure>
   
             <p class="text">
-                <strong>Prompt design.</strong> In Science-T2I, we categorize prompts into three types based on their use in scientific reasoning:
+                <strong>Prompt Design.</strong> In Science-T2I, we categorize prompts into three types based on their use in scientific reasoning:
             </p>
 
             <p class="text">
-                1. <strong>Implicit prompt (IP)</strong> refers to prompts that imply visual characteristics or phenomena requiring scientific interpretation. For example, "an unripe apple" suggests the apple's color is green, but this is not explicitly stated.
+                1. <strong>Implicit Prompt (IP)</strong> refers to prompts that imply visual characteristics or phenomena requiring scientific interpretation. For example, "an unripe apple" suggests the apple's color is green, but this is not explicitly stated.
             </p>
 
             <p class="text">
-                2. <strong>Explicit prompt (EP)</strong> reformulates the IP into a clear, descriptive statement that results in a scientifically accurate depiction. For instance, "a green apple" explicitly conveys the apple's immaturity.
+                2. <strong>Explicit Prompt (EP)</strong> reformulates the IP into a clear, descriptive statement that results in a scientifically accurate depiction. For instance, "a green apple" explicitly conveys the apple's immaturity.
             </p>
 
             <p class="text">
-                3. <strong>Superficial prompt (SP)</strong> provides explicit but scientifically inaccurate descriptions, focusing on surface-level interpretations. For example, interpreting "an unripe apple" as "a red apple" is a superficial interpretation that lacks scientific accuracy.
+                3. <strong>Superficial Prompt (SP)</strong> provides explicit but scientifically inaccurate descriptions, focusing on surface-level interpretations. For example, interpreting "an unripe apple" as "a red apple" is a superficial interpretation that lacks scientific accuracy.
             </p>
             
             <d-figure id="fig-data-pipeline">
@@ -290,7 +290,7 @@
             </d-figure>
   
             <p class="text">
-                <strong>Data curation.</strong> We utilize GPT-4o to create templates and generate corresponding prompts during the data curation process. These outputs are then used to guide T2I models for image generation. Following this, human annotators review and filter the data, incorporating insights from an additional website knowledgebase to ensure the reliability and accuracy of the final dataset.
+                <strong>Data Curation.</strong> We utilize GPT-4o to create templates and generate corresponding prompts during the data curation process. These outputs are then used to guide T2I models for image generation. Following this, human annotators review and filter the data, incorporating insights from an additional website knowledgebase to ensure the reliability and accuracy of the final dataset.
             </p>
             
             
@@ -399,7 +399,7 @@
         <div id="benchmark"> -->
             <!-- <h1 class="text">Science-T2I-S&C: Assessing VLMs/LMMs in Vision-Driven Scientific Tasks.</h1> -->
             <p class="text">
-                <strong>Benchmark Setpu.</strong> To thoroughly evaluate the model's generalization ability across different environments on scientific reasoning tasks, we have created two additional manually annotated test sets, Science-T2I-S and Science-T2I-C:
+                <strong>Benchmark Setup.</strong> To thoroughly evaluate the model's generalization ability across different environments on scientific reasoning tasks, we have created two additional manually annotated test sets, Science-T2I-S and Science-T2I-C:
             </p>
 
             <p class="text">
@@ -1094,7 +1094,7 @@
                 </figure>
             </d-figure>
 
-            <p class="text"><strong>Generalization of SciScore to complex scenes.</strong> SciScore generalizes well to complex scenes Science-T2I-C beyond simple ones Science-T2I-S, showing it can focus on relevant regions and ignore distractions.
+            <p class="text"><strong>Generalization of SciScore to Complex Scenes.</strong> SciScore generalizes well to complex scenes Science-T2I-C beyond simple ones Science-T2I-S, showing it can focus on relevant regions and ignore distractions.
             </p>
 
             <p class="text"><strong>Generalization of SciScore across ST and CT.</strong> A significant performance gap emerged between ST and CT, with most failures in ST. This is expected, as CT relies on generalizable visual features, while ST depends on subject-specific details. Lacking exposure to novel subjects, SciScore struggles to identify accurate visual contents.
@@ -1102,7 +1102,7 @@
 
             <h2 class="text" style="text-align: center">Benchmarking T2I Generation with SciScore</h2>
 
-            <p class="text"><strong>Three-dimensional evaluation.</strong> We evaluated T2I models' scientific reasoning by assessing the alignment between images generated from implicit prompts and those from (1) explicit prompts, (2) superficial prompts, and (3) implicit prompts themselves. 
+            <p class="text"><strong>Three-dimensional Evaluation.</strong> We evaluated T2I models' scientific reasoning by assessing the alignment between images generated from implicit prompts and those from (1) explicit prompts, (2) superficial prompts, and (3) implicit prompts themselves. 
             </p>
 
             <d-figure id="fig-benchmark">
@@ -1114,7 +1114,7 @@
                 </figure>
             </d-figure>
 
-            <p class="text"><strong>Analysis on reasoning capability.</strong> We introduce the 'Normalized Difference' (ND) metric to assess T2I models' ability to interpret implicit prompts by comparing generated images to those from explicit prompts, which is defined as \(ND = (IP - SP)/(EP - SP)\). Low ND scores (average ~35, mostly &lt; 50) indicate a significant failure of current models to move beyond literal prompt interpretations, especially for implicit scientific concepts.
+            <p class="text"><strong>Analysis on Reasoning Capability.</strong> We introduce the 'Normalized Difference' (ND) metric to assess T2I models' ability to interpret implicit prompts by comparing generated images to those from explicit prompts, which is defined as \[\text{ND} = (\text{IP} - \text{SP})/(\text{EP} - \text{SP})\]. Low ND scores (average ~35, mostly &lt; 50) indicate a significant failure of current models to move beyond literal prompt interpretations, especially for implicit scientific concepts.
             </p>
         </div>
 
@@ -1125,11 +1125,11 @@
             </p>
 
             <p class="text">
-                <strong>Supervised fine-tuning.</strong> For this phase, we utilize FLUX as our base model and train it on the Science-T2I, employing FLUX's native rectified flow training objective without any modifications.
+                <strong>Supervised Fine-tuning.</strong> For this phase, we utilize FLUX as our base model and train it on the Science-T2I, employing FLUX's native rectified flow training objective without any modifications.
             </p>
   
             <p class="text">
-                <strong>Online fine-tuning.</strong> In this phase, we implement a masked online fine-tuning approach, incorporating SciScore as a reward model to direct the learning process through the DPO training objective.
+                <strong>Online Fine-tuning.</strong> In this phase, we implement a masked online fine-tuning approach, incorporating SciScore as a reward model to direct the learning process through the DPO training objective.
             </p>
   
             <d-figure id="fig-train_pipeline">
