@@ -1143,7 +1143,7 @@
   
             <h2 class="text" style="text-align: center;">Experiment & Ablation Study</h2>
             <p class="text">
-                <strong>Relative Improvement Metric.</strong> To gain a more nuanced understanding of model performance beyond raw~\model~evaluation, we observe a consistent trend:~\model~achieved by the model when provided with explicit prompts invariably surpasses that obtained with implicit prompts. This principle allows us to establish an upper-bound performance estimate by calculating the average~\model~specifically for explicit prompts. To quantify the relative improvement achieved through finetuning, we introduce the Relative Improvement (RI) metric. Let $SciScore_B^{IP}$ and $SciScore_B^{EP}$ represent the SciScore of the base model under implicit and explicit prompts, respectively, and let $SciScore_F^{IP}$ denote the SciScore of the finetuned model under implicit prompts. The RI metric is then defined as:
+                <strong>Relative Improvement Metric.</strong> To better assess model performance beyond raw evaluations, we observe that explicit prompts consistently yield higher scores than implicit ones, providing an upper-bound performance estimate. To quantify the benefits of finetuning, we introduce the Relative Improvement (RI) metric. Let \(SciScore_B^{IP}\) and \(SciScore_B^{EP}\) represent the SciScore of the base model under implicit and explicit prompts, respectively, and let \(SciScore_F^{IP}\) denote the SciScore of the finetuned model under implicit prompts. The RI metric is then defined as:
                 \[
                 \begin{equation}
                     RI = \frac{\text{SciScore}_F^{IP}-\text{SciScore}_B^{IP}}{\text{SciScore}_B^{EP}-\text{SciScore}_B^{IP}}
