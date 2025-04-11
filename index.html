@@ -1114,7 +1114,7 @@
                 </figure>
             </d-figure>
 
-            <p class="text"><strong>Analysis on reasoning capability.</strong> We introduce the 'Normalized Difference' (ND) metric to assess T2I models' ability to interpret implicit prompts by comparing generated images to those from explicit prompts. Low ND scores (average ~35, mostly &lt; 50) indicate a significant failure of current models to move beyond literal prompt interpretations, especially for implicit scientific concepts.
+            <p class="text"><strong>Analysis on reasoning capability.</strong> We introduce the 'Normalized Difference' (ND) metric to assess T2I models' ability to interpret implicit prompts by comparing generated images to those from explicit prompts, which is defined as \[\text{ND} = (\text{IP} - \text{SP})/(\text{EP} - \text{SP})\]. Low ND scores (average ~35, mostly &lt; 50) indicate a significant failure of current models to move beyond literal prompt interpretations, especially for implicit scientific concepts.
             </p>
         </div>
 
@@ -1143,7 +1143,7 @@
   
             <h2 class="text" style="text-align: center;">Experiment & Ablation Study</h2>
             <p class="text">
-                <strong>Relative Improvement Metric.</strong> To better assess model performance beyond raw evaluations, we observe that explicit prompts consistently yield higher scores than implicit ones, providing an upper-bound performance estimate. To quantify the benefits of finetuning, we introduce the Relative Improvement (RI) metric. Let \(\text{SciScore}_B^{IP}\) and \(\text{SciScore}_B^{EP}\) represent the SciScore of the base model under implicit and explicit prompts, respectively, and let \(\text{SciScore}_F^{IP}\) denote the SciScore of the finetuned model under implicit prompts. The RI is then defined as:
+                <strong>Relative Improvement Metric.</strong> To better assess model performance beyond raw evaluations, we observe that explicit prompts consistently yield higher scores than implicit ones, providing an upper-bound performance estimate. To quantify the benefits of finetuning, we introduce the Relative Improvement (RI) metric. Let \[\text{SciScore}_B^{IP}\] and \(\text{SciScore}_B^{EP}\) represent the SciScore of the base model under implicit and explicit prompts, respectively, and let \(\text{SciScore}_F^{IP}\) denote the SciScore of the finetuned model under implicit prompts. The RI is then defined as:
                 \[
                 \begin{equation}
                     RI = \frac{\text{SciScore}_F^{IP}-\text{SciScore}_B^{IP}}{\text{SciScore}_B^{EP}-\text{SciScore}_B^{IP}}
