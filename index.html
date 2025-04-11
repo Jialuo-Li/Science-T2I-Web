@@ -202,7 +202,7 @@
         </d-figure>
 
         <p class="text abstract">
-            We introduce a novel method for integrating scientific knowledge into generative models to enhance their realism and consistency in image synthesis. Central to our approach is <b>Science-T2I</b> , an expert-annotated adversarial dataset of 20k image pairs and 9k prompts spanning diverse scientific categories. Building on <b>Science-T2I</b> , we develop <b>SciScore</b>, an end-to-end reward model that refines the evaluation of generated images by enhancing the scientific and visual capabilities of a pre-trained CLIP model. Furthermore, we propose a two-stage training framework—combining supervised fine-tuning and masked online fine-tuning—to embed scientific knowledge into existing generative models. Extensive experiments validate the framework's effectiveness in setting new benchmarks for assessing the scientific realism of generated content.
+            We introduce a novel method for integrating scientific knowledge into generative models to enhance their realism and consistency in image synthesis. Central to our approach is <b>Science-T2I</b>, an expert-annotated adversarial dataset of 20k image pairs and 9k prompts spanning diverse scientific categories. Building on <b>Science-T2I</b>, we develop <b>SciScore</b>, an end-to-end reward model that refines the evaluation of generated images by enhancing the scientific and visual capabilities of a pre-trained CLIP model. Furthermore, we propose a two-stage training framework—combining supervised fine-tuning and masked online fine-tuning—to embed scientific knowledge into existing generative models. Extensive experiments validate the framework's effectiveness in setting new benchmarks for assessing the scientific realism of generated content.
         </p>
         <div class="icon-row">
             <a href="#science-t2i" class="icon-link">
@@ -397,17 +397,17 @@
         </div>
 
         <div id="benchmark">
-            <h1 class="text">Science-T2I-S&C</h1>
+            <h1 class="text">Science-T2I-S&C: Assessing VLMs/LMMs in Vision-Driven Scientific Tasks.</h1>
             <p class="text">
                 To thoroughly evaluate the model's generalization ability across different environments on scientific reasoning tasks, we have created two additional manually annotated test sets, Science-T2I-S and Science-T2I-C:
             </p>
 
             <p class="text">
-                1. <strong>Science-T2I-S</strong>  closely replicates the stylistic and structural attributes of the training data. It emphasizes simplicity by focusing on specific regions and strictly adhering to the annotation criteria in Section~\ref{sec:data_criteria}. The goal of~\dataset~S is to assess the model's performance on data stylistically similar to its training set.
+                1. <strong>Science-T2I-S</strong>  closely replicates the stylistic and structural attributes of the training data. It emphasizes simplicity by focusing on specific regions. The goal of~\dataset~S is to assess the model's performance on data stylistically similar to its training set.
             </p>
 
             <p class="text">
-                2. <strong>Science-T2I-C</strong> challenges the model in more complex scenarios, introducing contextual elements like explicit scene settings and diverse scenarios. Prompts in~\dataset~C may include phrases such as "in a bedroom" or "on the street," adding spatial and contextual variability. This complexity evaluates the model's ability to adapt to nuanced, less constrained environments.
+                2. <strong>Science-T2I-C</strong> challenges the model in more complex scenarios, introducing contextual elements like explicit scene settings and diverse scenarios. Prompts may include phrases such as "in a bedroom" or "on the street," adding spatial and contextual variability. This complexity evaluates the model's ability to adapt to nuanced, less constrained environments.
             </p>
 
             <h2 class="text" style="text-align: center;">Science-T2I-S&C Leaderboard</h2>
@@ -1142,7 +1142,14 @@
             </d-figure>
   
             <h2 class="text" style="text-align: center;">Experiment & Ablation Study</h2>
-  
+            <p class="text">
+                <strong>Relative Improvement Metric.</strong> To gain a more nuanced understanding of model performance beyond raw~\model~evaluation, we observe a consistent trend:~\model~achieved by the model when provided with explicit prompts invariably surpasses that obtained with implicit prompts. This principle allows us to establish an upper-bound performance estimate by calculating the average~\model~specifically for explicit prompts. To quantify the relative improvement achieved through finetuning, we introduce the Relative Improvement (RI) metric. Let $SciScore_B^{IP}$ and $SciScore_B^{EP}$ represent the SciScore of the base model under implicit and explicit prompts, respectively, and let $SciScore_F^{IP}$ denote the SciScore of the finetuned model under implicit prompts. The RI metric is then defined as:
+                \[
+                \begin{equation}
+                    RI = \frac{\text{SciScore}_F^{IP}-\text{SciScore}_B^{IP}}{\text{SciScore}_B^{EP}-\text{SciScore}_B^{IP}}
+                \end{equation}
+                \]
+            </p>
             <d-figure id="fig-exp_tuning">
               <figure>
                   <img data-zoomable="" draggable="false" src="static/img/exp_tuning.png" style="width: 70%; margin-left: 15%;">
