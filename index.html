@@ -1114,8 +1114,11 @@
                 </figure>
             </d-figure>
 
-            <p class="text"><strong>Analysis on Reasoning Capability.</strong> We introduce the 'Normalized Difference' (ND) metric to assess T2I models' ability to interpret implicit prompts by comparing generated images to those from explicit prompts, which is defined as \[\text{ND} = \frac{\text{IP} - \text{SP}}{\text{EP} - \text{SP}}\]. Low ND scores (average ~35, mostly &lt; 50) indicate a significant failure of current models to move beyond literal prompt interpretations, especially for implicit scientific concepts.
-            </p>
+            <p class="text"><strong>Analysis of Reasoning Capability.</strong> To evaluate the ability of T2I models to interpret implicit prompts, we introduce the Normalized Difference (ND) metric. This metric compares images generated from implicit prompts to those produced from explicit prompts, using the formula:
+                \[
+                \text{ND} = \frac{\text{IP} - \text{SP}}{\text{EP} - \text{SP}}
+                \]
+            Here in Tab 2, low ND scores—averaging around 35 and mostly below 50—reveal a significant limitation in current models. Specifically, they struggle to move beyond literal interpretations of prompts, particularly when dealing with implicit scientific concepts.</p>
         </div>
 
         <div id="finetuning">
