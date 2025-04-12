@@ -9,7 +9,7 @@ body {
   /* background-color: #FAF8E7; */
   /* background-color: rgb(242, 240, 221); */
   /* background: linear-gradient(to right, #f4f4f4 50%, #ffffff 100%); */
-  /* background: linear-gradient(135deg, #d8c9d1 0%, #92b9c9 50%, #2b2a2a 100%); */
+  background: linear-gradient(135deg, #d8c9d1 0%, #92b9c9 50%, #FAF8E7 100%);
 }
 
 .header-container {
