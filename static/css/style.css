@@ -1588,7 +1588,7 @@ border: 1px solid red;
   height: 1.8em; /* Set a fixed height for all icons */
   width: auto; /* Adjust width to maintain aspect ratio */
   margin-bottom: 5px; /* Space between icon and text */
-  filter: invert(100%); /* Invert the color of the icon */
+  /* filter: invert(100%); Invert the color of the icon */
 }
 
 .icon-row {
