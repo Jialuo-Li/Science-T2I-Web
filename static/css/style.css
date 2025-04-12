@@ -5,7 +5,8 @@ body {
 
 .header-wrapper {
   /* background: linear-gradient(135deg, #0f2c5c, #1b4d8c, #62a4db, #f2f2f2); */
-  background: linear-gradient(135deg, #f4f1ec, #dbe1e5, #f1dede, #1e1e1e);
+  /* background: linear-gradient(135deg, #f4f1ec, #dbe1e5, #f1dede, #1e1e1e); */
+  background-color: #FAF8E7;
 }
 
 .header-container {
