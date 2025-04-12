@@ -4,7 +4,7 @@ body {
 }
 
 .header-wrapper {
-  background: linear-gradient(-180deg, #3498db 0%, #e0f2f7 100%); /* 柔和的蓝色到浅蓝色 */
+  background: linear-gradient(135deg, #0f2c5c, #1b4d8c, #62a4db, #f2f2f2);
 }
 
 .header-container {
