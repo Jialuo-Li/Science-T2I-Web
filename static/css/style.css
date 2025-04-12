@@ -1581,7 +1581,7 @@ border: 1px solid red;
   width: 30px;
   height: 30px;
   margin-right: 1em;
-  filter: invert(60%) sepia(57%) saturate(2133%) hue-rotate(208deg) brightness(92%) contrast(90%);
+  filter: invert(25%) sepia(15%) saturate(350%) hue-rotate(210deg) brightness(95%) contrast(90%);
 
 }
 
