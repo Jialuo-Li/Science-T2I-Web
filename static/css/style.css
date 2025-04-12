@@ -34,7 +34,7 @@ body {
     font-size: 1.5em;
     margin-bottom: 0.5em;
     line-height: 1.2;
-    color: #FBBC04;
+    color: rgb(100, 150, 255);
 }
 
 .header-content h2 {
