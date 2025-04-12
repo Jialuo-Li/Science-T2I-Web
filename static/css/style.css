@@ -22,11 +22,11 @@ body {
 }
 
 .header-content strong {
-    color: #ffe099;
+    color: rgb(169, 193, 198);
 }
 
 .header-content {
-    color: #FEEFC3;
+    color: rgb(169, 193, 198);
     text-align: left;
 }
 
@@ -34,13 +34,13 @@ body {
     font-size: 1.5em;
     margin-bottom: 0.5em;
     line-height: 1.2;
-    color: rgb(100, 150, 255);
+    color: rgb(169, 193, 198);
 }
 
 .header-content h2 {
     margin-bottom: 0.5em;
     line-height: 1.2;
-    color: #FBBC04;
+    color: rgb(169, 193, 198);
 }
 
 .header-container p {
