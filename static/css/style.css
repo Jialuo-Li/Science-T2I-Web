@@ -5,11 +5,11 @@ body {
 
 .header-wrapper {
   /* background: linear-gradient(135deg, #0f2c5c, #1b4d8c, #62a4db, #f2f2f2); */
-  background: linear-gradient(135deg, #f1dede, #dbe1e5, #FAF8E7);
-  /* background-color: #FAF8E7; */
+  /* background: linear-gradient(135deg, #f1dede, #dbe1e5, #FAF8E7); */
+  background-color: #FAF8E8;
   /* background-color: rgb(242, 240, 221); */
   /* background: linear-gradient(to right, #f4f4f4 50%, #ffffff 100%); */
-  background: linear-gradient(135deg, #d8c9d1 0%, #92b9c9 50%, #FAF8E7 100%);
+  /* background: linear-gradient(135deg, #d8c9d1 0%, #92b9c9 50%, #FAF8E7 100%); */
 }
 
 .header-container {
