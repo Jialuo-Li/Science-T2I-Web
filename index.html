@@ -1,1261 +1,600 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <style>
-            pre, code {
-                font-size: 16px;
-            }
-        </style>
+ <head>
+ <style>
+ pre, code {
+ font-size: 16px;
+ }
+ </style>
 
-        <title>Science-T2I: Addressing Scientific Illusions in Image Synthesis</title>
-        <link rel="icon" type="image/x-icon" href="static/img/icon/Science-T2I.png">
+ <title>Science-T2I: Addressing Scientific Illusions in Image Synthesis</title>
+ <link rel="icon" type="image/x-icon" href="static/img/icon/Science-T2I.png">
 
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- Open Graph -->
-        <meta property="og:url" content="" />
-        <meta property="og:image" content="./static/img/preview.png" />
-        <meta property="og:title" content="Science-T2I: Addressing Scientific Illusions in Image Synthesis" />
-        
-        <!-- Twitter -->
-        <meta name="twitter:url" content="https://jialuo-li.github.io/Science-T2I-Web" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:image" content="./static/img/preview.png" />
-        <meta name="twitter:title" content="Science-T2I: Addressing Scientific Illusions in Image Synthesis" />
-        <meta name="twitter:description" content="We develop an expert-annotated adversarial dataset covering a wide range of scientific knowledge categories. Furthermore, we introduce two benchmarks with distinct scene settings to evaluate how VLMs and LMMs handle tasks requiring vision-based scientific reasoning." />
+ <meta property="og:url" content="" />
+ <meta property="og:image" content="./static/img/preview.png" />
+ <meta property="og:title" content="Science-T2I: Addressing Scientific Illusions in Image Synthesis" />
 
-        <!-- JS Libraries -->
-        <script src="./static/js/distill_template.v2.js"></script>
-        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+ <meta name="twitter:url" content="https://jialuo-li.github.io/Science-T2I-Web" />
+ <meta name="twitter:card" content="summary_large_image" />
+ <meta name="twitter:image" content="./static/img/preview.png" />
+ <meta name="twitter:title" content="Science-T2I: Addressing Scientific Illusions in Image Synthesis" />
+ <meta name="twitter:description" content="Current image generation models produce visually compelling but scientifically implausible images. We introduce Science-T2I, an expert-annotated dataset, SciScore, a reward model surpassing human evaluators, and a two-stage alignment framework yielding over 50% relative improvement." />
 
-        <script defer="" src="./static/js/hider.js"></script>
-        <script defer src="./static/js/image_interact.js"></script>
-        <script src="./static/js/bulma-carousel.min.js"></script>
-        <script src="./static/js/bulma-slider.min.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="./static/js/explorer-index.js"></script>
-        <script defer src="./static/js/fontawesome.all.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-            crossorigin="anonymous"></script>
-        <script type="text/javascript" src="https://unpkg.com/tabulator-tables@5.5.2/dist/js/tabulator.min.js"></script>
-        <script type="text/javascript" src="static/js/sort-table.js" defer></script>
+ <script src="./static/js/distill_template.v2.js"></script>
+ <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+ <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
-        <!-- Stylesheets -->
-        <link rel="stylesheet" href="./static/css/style.css">
-        <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-        <link rel="stylesheet" href="./static/css/bulma.min.css">
-        <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
-        <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-                integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-        <link href="https://unpkg.com/tabulator-tables@5.5.2/dist/css/tabulator_bootstrap4.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="./static/css/leaderboard.css">
+ <script defer="" src="./static/js/hider.js"></script>
+ <script defer src="./static/js/image_interact.js"></script>
+ <script src="./static/js/bulma-carousel.min.js"></script>
+ <script src="./static/js/bulma-slider.min.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ <script src="./static/js/explorer-index.js"></script>
+ <script defer src="./static/js/fontawesome.all.min.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+ integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+ crossorigin="anonymous"></script>
+ <script type="text/javascript" src="https://unpkg.com/tabulator-tables@5.5.2/dist/js/tabulator.min.js"></script>
+ <script type="text/javascript" src="static/js/sort-table.js" defer></script>
 
-        <!-- KaTeX -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
-        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script>
-        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+ <link rel="stylesheet" href="./static/css/style.css">
+ <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+ <link rel="stylesheet" href="./static/css/bulma.min.css">
+ <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+ <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+ <link href="https://unpkg.com/tabulator-tables@5.5.2/dist/css/tabulator_bootstrap4.min.css" rel="stylesheet">
+ <link rel="stylesheet" href="./static/css/leaderboard.css">
 
-        <!-- FontAwesome -->
-        <script defer src="./static/js/fontawesome.all.min.js"></script>
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+ <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.js" integrity="sha384-9Nhn55MVVN0/4OFx7EE5kpFBPsEMZxKTCnA+4fqDmg12eCTqGi6+BB2LjY8brQxJ" crossorigin="anonymous"></script>
+ <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
 
-        <!-- Medium Zoom -->
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
-        <script defer src="./static/js/medium-zoom.min.js"></script>
-        <script defer src="./static/js/zoom.js"></script>
+ <script defer src="./static/js/fontawesome.all.min.js"></script>
 
-        <style>
-            figure {
-                width: 150%;
-                margin-left: -20%;
-            }
-            .collapse-content {
-                display: none;
-                margin-top: 10px;
-            }
-            .collapse-content.is-active {
-                display: block;
-            }
-            .button-container a.button {
-                display: inline-block; /* Or keep inline-flex, try both */
-                height: 2.5em; /* Adjust to your button's height */
-                line-height: 2.5em; /* Should match the height */
-                padding: 0 1.5em; /* Adjust to your button's padding */
-            }
+ <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+ <script defer src="./static/js/medium-zoom.min.js"></script>
+ <script defer src="./static/js/zoom.js"></script>
 
-            .button-container a.button .icon {
-                margin-right: -5px;
-                vertical-align: middle; /* Still might be needed */
-            }
+ <style>
+ figure {
+ width: 150%;
+ margin-left: -20%;
+ }
+ .collapse-content {
+ display: none;
+ margin-top: 10px;
+ }
+ .collapse-content.is-active {
+ display: block;
+ }
+ .button-container a.button {
+ display: inline-block;
+ height: 2.5em;
+ line-height: 2.5em;
+ padding: 0 1.5em;
+ }
 
-            .button-container a.button span:not(.icon) {
-                vertical-align: middle; /* Still might be needed */
-            }
+ .button-container a.button .icon {
+ margin-right: -5px;
+ vertical-align: middle;
+ }
 
-            .button-container a.button img {
-                vertical-align: middle; /* Still might be needed */
-            }
-        </style>
-    </head>
-    <body>
-        <script>
-            window.onload = function() {
-                sortTable('sortableTable1', 2);
-                sortTable('sortableTable2', 2);
-            }
-        </script>
-        <div class="header-wrapper">
-            <div class="header-container" id="header-container">
-                <div class="header-content">
-                    <h1 style="margin-top: 0px"><i>Science-T2I</i></h1>
-                    <div class="responsive-header">
-                        <h2>Addressing Scientific Illusions in Image Synthesis</h2>
-                    </div>
+ .button-container a.button span:not(.icon) {
+ vertical-align: middle;
+ }
 
-                    <div class="icon-container">
-                        <div class="icon-item">
-                            <img src="./static/img/icon/dataset.svg" alt="Science-T2I Icon">
-                            <div><strong>Science-T2I</strong>: We develop an expert-annotated adversarial dataset covering a wide range of scientific knowledge categories. Furthermore, we introduce two benchmarks with distinct scene settings to evaluate how VLMs and LMMs handle tasks requiring vision-based scientific reasoning.</div>
-                        </div>
-                        <!-- <div class="icon-item">
-                            <img src="./static/img/icon/benchmark.svg" alt="Evaluation Icon">
-                            <div><strong>Science-T2I-C&S</strong>: We introduce two benchmarks with distinct scene settings to evaluate how VLMs and LMMs handle tasks requiring vision-based scientific reasoning.</div>
-                        </div> -->
-                        <div class="icon-item">
-                            <img src="./static/img/icon/sciscore.svg" alt="Generalization Analysis Icon">
-                            <div><strong>SciScore</strong>: We present an end-to-end reward model built by enhancing a pre-trained CLIP model to assess the scientific realism of generated images.</div>
-                        </div>
-                        <div class="icon-item">
-                            <img src="./static/img/icon/tuning.svg" alt="Tuning Icon">
-                            <div><strong>Reality Alignment</strong>: We propose a two-stage training framework which including supervised fine-tuning and masked online fine-tuning based on Science-T2I to integrate scientific knowledge into generative models.</div>
-                        </div>
-                    </div>
-                    <div class="button-container">
-                        <a href="https://arxiv.org/abs/2504.13129" class="button paper-link" target="_blank" style="width: auto;">
-                            <span class="icon is-small" style="height: 1.8em; width: auto; margin-bottom: 5px;">
-                                <i class="ai ai-arxiv"></i>
-                            </span>
-                            <span style="vertical-align: top;">arXiv</span>
-                        </a>
-                        <a href="https://arxiv.org/pdf/2504.13129" class="button paper-link" target="_blank">
-                            <span class="icon is-small" style="height: 1.8em; width: auto; margin-bottom: 5px;">
-                                <i class="fas fa-file-pdf"></i>
-                            </span>
-                            <span style="vertical-align: top;">pdf</span>
-                        </a>
-                        <a href="https://github.com/Jialuo-Li/Science-T2I" class="button" target="_blank">
-                            <span class="icon is-small" style="height: 1.8em; width: auto; margin-bottom: 5px;">
-                                <i class="fab fa-github"></i>
-                            </span>
-                            <span style="vertical-align: top;">Code</span>
-                        </a>
-                        <a href="https://huggingface.co/collections/Jialuo21/science-t2i-67d3bfe43253da2bc7cfaf06" class="button" target="_blank">
-                            <span class="icon is-small" style="height: 1.8em; width: auto; margin-bottom: 5px;">
-                                <img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" alt="Hugging Face logo" style="height: 1em;">
-                            </span>
-                            <span style="vertical-align: top;">Science-T2I</span>
-                        </a>
-                    </div>
-                </div>
-                <div class="header-image">
-                    <img src="static/img/teaser_img.png" alt="Teaser Image" class="teaser-image" style="box-shadow: 8px 8px 0px #B8B4AC;">
-                </div>
-            </div>
-        </div>
-    <d-article>
-        <div class="byline">
-            <div class="byline-container">
-                <p>
-                    <a href="https://jialuo-li.github.io/" class="author-link" target="_blank" style="margin-right: 15px;">Jialuo Li<sup>△</sup></a>
-                    <a href="https://rese1f.github.io/" class="author-link" target="_blank" style="margin-right: 15px;">Wenhao Chai<sup>▲</sup></a>
-                    <a href="https://zeyofu.github.io/" class="author-link" target="_blank">Xingyu Fu<sup>◆</sup></a>
-                </p>
-                <p>
-                    <a href="https://xxuhaiyang.github.io/" class="author-link" target="_blank" style="margin-right: 15px;">Haiyang Xu<sup>◇</sup></a>
-                    <a href="https://www.sainingxie.com/" class="author-link" target="_blank">Saining Xie<sup>△</sup></a>
-                </p>
-                <p></p>
-                <p></p>
-                <p style="text-align: center;">
-                    <a class="affiliation-link" target="_blank" style="margin-right: 15px;"><sup>△</sup>New York University</a>
-                    <a class="affiliation-link" target="_blank"><sup>▲</sup>University of Washington</a>
-                </p>
-                <p style="text-align: center;">
-                    <a class="affiliation-link" target="_blank" style="margin-right: 15px;"><sup>◆</sup>University of Pennsylvania</a>
-                    <a class="affiliation-link" target="_blank"><sup>◇</sup>University of California, San Diego</a>
-                </p>
+ .button-container a.button img {
+ vertical-align: middle;
+ }
+ </style>
+ </head>
+ <body>
+ <script>
+ window.onload = function() {
+ sortTable('sortableTable1', 2);
+ sortTable('sortableTable2', 2);
+ sortTable('sortableTable3', 2);
+ }
+ </script>
+ <div class="header-wrapper">
+ <div class="header-container" id="header-container">
+ <div class="header-content">
+ <h1 style="margin-top: 0px"><i>Science-T2I</i></h1>
+ <div class="responsive-header">
+ <h2>Addressing Scientific Illusions in Image Synthesis</h2>
+ </div>
 
-            </div>
-        </div>
-        
-        <d-figure id="fig-teaser">
-            <figure>
-                <img data-zoomable="" draggable="false" src="static/img/teaser.png" alt="Science-T2I">
-                <figcaption>
-                    <strong>Fig 1:</strong> When presented with knowledge-implicit prompts, can LMMs and VLMs effectively distinguish between real and fake scientific images? Can generative models produce scientifically plausible images from such prompts? Does fine-tuning generative models with relevant data enhance their ability to generalize based on knowledge? To explore these questions, we establish a benchmark for evaluating LMMs and VLMs, construct a dataset to train a reward model which can then serve as a reliable tool for assessing generative models, and fine-tune generative models to investigate the generalization.
-                </figcaption>
-            </figure>
-        </d-figure>
+ <div class="icon-container">
+ <div class="icon-item">
+ <img src="./static/img/icon/dataset.svg" alt="Science-T2I Icon">
+ <div><strong>Science-T2I</strong>: An expert-annotated dataset of over 20k adversarial image pairs and 9k prompts across 16 scientific domains, with an isolated test set of 454 prompts for benchmarking image generation models.</div>
+ </div>
 
-        <p class="text abstract">
-            We introduce a novel method for integrating scientific knowledge into generative models to enhance their realism and consistency in image synthesis. Central to our approach is <b>Science-T2I</b>, an expert-annotated adversarial dataset of 20k image pairs and 9k prompts spanning diverse scientific categories. Building on <b>Science-T2I</b>, we develop <b>SciScore</b>, an end-to-end reward model that refines the evaluation of generated images by enhancing the scientific and visual capabilities of a pre-trained CLIP model. Furthermore, we propose a two-stage training framework—combining supervised fine-tuning and masked online fine-tuning—to embed scientific knowledge into existing generative models. Extensive experiments validate the framework's effectiveness in setting new benchmarks for assessing the scientific realism of generated content.
-        </p>
-        <div class="icon-row">
-            <a href="#science-t2i" class="icon-link">
-                <img src="static/img/icon/dataset.svg" alt="Science-T2I Logo" class="icon-jump">
-                Science-T2I
-            </a>
-            <!-- <a href="#benchmark" class="icon-link">
-                <img src="static/img/icon/benchmark.svg" alt=" Logo" class="icon-jump">
-                Science-T2I-C&S
-            </a> -->
-            <a href="#sciscore" class="icon-link">
-                <img src="static/img/icon/sciscore.svg" alt="Generalization Analysis Logo" class="icon-jump">
-                SciScore
-            </a>
-            <a href="#finetuning" class="icon-link">
-                <img src="static/img/icon/tuning.svg" alt="Generalization Analysis Logo" class="icon-jump">
-                Reality<br>Alignment
-            </a>
-        </div>
-        <p class="click-hint2" style="width: 85%; display: flex; align-items: center; justify-content: center;">
-            <img src="static/img/icon/click.gif" style="width: 1.5rem; margin-right: 0.5rem;">
-            <strong>Click to jump to each section.</strong>
-        </p>
-        <hr>
+ <div class="icon-item">
+ <img src="./static/img/icon/sciscore.svg" alt="Generalization Analysis Icon">
+ <div><strong>SciScore</strong>: A reward model fine-tuned from CLIP-H that captures fine-grained scientific phenomena, surpassing GPT-4o and human evaluators by roughly 5 points.</div>
+ </div>
+ <div class="icon-item">
+ <img src="./static/img/icon/tuning.svg" alt="Tuning Icon">
+ <div><strong>Reality Alignment</strong>: A two-stage framework combining supervised fine-tuning with masked online fine-tuning that improves FLUX.1[dev] by over 50% relative improvement.</div>
+ </div>
+ </div>
+ <div class="button-container">
+ <a href="https://arxiv.org/abs/2504.13129" class="button paper-link" target="_blank" style="width: auto;">
+ <span class="icon is-small" style="height: 1.8em; width: auto; margin-bottom: 5px;">
+ <i class="ai ai-arxiv"></i>
+ </span>
+ <span style="vertical-align: top;">arXiv</span>
+ </a>
+ <a href="https://arxiv.org/pdf/2504.13129" class="button paper-link" target="_blank">
+ <span class="icon is-small" style="height: 1.8em; width: auto; margin-bottom: 5px;">
+ <i class="fas fa-file-pdf"></i>
+ </span>
+ <span style="vertical-align: top;">pdf</span>
+ </a>
+ <a href="https://github.com/Jialuo-Li/Science-T2I" class="button" target="_blank">
+ <span class="icon is-small" style="height: 1.8em; width: auto; margin-bottom: 5px;">
+ <i class="fab fa-github"></i>
+ </span>
+ <span style="vertical-align: top;">Code</span>
+ </a>
+ <a href="https://huggingface.co/collections/Jialuo21/science-t2i-67d3bfe43253da2bc7cfaf06" class="button" target="_blank">
+ <span class="icon is-small" style="height: 1.8em; width: auto; margin-bottom: 5px;">
+ <img src="https://huggingface.co/front/assets/huggingface_logo-noborder.svg" alt="Hugging Face logo" style="height: 1em;">
+ </span>
+ <span style="vertical-align: top;">Science-T2I</span>
+ </a>
+ </div>
+ </div>
+ <div class="header-image">
+ <img src="static/img/teaser_img.png" alt="Teaser Image" class="teaser-image" style="box-shadow: 8px 8px 0px #B8B4AC;">
+ </div>
+ </div>
+ </div>
+ <d-article>
+ <div class="byline">
+ <div class="byline-container">
+ <p>
+ <a href="https://jialuo-li.github.io/" class="author-link" target="_blank" style="margin-right: 15px;">Jialuo Li<sup>△</sup></a>
+ <a href="https://rese1f.github.io/" class="author-link" target="_blank" style="margin-right: 15px;">Wenhao Chai<sup>▲</sup></a>
+ <a href="https://zeyofu.github.io/" class="author-link" target="_blank">Xingyu Fu<sup>◆</sup></a>
+ </p>
+ <p>
+ <a href="https://xxuhaiyang.github.io/" class="author-link" target="_blank" style="margin-right: 15px;">Haiyang Xu<sup>◇</sup></a>
+ <a href="https://www.sainingxie.com/" class="author-link" target="_blank">Saining Xie<sup>△</sup></a>
+ </p>
 
-        <div id="science-t2i">
-            <h1 class="text">Science-T2I: An Adversarial Scientific Dataset</h1>
-            <p class="text">
-                <strong>Task Overview.</strong> Science-T2I consists of 16 tasks spanning physics, chemistry and biology that require the model to infer or visualize concepts not explicitly stated in the prompts but rooted in underlying scientific principles.
-            </p>
-            
-            <d-figure id="fig-data-stat">
-              <figure>
-                  <img data-zoomable="" draggable="false" src="static/img/data_stat.png">
-                  <figcaption style="text-align: center; margin: 20px;">
-                    <strong>Fig 2:</strong> Data statistics (left) of and wordcloud (right) of Science-T2I.
-                  </figcaption>
-              </figure>
-            </d-figure>
-  
-            <p class="text">
-                <strong>Task Classification.</strong> Beyond a classification based on scientific disciplines, the tasks can be categorized into two distinct groups:
-            </p>
-            
-            <p class="text">
-                1. <strong>Subject-oriented Task (ST)</strong> require scientific reasoning to discern how inherent differences between subjects lead to varying visual features under identical conditions.
-            </p>
+<p style="text-align: center;">
+ <a class="affiliation-link" target="_blank" style="margin-right: 15px;"><sup>△</sup>New York University</a>
+ <a class="affiliation-link" target="_blank"><sup>▲</sup>University of Washington</a>
+ </p>
+ <p style="text-align: center;">
+ <a class="affiliation-link" target="_blank" style="margin-right: 15px;"><sup>◆</sup>University of Pennsylvania</a>
+ <a class="affiliation-link" target="_blank"><sup>◇</sup>University of California, San Diego</a>
+ </p>
 
-            <p class="text">
-                2. <strong>Condition-oriented Task (CT)</strong> focus on how a single condition affects various subjects. Scientific reasoning in these tasks centers on the applied condition, not the subject's individual properties.
-            </p>
+ </div>
+ </div>
 
-            <d-figure id="fig-classification">
-              <figure>
-                  <img data-zoomable="" draggable="false" src="static/img/classification.png">
-                  <figcaption style="text-align: center; margin: 20px;">
-                    <strong>Fig 3:</strong> Task classification of Science-T2I.
-                  </figcaption>
-              </figure>
-            </d-figure>
-  
-            <p class="text">
-                <strong>Prompt Design.</strong> In Science-T2I, we categorize prompts into three types based on their use in scientific reasoning:
-            </p>
+ <d-figure id="fig-teaser">
+ <figure>
+ <img data-zoomable="" draggable="false" src="static/img/teaser.png" alt="Science-T2I">
+ <figcaption>
+ <strong>Fig 1:</strong> Given prompts requiring scientific knowledge, image generation models produce scientifically incorrect outputs, and LMMs like GPT-4o fail to identify the errors. We introduce Science-T2I (dataset + benchmark), SciScore (reward model surpassing human evaluators), and a two-stage alignment framework that substantially improves scientific reasoning in image generation.
+ </figcaption>
+ </figure>
+ </d-figure>
 
-            <p class="text">
-                1. <strong>Implicit Prompt (IP)</strong> refers to prompts that imply visual characteristics or phenomena requiring scientific interpretation. For example, "an unripe apple" suggests the apple's color is green, but this is not explicitly stated.
-            </p>
+ <p class="text abstract">
+ Current image generation models produce visually compelling but scientifically implausible images, exposing a fundamental gap between visual fidelity and physical realism. We introduce <b>Science-T2I</b>, an expert-annotated dataset comprising over 20k adversarial image pairs and 9k prompts across 16 scientific domains, along with an isolated test set of 454 challenging prompts. Using this benchmark, we evaluate 18 recent image generation models and find that none scores above 50 out of 100 under implicit scientific prompts, while explicit prompts yield scores roughly 35 points higher, confirming a systematic composition–reasoning disconnect. To address this, we develop <b>SciScore</b>, a reward model fine-tuned from CLIP-H that surpasses GPT-4o and human evaluators by roughly 5 points. We further propose a two-stage alignment framework combining supervised fine-tuning with masked online fine-tuning. Applying this framework to FLUX.1[dev] yields a relative improvement exceeding 50%, demonstrating that scientific reasoning in image generation can be substantially improved through targeted data and alignment.
+ </p>
+ <div class="icon-row">
+ <a href="#science-t2i" class="icon-link">
+ <img src="static/img/icon/dataset.svg" alt="Science-T2I Logo" class="icon-jump">
+ Science-T2I
+ </a>
 
-            <p class="text">
-                2. <strong>Explicit Prompt (EP)</strong> reformulates the IP into a clear, descriptive statement that results in a scientifically accurate depiction. For instance, "a green apple" explicitly conveys the apple's immaturity.
-            </p>
+ <a href="#sciscore" class="icon-link">
+ <img src="static/img/icon/sciscore.svg" alt="Generalization Analysis Logo" class="icon-jump">
+ SciScore
+ </a>
+ <a href="#finetuning" class="icon-link">
+ <img src="static/img/icon/tuning.svg" alt="Generalization Analysis Logo" class="icon-jump">
+ Reality<br>Alignment
+ </a>
+ </div>
+ <p class="click-hint2" style="width: 85%; display: flex; align-items: center; justify-content: center;">
+ <img src="static/img/icon/click.gif" style="width: 1.5rem; margin-right: 0.5rem;">
+ <strong>Click to jump to each section.</strong>
+ </p>
+ <hr>
 
-            <p class="text">
-                3. <strong>Superficial Prompt (SP)</strong> provides explicit but scientifically inaccurate descriptions, focusing on surface-level interpretations. For example, interpreting "an unripe apple" as "a red apple" is a superficial interpretation that lacks scientific accuracy.
-            </p>
-            
-            <d-figure id="fig-data-pipeline">
-              <figure>
-                  <img data-zoomable="" draggable="false" src="static/img/dataset_pipeline.png">
-                  <figcaption style="text-align: center; margin: 20px;">
-                    <strong>Fig 4:</strong> Data curation pipeline of Science-T2I.
-                  </figcaption>
-              </figure>
-            </d-figure>
-  
-            <p class="text">
-                <strong>Data Curation.</strong> We utilize GPT-4o to create templates and generate corresponding prompts during the data curation process. These outputs are then used to guide T2I models for image generation. Following this, human annotators review and filter the data, incorporating insights from an additional website knowledgebase to ensure the reliability and accuracy of the final dataset.
-            </p>
-            
-            
-            <h2 class="text" style="text-align: center;">Science-T2I Examples</h2>
-            <div id="results-carousel" class="carousel results-carousel text">  
-            
-                <div>
-                <img src="static/img/cases/absorption.png" style="width: 90%; margin-left: 50px;"/>
-                <br>
-                </div>
-                <div>
-                <img src="static/img/cases/buoyancy.png" style="width: 90%; margin-left: 50px;"/>
-                <br>
-                </div>
-                <div>
-                <img src="static/img/cases/dark.png" style="width: 90%; margin-left: 50px;"/>
-                <br>
-                </div>
-                <div>
-                <img src="static/img/cases/diffusion.png" style="width: 90%; margin-left: 50px;"/>
-                <br>
-                </div>
-                <div>
-                <img src="static/img/cases/electricity.png" style="width: 90%; margin-left: 50px;"/>
-                <br>
-                </div>
-                <div>
-                <img src="static/img/cases/evaporation.png" style="width: 90%; margin-left: 50px;"/>
-                <br>
-                </div>
-                <div>
-                <img src="static/img/cases/flame.png" style="width: 90%; margin-left: 50px;"/>
-                <br>
-                </div>
-                <div>
-                <img src="static/img/cases/gravity.png" style="width: 90%; margin-left: 50px;"/>
-                <br>
-                </div>
-                <div>
-                <img src="static/img/cases/immisciblity.png" style="width: 90%; margin-left: 50px;"/>
-                <br>
-                </div>
-                <div>
-                <img src="static/img/cases/liquidation.png" style="width: 90%; margin-left: 50px;"/>
-                <br>
-                </div>
-                <div>
-                <img src="static/img/cases/melting.png" style="width: 90%; margin-left: 50px;"/>
-                <br>
-                </div>
-                <div>
-                <img src="static/img/cases/ripeness.png" style="width: 90%; margin-left: 50px;"/>
-                <br>
-                </div>
-                <div>
-                <img src="static/img/cases/rust.png" style="width: 90%; margin-left: 50px;"/>
-                <br>
-                </div>
-                <div>
-                <img src="static/img/cases/solidification.png" style="width: 90%; margin-left: 50px;"/>
-                <br>
-                </div>
-                <div>
-                <img src="static/img/cases/tree.png" style="width: 90%; margin-left: 50px;"/>
-                <br>
-                </div>
-                <div>
-                <img src="static/img/cases/water.png" style="width: 90%; margin-left: 50px;"/>
-                <br>
-                </div>
-            </div>
-            <br>
-            <!-- <div class="collapsible-section">
-                <button class="button is-fullwidth toggle-section" aria-controls="data_table" style="background-color: white; width: 150%; margin-left: -20%;">
-                    <span>View trainset</span>
-                    <span class="icon is-small">
-                        <i class="fas fa-angle-down" aria-hidden="true"></i>
-                    </span>
-                </button>
-                <div id="data_table" class="collapse-content text" style="display: none; width: 80%;">
-                  <iframe
-                  src="https://huggingface.co/datasets/Jialuo21/Science-T2I-Trainset/embed/viewer/default/train"
-                  frameborder="0"
-                  style="width: 187.5%; height: 600px; border: none;"
-                  ></iframe>
-                </div>
-                <script>
-                    document.addEventListener('DOMContentLoaded', function() {
-                        const button = document.querySelector('[aria-controls="data_table"]');
-                        if (button) {
-                            button.addEventListener('click', function() {
-                                const content = document.getElementById('data_table');
-                                if (content.style.display === 'none') {
-                                    content.style.display = 'block';
-                                } else {
-                                    content.style.display = 'none';
-                                }
-                            });
-                            button.click(); // 默认展开
-                        }
-                    });
-                </script>
-            </div> -->
-        <!-- </div>
+ <div id="science-t2i">
+ <h1 class="text">Science-T2I: An Adversarial Scientific Dataset</h1>
+ <p class="text">
+ <strong>Task Overview.</strong> Science-T2I consists of 16 tasks spanning physics, chemistry and biology that require the model to infer or visualize concepts not explicitly stated in the prompts but rooted in underlying scientific principles.
+ </p>
 
-        <div id="benchmark"> -->
-            <!-- <h1 class="text">Science-T2I-S&C: Assessing VLMs/LMMs in Vision-Driven Scientific Tasks.</h1> -->
-            <p class="text">
-                <strong>Benchmark Setup.</strong> To thoroughly evaluate the model's generalization ability across different environments on scientific reasoning tasks, we have created two additional manually annotated test sets, Science-T2I-S and Science-T2I-C:
-            </p>
+ <d-figure id="fig-data-stat">
+ <figure>
+ <img data-zoomable="" draggable="false" src="static/img/data_stat.png">
+ <figcaption style="text-align: center; margin: 20px;">
+ <strong>Fig 2:</strong> Data statistics (left) of and wordcloud (right) of Science-T2I.
+ </figcaption>
+ </figure>
+ </d-figure>
 
-            <p class="text">
-                1. <strong>Science-T2I-S</strong>  closely replicates the stylistic and structural attributes of the training data. It emphasizes simplicity by focusing on specific regions. The goal of Science-T2I-S is to assess the model's performance on data stylistically similar to the training set.
-            </p>
+ <p class="text">
+ <strong>Task Classification.</strong> Beyond a classification based on scientific disciplines, the tasks can be categorized into two distinct groups:
+ </p>
 
-            <p class="text">
-                2. <strong>Science-T2I-C</strong> challenges the model in more complex scenarios, introducing contextual elements like explicit scene settings and diverse scenarios. Prompts may include phrases such as "in a bedroom" or "on the street," adding spatial and contextual variability. This complexity evaluates the model's ability to adapt to nuanced, less constrained environments.
-            </p>
+ <p class="text">
+ 1. <strong>Subject-oriented Task (ST)</strong> require scientific reasoning to discern how inherent differences between subjects lead to varying visual features under identical conditions.
+ </p>
 
-            <h2 class="text" style="text-align: center;">Science-T2I-S&C Leaderboard</h2>
-            <div class="has-text-centered">
-                <p>🤩 Submit your LMM/VLM scores now and watch the leaderboard refresh with your achievements! Email us at <a href="mailto:ljl20031007@gmail.com"><i class="fas fa-envelope"></i></a>.
-                </p>
-                <p>Click the button below to view different results!</p>
-            </div>
+ <p class="text">
+ 2. <strong>Condition-oriented Task (CT)</strong> focus on how a single condition affects various subjects. Scientific reasoning in these tasks centers on the applied condition, not the subject's individual properties.
+ </p>
 
-            <div style="text-align: center; margin-bottom: 20px;">
-                <button id="showTable1" class="a-button">
-                Science-T2I-S
-                </button>
-                <button id="showTable2" class="a-button">
-                Science-T2I-C
-                </button>
-            </div>
+ <d-figure id="fig-classification">
+ <figure>
+ <img data-zoomable="" draggable="false" src="static/img/classification.png">
+ <figcaption style="text-align: center; margin: 20px;">
+ <strong>Fig 3:</strong> Task classification of Science-T2I.
+ </figcaption>
+ </figure>
+ </d-figure>
 
-            <div id="table1Container">
-                <div class="leaderboard-main" style="text-align: center">
-                <table id="sortableTable1">
-                    <thead>
-                        <tr>
-                            <th style="vertical-align: middle; text-align: center;" rowspan="2">#</th>
-                            <th style="vertical-align: middle; text-align: center;" rowspan="2">Model</th>
-                            <th colspan="1">Overall</th>
-                            <th colspan="10">Physics</th>
-                            <th colspan="4">Chemistry</th>
-                            <th colspan="5">Biology</th>
-                        </tr>
-                        <tr>
-                            <th onclick="sortTable('sortableTable1', 2)">Acc</th>
-                            <th onclick="sortTable('sortableTable1', 3)">GR</th>
-                            <th onclick="sortTable('sortableTable1', 4)">SO</th>
-                            <th onclick="sortTable('sortableTable1', 5)">ME</th>
-                            <th onclick="sortTable('sortableTable1', 6)">AB</th>
-                            <th onclick="sortTable('sortableTable1', 7)">BU</th>
-                            <th onclick="sortTable('sortableTable1', 8)">DI</th>
-                            <th onclick="sortTable('sortableTable1', 9)">EL</th>
-                            <th onclick="sortTable('sortableTable1', 10)">EV</th>
-                            <th onclick="sortTable('sortableTable1', 11)">LI</th>
-                            <th onclick="sortTable('sortableTable1', 12)">Avg</th>
-                            <th onclick="sortTable('sortableTable1', 13)">RU</th>
-                            <th onclick="sortTable('sortableTable1', 14)">IM</th>
-                            <th onclick="sortTable('sortableTable1', 15)">FR</th>
-                            <th onclick="sortTable('sortableTable1', 16)">Avg</th>
-                            <th onclick="sortTable('sortableTable1', 17)">LR</th>
-                            <th onclick="sortTable('sortableTable1', 18)">WR</th>
-                            <th onclick="sortTable('sortableTable1', 19)">SC</th>
-                            <th onclick="sortTable('sortableTable1', 20)">RI</th>
-                            <th onclick="sortTable('sortableTable1', 21)">Avg</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>
-                        <div style="display: inline-block; text-align: center;">
-                            <a href="https://github.com/openai/CLIP">CLIP-H</a>
-                            <div style="display: block; font-size: 8px; color: #858383;">VLM</div>
-                        </div>
-                        </td>
-                        <td>54.7</td>
-                        <td>78.3</td>
-                        <td>40.5</td>
-                        <td>25.0</td>
-                        <td>57.1</td>
-                        <td>63.9</td>
-                        <td>71.4</td>
-                        <td>47.6</td>
-                        <td>26.7</td>
-                        <td>77.8</td>
-                        <td>55.1</td>
-                        <td>16.7</td>
-                        <td>54.2</td>
-                        <td>77.8</td>
-                        <td>52.4</td>
-                        <td>62.2</td>
-                        <td>31.1</td>
-                        <td>81.5</td>
-                        <td>34.6</td>
-                        <td>55.9</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>
-                        <div style="display: inline-block; text-align: center;">
-                            <a href="https://github.com/salesforce/BLIP">BLIPScore</a>
-                            <div style="display: block; font-size: 8px; color: #858383;">VLM</div>
-                        </div>
-                        </td>
-                        <td>55.0</td>
-                        <td>47.5</td>
-                        <td>44.1</td>
-                        <td>56.9</td>
-                        <td>38.1</td>
-                        <td>50.0</td>
-                        <td>50.0</td>
-                        <td>52.4</td>
-                        <td>20.0</td>
-                        <td>33.3</td>
-                        <td>50.4</td>
-                        <td>42.9</td>
-                        <td>53.1</td>
-                        <td>76.7</td>
-                        <td>43.1</td>
-                        <td>76.7</td>
-                        <td>38.9</td>
-                        <td>58.3</td>
-                        <td>38.5</td>
-                        <td>59.9</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>
-                        <div style="display: inline-block; text-align: center;">
-                            <a href="https://huggingface.co/docs/transformers/model_doc/siglip">SigLIP</a>
-                            <div style="display: block; font-size: 8px; color: #858383;">VLM</div>
-                        </div>
-                        </td>
-                        <td>57.2</td> <!-- overall -->
-                        <td>78.3</td> <!-- GR -->
-                        <td>45.2</td> <!-- SO -->
-                        <td>44.4</td> <!-- ME -->
-                        <td>57.1</td> <!-- AB --> 
-                        <td>58.3</td> <!-- BU -->
-                        <td>83.3</td> <!-- DI -->
-                        <td>47.6</td> <!-- EL -->
-                        <td>63.3</td> <!-- EV -->
-                        <td>58.3</td> <!-- LI -->
-                        <td>59.6</td> <!-- Avg phy -->
-                        <td>23.8</td> <!-- RU -->
-                        <td>60.4</td> <!-- IM -->
-                        <td>62.2</td> <!-- FR -->
-                        <td>53.2</td> <!-- Avg chem -->
-                        <td>46.7</td> <!-- LR -->
-                        <td>33.3</td> <!-- WR -->
-                        <td>83.3</td> <!-- SC -->
-                        <td>53.9</td> <!-- RI -->
-                        <td>55.9</td> <!-- Avg bio -->
-                    </tr>
-        
-                    <tr>
-                        <td>4</td>
-                        <td>
-                        <div style="display: inline-block; text-align: center;">
-                            <a href="https://huggingface.co/Qwen/Qwen2-VL-7B-Instruct">Qwen2-VL-7B</a>
-                            <div style="display: block; font-size: 8px; color: #858383;">LMM</div>
-                        </div>
-                        </td>
-                        <td>63.8</td> <!-- overall -->
-                        <td>83.3</td> <!-- GR -->
-                        <td>42.9</td> <!-- SO -->
-                        <td>26.4</td> <!-- ME -->
-                        <td>40.5</td> <!-- AB --> 
-                        <td>47.2</td> <!-- BU -->
-                        <td>70.2</td> <!-- DI -->
-                        <td>77.4</td> <!-- EL -->
-                        <td>68.3</td> <!-- EV -->
-                        <td>84.7</td> <!-- LI -->
-                        <td>60.0</td> <!-- Avg phy -->
-                        <td>73.8</td> <!-- RU -->
-                        <td>66.7</td> <!-- IM -->
-                        <td>52.2</td> <!-- FR -->
-                        <td>67.0</td> <!-- Avg chem -->
-                        <td>57.8</td> <!-- LR -->
-                        <td>67.8</td> <!-- WR -->
-                        <td>95.4</td> <!-- SC -->
-                        <td>34.6</td> <!-- RI -->
-                        <td>68.8</td> <!-- Avg bio -->
-                    </tr>
-        
-                    <tr>
-                        <td>5</td>
-                        <td>
-                        <div style="display: inline-block; text-align: center;">
-                            <a href="https://huggingface.co/lmms-lab/llava-onevision-qwen2-7b-ov">LLaVA-OV-7B</a>
-                            <div style="display: block; font-size: 8px; color: #858383;">LMM</div>
-                        </div>
-                        </td>
-                        <td>65.1</td> <!-- overall -->
-                        <td>92.5</td> <!-- GR -->
-                        <td>56.0</td> <!-- SO -->
-                        <td>36.1</td> <!-- ME -->
-                        <td>38.1</td> <!-- AB --> 
-                        <td>45.8</td> <!-- BU -->
-                        <td>75.0</td> <!-- DI -->
-                        <td>77.4</td> <!-- EL -->
-                        <td>100</td> <!-- EV -->
-                        <td>95.8</td> <!-- LI -->
-                        <td>68.2</td> <!-- Avg phy -->
-                        <td>59.5</td> <!-- RU -->
-                        <td>55.2</td> <!-- IM -->
-                        <td>48.9</td> <!-- FR -->
-                        <td>57.8</td> <!-- Avg chem -->
-                        <td>51.1</td> <!-- LR -->
-                        <td>72.2</td> <!-- WR -->
-                        <td>78.7</td> <!-- SC -->
-                        <td>46.2</td> <!-- RI -->
-                        <td>64.7</td> <!-- Avg bio -->
-                    </tr>
-        
-                    <tr>
-                        <td>6</td>
-                        <td>
-                        <div style="display: inline-block; text-align: center;">
-                            <a>Human Eval</a>
-                        </div>
-                        </td>
-                        <td>87.0</td> <!-- overall -->
-                        <td>93.0</td> <!-- GR -->
-                        <td>86.1</td> <!-- SO -->
-                        <td>98.2</td> <!-- ME -->
-                        <td>66.7</td> <!-- AB --> 
-                        <td>74.6</td> <!-- BU -->
-                        <td>65.9</td> <!-- DI -->
-                        <td>95.6</td> <!-- EL -->
-                        <td>100</td> <!-- EV -->
-                        <td>82.1</td> <!-- LI -->
-                        <td>87.7</td> <!-- Avg phy -->
-                        <td>92.9</td> <!-- RU -->
-                        <td>77.8</td> <!-- IM -->
-                        <td>81.0</td> <!-- FR -->
-                        <td>75.9</td> <!-- Avg chem -->
-                        <td>96.9</td> <!-- LR -->
-                        <td>99.6</td> <!-- WR -->
-                        <td>90.7</td> <!-- SC -->
-                        <td>94.6</td> <!-- RI -->
-                        <td>95.3</td> <!-- Avg bio -->
-                    </tr>
-        
-                    <tr>
-                        <td>7</td>
-                        <td>
-                        <div style="display: inline-block; text-align: center;">
-                            <a href="https://huggingface.co/OpenGVLab/InternVL2_5-8B">InternVL2.5-8B</a>
-                            <div style="display: block; font-size: 8px; color: #858383;">LMM</div>
-                        </div>
-                        </td>
-                        <td>70.8</td> <!-- overall -->
-                        <td>96.7</td> <!-- GR -->
-                        <td>52.4</td> <!-- SO -->
-                        <td>41.7</td> <!-- ME -->
-                        <td>47.6</td> <!-- AB --> 
-                        <td>55.6</td> <!-- BU -->
-                        <td>63.1</td> <!-- DI -->
-                        <td>72.6</td> <!-- EL -->
-                        <td>91.7</td> <!-- EV -->
-                        <td>90.3</td> <!-- LI -->
-                        <td>67.8</td> <!-- Avg phy -->
-                        <td>69.1</td> <!-- RU -->
-                        <td>56.3</td> <!-- IM -->
-                        <td>52.2</td> <!-- FR -->
-                        <td>62.2</td> <!-- Avg chem -->
-                        <td>84.4</td> <!-- LR -->
-                        <td>90.0</td> <!-- WR -->
-                        <td>84.3</td> <!-- SC -->
-                        <td>75.0</td> <!-- RI -->
-                        <td>84.4</td> <!-- Avg bio -->
-                    </tr>
-        
-                    <tr>
-                        <td>8</td>
-                        <td>
-                        <div style="display: inline-block; text-align: center;">
-                            <a href="https://openai.com/index/gpt-4o-mini-advancing-cost-efficient-intelligence/">GPT-4o mini</a>
-                            <div style="display: block; font-size: 8px; color: #858383;">LMM</div>
-                        </div>
-                        </td>
-                        <td>70.8</td> <!-- overall -->
-                        <td>71.3</td> <!-- GR -->
-                        <td>35.7</td> <!-- SO -->
-                        <td>36.1</td> <!-- ME -->
-                        <td>33.3</td> <!-- AB --> 
-                        <td>56.9</td> <!-- BU -->
-                        <td>77.4</td> <!-- DI -->
-                        <td>82.1</td> <!-- EL -->
-                        <td>100</td> <!-- EV -->
-                        <td>76.4</td> <!-- LI -->
-                        <td>62.0</td> <!-- Avg phy -->
-                        <td>95.2</td> <!-- RU -->
-                        <td>65.6</td> <!-- IM -->
-                        <td>58.9</td> <!-- FR -->
-                        <td>73.8</td> <!-- Avg chem -->
-                        <td>96.7</td> <!-- LR -->
-                        <td>83.3</td> <!-- WR -->
-                        <td>97.2</td> <!-- SC -->
-                        <td>53.9</td> <!-- RI -->
-                        <td>86.8</td> <!-- Avg bio -->
-                    </tr>
-        
-                    <tr>
-                        <td>9</td>
-                        <td>
-                        <div style="display: inline-block; text-align: center;">
-                            <a><strong>SciScore</strong></a>
-                            <div style="display: block; font-size: 8px; color: #858383;">VLM</div>
-                        </div>
-                        </td>
-                        <td>93.1</td> <!-- overall -->
-                        <td>98.3</td> <!-- GR -->
-                        <td>90.5</td> <!-- SO -->
-                        <td>100</td> <!-- ME -->
-                        <td>71.4</td> <!-- AB --> 
-                        <td>66.7</td> <!-- BU -->
-                        <td>97.6</td> <!-- DI -->
-                        <td>100</td> <!-- EL -->
-                        <td>100</td> <!-- EV -->
-                        <td>100</td> <!-- LI -->
-                        <td>94.9</td> <!-- Avg phy -->
-                        <td>100</td> <!-- RU -->
-                        <td>68.8</td> <!-- IM -->
-                        <td>97.8</td> <!-- FR -->
-                        <td>81.0</td> <!-- Avg chem -->
-                        <td>100</td> <!-- LR -->
-                        <td>100</td> <!-- WR -->
-                        <td>100</td> <!-- SC -->
-                        <td>100</td> <!-- RI -->
-                        <td>100</td> <!-- Avg bio -->
-                    </tr>
-        
-                    </tbody>
-                </table>
-                </div>
-            </div>
-        
-            <div id="table2Container" style="display: none;">
-                <div class="leaderboard-main" style="text-align: center">
-                <table id="sortableTable2">
-                    <thead>
-                        <tr>
-                            <th style="vertical-align: middle; text-align: center;" rowspan="2">#</th>
-                            <th style="vertical-align: middle; text-align: center;" rowspan="2">Model</th>
-                            <th colspan="1">Overall</th>
-                            <th colspan="10">Physics</th>
-                            <th colspan="4">Chemistry</th>
-                            <th colspan="5">Biology</th>
-                        </tr>
-                        <tr>
-                            <th onclick="sortTable('sortableTable2', 2)">Acc</th>
-                            <th onclick="sortTable('sortableTable2', 3)">GR</th>
-                            <th onclick="sortTable('sortableTable2', 4)">SO</th>
-                            <th onclick="sortTable('sortableTable2', 5)">ME</th>
-                            <th onclick="sortTable('sortableTable2', 6)">AB</th>
-                            <th onclick="sortTable('sortableTable2', 7)">BU</th>
-                            <th onclick="sortTable('sortableTable2', 8)">DI</th>
-                            <th onclick="sortTable('sortableTable2', 9)">EL</th>
-                            <th onclick="sortTable('sortableTable2', 10)">EV</th>
-                            <th onclick="sortTable('sortableTable2', 11)">LI</th>
-                            <th onclick="sortTable('sortableTable2', 12)">Avg</th>
-                            <th onclick="sortTable('sortableTable2', 13)">RU</th>
-                            <th onclick="sortTable('sortableTable2', 14)">IM</th>
-                            <th onclick="sortTable('sortableTable2', 15)">FR</th>
-                            <th onclick="sortTable('sortableTable2', 16)">Avg</th>
-                            <th onclick="sortTable('sortableTable2', 17)">LR</th>
-                            <th onclick="sortTable('sortableTable2', 18)">WR</th>
-                            <th onclick="sortTable('sortableTable2', 19)">SC</th>
-                            <th onclick="sortTable('sortableTable2', 20)">RI</th>
-                            <th onclick="sortTable('sortableTable2', 21)">Avg</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>
-                        <div style="display: inline-block; text-align: center;">
-                            <a href="https://github.com/openai/CLIP">CLIP-H</a>
-                            <div style="display: block; font-size: 8px; color: #858383;">VLM</div>
-                        </div>
-                        </td>
-                        <td>59.5</td> <!-- overall -->
-                        <td>75.0</td> <!-- GR -->
-                        <td>57.1</td> <!-- SO -->
-                        <td>66.7</td> <!-- ME -->
-                        <td>64.3</td> <!-- AB --> 
-                        <td>58.3</td> <!-- BU -->
-                        <td>78.6</td> <!-- DI -->
-                        <td>21.4</td> <!-- EL -->
-                        <td>0.0</td> <!-- EV -->
-                        <td>66.7</td> <!-- LI -->
-                        <td>56.6</td> <!-- Avg phy -->
-                        <td>35.7</td> <!-- RU -->
-                        <td>50.0</td> <!-- IM -->
-                        <td>46.7</td> <!-- FR -->
-                        <td>44.4</td> <!-- Avg chem -->
-                        <td>80.0</td> <!-- LR -->
-                        <td>60.0</td> <!-- WR -->
-                        <td>88.9</td> <!-- SC -->
-                        <td>75.0</td> <!-- RI -->
-                        <td>76.7</td> <!-- Avg bio -->
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>
-                        <div style="display: inline-block; text-align: center;">
-                            <a href="https://github.com/salesforce/BLIP">BLIPScore</a>
-                            <div style="display: block; font-size: 8px; color: #858383;">VLM</div>
-                        </div>
-                        </td>
-                        <td>51.5</td> <!-- overall -->
-                        <td>40.0</td> <!-- GR -->
-                        <td>42.9</td> <!-- SO -->
-                        <td>58.3</td> <!-- ME -->
-                        <td>50.0</td> <!-- AB --> 
-                        <td>62.5</td> <!-- BU -->
-                        <td>50.0</td> <!-- DI -->
-                        <td>28.6</td> <!-- EL -->
-                        <td>50.0</td> <!-- EV -->
-                        <td>29.2</td> <!-- LI -->
-                        <td>49.8</td> <!-- Avg phy -->
-                        <td>57.1</td> <!-- RU -->
-                        <td>62.5</td> <!-- IM -->
-                        <td>60.0</td> <!-- FR -->
-                        <td>60.0</td> <!-- Avg chem -->
-                        <td>53.3</td> <!-- LR -->
-                        <td>46.7</td> <!-- WR -->
-                        <td>75.0</td> <!-- SC -->
-                        <td>54.2</td> <!-- RI -->
-                        <td>58.3</td> <!-- Avg bio -->
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>
-                        <div style="display: inline-block; text-align: center;">
-                            <a href="https://huggingface.co/docs/transformers/model_doc/siglip">SigLIP</a>
-                            <div style="display: block; font-size: 8px; color: #858383;">VLM</div>
-                        </div>
-                        </td>
-                        <td>61.7</td> <!-- overall -->
-                        <td>95.0</td> <!-- GR -->
-                        <td>42.9</td> <!-- SO -->
-                        <td>58.3</td> <!-- ME -->
-                        <td>64.3</td> <!-- AB --> 
-                        <td>66.7</td> <!-- BU -->
-                        <td>85.7</td> <!-- DI -->
-                        <td>42.9</td> <!-- EL -->
-                        <td>30.0</td> <!-- EV -->
-                        <td>41.7</td> <!-- LI -->
-                        <td>61.5</td> <!-- Avg phy -->
-                        <td>28.6</td> <!-- RU -->
-                        <td>62.5</td> <!-- IM -->
-                        <td>60.0</td> <!-- FR -->
-                        <td>51.1</td> <!-- Avg chem -->
-                        <td>46.7</td> <!-- LR -->
-                        <td>53.3</td> <!-- WR -->
-                        <td>94.4</td> <!-- SC -->
-                        <td>83.3</td> <!-- RI -->
-                        <td>70.0</td> <!-- Avg bio -->
-                    </tr>
-        
-                    <tr>
-                        <td>4</td>
-                        <td>
-                        <div style="display: inline-block; text-align: center;">
-                            <a href="https://huggingface.co/Qwen/Qwen2-VL-7B-Instruct">Qwen2-VL-7B</a>
-                            <div style="display: block; font-size: 8px; color: #858383;">LMM</div>
-                        </div>
-                        </td>
-                        <td>69.8</td> <!-- overall -->
-                        <td>100</td> <!-- GR -->
-                        <td>57.1</td> <!-- SO -->
-                        <td>41.7</td> <!-- ME -->
-                        <td>57.1</td> <!-- AB --> 
-                        <td>66.7</td> <!-- BU -->
-                        <td>64.3</td> <!-- DI -->
-                        <td>67.9</td> <!-- EL -->
-                        <td>55.0</td> <!-- EV -->
-                        <td>70.8</td> <!-- LI -->
-                        <td>66.8</td> <!-- Avg phy -->
-                        <td>60.7</td> <!-- RU -->
-                        <td>53.1</td> <!-- IM -->
-                        <td>36.7</td> <!-- FR -->
-                        <td>50.0</td> <!-- Avg chem -->
-                        <td>93.3</td> <!-- LR -->
-                        <td>96.7</td> <!-- WR -->
-                        <td>94.4</td> <!-- SC -->
-                        <td>75.0</td> <!-- RI -->
-                        <td>90.8</td> <!-- Avg bio -->
-                    </tr>
-        
-                    <tr>
-                        <td>5</td>
-                        <td>
-                        <div style="display: inline-block; text-align: center;">
-                            <a href="https://huggingface.co/lmms-lab/llava-onevision-qwen2-7b-ov">LLaVA-OV-7B</a>
-                            <div style="display: block; font-size: 8px; color: #858383;">LMM</div>
-                        </div>
-                        </td>
-                        <td>70.3</td> <!-- overall -->
-                        <td>100</td> <!-- GR -->
-                        <td>71.4</td> <!-- SO -->
-                        <td>45.8</td> <!-- ME -->
-                        <td>57.1</td> <!-- AB --> 
-                        <td>75.0</td> <!-- BU -->
-                        <td>71.4</td> <!-- DI -->
-                        <td>64.3</td> <!-- EL -->
-                        <td>100</td> <!-- EV -->
-                        <td>79.2</td> <!-- LI -->
-                        <td>74.6</td> <!-- Avg phy -->
-                        <td>53.6</td> <!-- RU -->
-                        <td>59.4</td> <!-- IM -->
-                        <td>36.7</td> <!-- FR -->
-                        <td>50.0</td> <!-- Avg chem -->
-                        <td>63.3</td> <!-- LR -->
-                        <td>86.7</td> <!-- WR -->
-                        <td>77.8</td> <!-- SC -->
-                        <td>79.2</td> <!-- RI -->
-                        <td>76.7</td> <!-- Avg bio -->
-                    </tr>
-        
-                    <tr>
-                        <td>6</td>
-                        <td>
-                        <div style="display: inline-block; text-align: center;">
-                            <a>Human Eval</a>
-                        </div>
-                        </td>
-                        <td>86.0</td> <!-- overall -->
-                        <td>98.6</td> <!-- GR -->
-                        <td>77.6</td> <!-- SO -->
-                        <td>91.0</td> <!-- ME -->
-                        <td>78.6</td> <!-- AB --> 
-                        <td>83.3</td> <!-- BU -->
-                        <td>66.8</td> <!-- DI -->
-                        <td>90.9</td> <!-- EL -->
-                        <td>95.7</td> <!-- EV -->
-                        <td>76.8</td> <!-- LI -->
-                        <td>84.7</td> <!-- Avg phy -->
-                        <td>92.9</td> <!-- RU -->
-                        <td>86.6</td> <!-- IM -->
-                        <td>77.1</td> <!-- FR -->
-                        <td>85.4</td> <!-- Avg chem -->
-                        <td>88.6</td> <!-- LR -->
-                        <td>84.8</td> <!-- WR -->
-                        <td>96.8</td> <!-- SC -->
-                        <td>83.8</td> <!-- RI -->
-                        <td>89.1</td> <!-- Avg bio -->
-                    </tr>
-        
-                    <tr>
-                        <td>7</td>
-                        <td>
-                        <div style="display: inline-block; text-align: center;">
-                            <a href="https://huggingface.co/OpenGVLab/InternVL2_5-8B">InternVL2.5-8B</a>
-                            <div style="display: block; font-size: 8px; color: #858383;">LMM</div>
-                        </div>
-                        </td>
-                        <td>75.3</td> <!-- overall -->
-                        <td>97.5</td> <!-- GR -->
-                        <td>53.6</td> <!-- SO -->
-                        <td>58.3</td> <!-- ME -->
-                        <td>57.1</td> <!-- AB --> 
-                        <td>75.0</td> <!-- BU -->
-                        <td>92.9</td> <!-- DI -->
-                        <td>57.1</td> <!-- EL -->
-                        <td>95.0</td> <!-- EV -->
-                        <td>70.8</td> <!-- LI -->
-                        <td>73.8</td> <!-- Avg phy -->
-                        <td>75.0</td> <!-- RU -->
-                        <td>71.9</td> <!-- IM -->
-                        <td>50.0</td> <!-- FR -->
-                        <td>65.6</td> <!-- Avg chem -->
-                        <td>90.0</td> <!-- LR -->
-                        <td>93.3</td> <!-- WR -->
-                        <td>75.0</td> <!-- SC -->
-                        <td>87.5</td> <!-- RI -->
-                        <td>85.8</td> <!-- Avg bio -->
-                    </tr>
-        
-                    <tr>
-                        <td>8</td>
-                        <td>
-                        <div style="display: inline-block; text-align: center;">
-                            <a href="https://openai.com/index/gpt-4o-mini-advancing-cost-efficient-intelligence/">GPT-4o mini</a>
-                            <div style="display: block; font-size: 8px; color: #858383;">LMM</div>
-                        </div>
-                        </td>
-                        <td>74.8</td> <!-- overall -->
-                        <td>97.5</td> <!-- GR -->
-                        <td>50.0</td> <!-- SO -->
-                        <td>67.7</td> <!-- ME -->
-                        <td>50.0</td> <!-- AB --> 
-                        <td>54.2</td> <!-- BU -->
-                        <td>67.9</td> <!-- DI -->
-                        <td>64.3</td> <!-- EL -->
-                        <td>90.0</td> <!-- EV -->
-                        <td>75.0</td> <!-- LI -->
-                        <td>69.3</td> <!-- Avg phy -->
-                        <td>89.3</td> <!-- RU -->
-                        <td>68.8</td> <!-- IM -->
-                        <td>53.3</td> <!-- FR -->
-                        <td>70.0</td> <!-- Avg chem -->
-                        <td>100</td> <!-- LR -->
-                        <td>83.3</td> <!-- WR -->
-                        <td>88.9</td> <!-- SC -->
-                        <td>87.5</td> <!-- RI -->
-                        <td>90.0</td> <!-- Avg bio -->
-                    </tr>
-        
-                    <tr>
-                        <td>9</td>
-                        <td>
-                        <div style="display: inline-block; text-align: center;">
-                            <a><strong>SciScore</strong></a>
-                            <div style="display: block; font-size: 8px; color: #858383;">VLM</div>
-                        </div>
-                        </td>
-                        <td>91.2</td> <!-- overall -->
-                        <td>100</td> <!-- GR -->
-                        <td>92.9</td> <!-- SO -->
-                        <td>100</td> <!-- ME -->
-                        <td>71.4</td> <!-- AB --> 
-                        <td>41.7</td> <!-- BU -->
-                        <td>85.7</td> <!-- DI -->
-                        <td>85.7</td> <!-- EL -->
-                        <td>100</td> <!-- EV -->
-                        <td>100</td> <!-- LI -->
-                        <td>86.9</td> <!-- Avg phy -->
-                        <td>92.9</td> <!-- RU -->
-                        <td>81.3</td> <!-- IM -->
-                        <td>100</td> <!-- FR -->
-                        <td>91.1</td> <!-- Avg chem -->
-                        <td>100</td> <!-- LR -->
-                        <td>100</td> <!-- WR -->
-                        <td>100</td> <!-- SC -->
-                        <td>100</td> <!-- RI -->
-                        <td>100</td> <!-- Avg bio -->
-                    </tr>
-                    </tbody>
-                </table>
-                </div>
-            </div>
-            <div class="collapsible-section">
-                <button class="button is-fullwidth toggle-section" aria-controls="benchmark_table" style="background-color: white; width: 150%; margin-left: -20%;">
-                    <span>View benchmark</span>
-                    <span class="icon is-small">
-                        <i class="fas fa-angle-down" aria-hidden="true"></i>
-                    </span>
-                </button>
-                <div id="benchmark_table" class="collapse-content text" style="display: none;">
-                    <div style="display: flex;">
-                        <iframe
-                            src="https://huggingface.co/datasets/Jialuo21/Science-T2I-S/embed/viewer/default/test"
-                            frameborder="0"
-                            style="width: 600%; height: 600px; border: none;"
-                        ></iframe>
-                        <iframe
-                            src="https://huggingface.co/datasets/Jialuo21/Science-T2I-C/embed/viewer/default/test"
-                            frameborder="0"
-                            style="width: 600%; height: 600px; border: none;"
-                        ></iframe>
-                    </div>
-                </div>
-                <script>
-                    document.addEventListener('DOMContentLoaded', function() {
-                        const button = document.querySelector('[aria-controls="benchmark_table"]');
-                        if (button) {
-                            button.addEventListener('click', function() {
-                                const content = document.getElementById('benchmark_table');
-                                if (content.style.display === 'none') {
-                                    content.style.display = 'block';
-                                } else {
-                                    content.style.display = 'none';
-                                }
-                            });
-                            button.click(); // 默认展开
-                        }
-                    });
-                </script>
-            </div>
-        </div>  
-        <div id="sciscore">
-            <h1 class="text">SciScore: Evaluating Scientific Authenticity of Images</h1>
+ <p class="text">
+ <strong>Prompt Design.</strong> In Science-T2I, we categorize prompts into three types based on their use in scientific reasoning:
+ </p>
 
-            <p class="text">
-                Leveraging Science-T2I, we present SciScore, an end-to-end reward model that refines the assessment of generated images based on scientific knowledge, which is achieved by augmenting both the scientific comprehension and visual capabilities of pre-trained CLIP model. The qualitative performance of SciScore is demonstrated in Fig. 1.
-            </p>
+ <p class="text">
+ 1. <strong>Implicit Prompt (IP)</strong> refers to prompts that imply visual characteristics or phenomena requiring scientific interpretation. For example, "an unripe apple" suggests the apple's color is green, but this is not explicitly stated.
+ </p>
 
-            <d-figure id="fig-res">
-                <figure>
-                    <img data-zoomable="" draggable="false" src="static/img/SciScore_results.jpg">
-                    <figcaption>
-                    <strong>Tab 1:</strong> (Left) Performance comparison of different models on Science-T2I-S&C across different subjects. (Right) Performance of SciScore in ST and CT.
-                    </figcaption>
-                </figure>
-            </d-figure>
+ <p class="text">
+ 2. <strong>Explicit Prompt (EP)</strong> reformulates the IP into a clear, descriptive statement that results in a scientifically accurate depiction. For instance, "a green apple" explicitly conveys the apple's immaturity.
+ </p>
 
-            <p class="text">
-                <strong>Generalization of SciScore to Complex Scenes.</strong> SciScore generalizes well to complex scenes Science-T2I-C beyond simple ones Science-T2I-S, showing it can focus on relevant regions and ignore distractions.
-            </p>
+ <p class="text">
+ 3. <strong>Superficial Prompt (SP)</strong> provides explicit but scientifically inaccurate descriptions, focusing on surface-level interpretations. For example, interpreting "an unripe apple" as "a red apple" is a superficial interpretation that lacks scientific accuracy.
+ </p>
 
-            <p class="text">
-                <strong>Generalization of SciScore across ST and CT.</strong> A significant performance gap emerged between ST and CT, with most failures in ST. This is expected, as CT relies on generalizable visual features, while ST depends on subject-specific details. Lacking exposure to novel subjects, SciScore struggles to identify accurate visual contents.
-            </p>
+ <d-figure id="fig-data-pipeline">
+ <figure>
+ <img data-zoomable="" draggable="false" src="static/img/dataset_pipeline.png">
+ <figcaption style="text-align: center; margin: 20px;">
+ <strong>Fig 4:</strong> Data curation pipeline of Science-T2I.
+ </figcaption>
+ </figure>
+ </d-figure>
 
-            <h2 class="text" style="text-align: center">Benchmarking T2I Generation with SciScore</h2>
+ <p class="text">
+ <strong>Data Curation.</strong> We utilize GPT-4o to create templates and generate corresponding prompts during the data curation process. These outputs are then used to guide T2I models for image generation. Following this, human annotators review and filter the data, incorporating insights from an additional website knowledgebase to ensure the reliability and accuracy of the final dataset.
+ </p>
 
-            <p class="text">
-                <strong>Three-dimensional Evaluation.</strong> We evaluated T2I models' scientific reasoning by assessing the alignment between images generated from implicit prompts and those from (1) explicit prompts, (2) superficial prompts, and (3) implicit prompts themselves. 
-            </p>
+ <h2 class="text" style="text-align: center;">Science-T2I Examples</h2>
+ <div id="results-carousel" class="carousel results-carousel text">
 
-            <d-figure id="fig-benchmark">
-                <figure>
-                    <img data-zoomable="" draggable="false" src="static/img/benchmark.png" style="width: 60%; margin-left: 20%;">
-                    <figcaption style="text-align: center; margin: 20px;">
-                    <strong>Tab 2:</strong> Performance of T2I Models on SciScore.
-                    </figcaption>
-                </figure>
-            </d-figure>
+ <div><img src="static/img/cases/absorption.png" style="width:90%;margin-left:50px"></div>
+ <div><img src="static/img/cases/buoyancy.png" style="width:90%;margin-left:50px"></div>
+ <div><img src="static/img/cases/dark.png" style="width:90%;margin-left:50px"></div>
+ <div><img src="static/img/cases/diffusion.png" style="width:90%;margin-left:50px"></div>
+ <div><img src="static/img/cases/electricity.png" style="width:90%;margin-left:50px"></div>
+ <div><img src="static/img/cases/evaporation.png" style="width:90%;margin-left:50px"></div>
+ <div><img src="static/img/cases/flame.png" style="width:90%;margin-left:50px"></div>
+ <div><img src="static/img/cases/gravity.png" style="width:90%;margin-left:50px"></div>
+ <div><img src="static/img/cases/immisciblity.png" style="width:90%;margin-left:50px"></div>
+ <div><img src="static/img/cases/liquidation.png" style="width:90%;margin-left:50px"></div>
+ <div><img src="static/img/cases/melting.png" style="width:90%;margin-left:50px"></div>
+ <div><img src="static/img/cases/ripeness.png" style="width:90%;margin-left:50px"></div>
+ <div><img src="static/img/cases/rust.png" style="width:90%;margin-left:50px"></div>
+ <div><img src="static/img/cases/solidification.png" style="width:90%;margin-left:50px"></div>
+ <div><img src="static/img/cases/tree.png" style="width:90%;margin-left:50px"></div>
+ <div><img src="static/img/cases/water.png" style="width:90%;margin-left:50px"></div>
+ </div>
+ <br>
 
-            <p class="text">
-                <strong>Analysis of Reasoning Capability.</strong> To evaluate the ability of T2I models to interpret implicit prompts, we introduce the Normalized Difference (ND) metric. This metric compares images generated from implicit prompts to those produced from explicit prompts, using the formula:
-                \[
-                \begin{equation}
-                \text{ND} = \frac{\text{IP} - \text{SP}}{\text{EP} - \text{SP}}
-                \end{equation}
-                \]
-                Here in Tab 2, low ND scores—averaging around 35 and mostly below 50—reveal a significant limitation in current models. Specifically, they struggle to move beyond literal interpretations of prompts, particularly when dealing with implicit scientific concepts.
-            </p>
-        </div>
+ <p class="text">
+ <strong>Test Splits.</strong> We construct two manually annotated test sets covering the same scientific domains as the training data but containing no overlapping samples:
+ </p>
 
-        <div id="finetuning">
-            <h1 class="text">Reality Alignment: Two-stage Fine-tuning Framework</h1>
-            <p class="text">
-                We propose a two-stage training framework, comprising a supervised fine-tuning phase and a masked online fine-tuning phase, to incorporate scientific knowledge into existing generative models utilizing Science-T2I.
-            </p>
+ <p class="text">
+ 1. <strong>Science-T2I-S (Simple)</strong>, containing 227 tuples. This split uses minimalist compositions with simple backgrounds. By isolating the scientific subject from environmental distractions, it provides a controlled test of whether the model can generate the correct scientific visual features.
+ </p>
 
-            <p class="text">
-                <strong>Supervised Fine-tuning.</strong> For this phase, we utilize FLUX as our base model and train it on the Science-T2I, employing FLUX's native rectified flow training objective without any modifications.
-            </p>
-  
-            <p class="text">
-                <strong>Online Fine-tuning.</strong> In this phase, we implement a masked online fine-tuning approach, incorporating SciScore as a reward model to direct the learning process through the DPO training objective.
-            </p>
-  
-            <d-figure id="fig-train_pipeline">
-              <figure>
-                  <img data-zoomable="" draggable="false" src="static/img/train_pipeline.png">
-                  <figcaption>
-                    <strong>Fig 5:</strong> Online fine-tuning pipeline. For each prompt, two images are generated to compute SciScore preference metric. Simultaneously, GroundingDINO extracts segmentation masks from these images based on the prompts, which are then used to block gradient propagation in the corresponding regions.
-                  </figcaption>
-              </figure>
-            </d-figure>
-  
-            <h2 class="text" style="text-align: center;">Experiment & Ablation Study</h2>
-            <p class="text">
-                <strong>Relative Improvement Metric.</strong> To better assess model performance beyond raw evaluations, we observe that explicit prompts consistently yield higher scores than implicit ones, providing an upper-bound performance estimate. To quantify the benefits of finetuning, we introduce the Relative Improvement (RI) metric. Let \(SciScore_B^{IP}\) and \(SciScore_B^{EP}\) represent the SciScore of the base model under implicit and explicit prompts, respectively, and let \(SciScore_F^{IP}\) denote the SciScore of the finetuned model under implicit prompts. The RI is then defined as:
-                \[
-                \begin{equation}
-                    RI = \frac{\text{SciScore}_F^{IP}-\text{SciScore}_B^{IP}}{\text{SciScore}_B^{EP}-\text{SciScore}_B^{IP}}
-                \end{equation}
-                \]
-            </p>
-            <d-figure id="fig-exp_tuning">
-              <figure>
-                  <img data-zoomable="" draggable="false" src="static/img/exp_tuning.png" style="width: 60%; margin-left: 20%;">
-                  <figcaption style="text-align: center; margin: 20px;">
-                    <strong>Tab 3:</strong> Average SciScore on various methods.
-                  </figcaption>
-              </figure>
-            </d-figure>
+ <p class="text">
+ 2. <strong>Science-T2I-C (Complex)</strong>, containing 227 tuples. This split embeds the same scientific tasks within diverse real-world scenes, adding contextual elements such as "in a bedroom" or "on the street." It tests whether the model can maintain scientific accuracy when the background is visually complex.
+ </p>
 
-            <p class="text">
-                <strong>Generalization to Complex Scenes.</strong> Finetuned FLUX on Science-T2I-C generalizes well to complex scenes. This suggests the model learned scientific principles, not just memorized examples.
-            </p>
-  
-            <d-figure id="fig-ablation">
-              <figure>
-                  <img data-zoomable="" draggable="false" src="static/img/score_averages.png" style="width: 70%; margin-left: 15%;">
-                  <figcaption style="text-align: center; margin: 20px;">
-                    <strong>Fig 6:</strong> Ablation study of two-stage training. 
-                  </figcaption>
-              </figure>
-            </d-figure>
-  
-            <p class="text">
-                <strong>Necessity of SFT.</strong> Initial SFT (blue) provides a better starting point for OFT, leading to stable performance gains. Without it (purple), OFT struggles, highlighting SFT's role in establishing a good base for effective training.
-            </p>
-  
-            <p class="text">
-                <strong>Masking Strategy As A Denoiser.</strong> Without masking (yellow), performance is erratic with collapse. Lowering the learning rate (red) prevents collapse but doesn't improve the model. Masking likely prevents the model from treating all features as equally important, reducing noise and enabling stable improvement.
-            </p>
-  
-            <d-figure id="fig-case">
-              <figure>
-                  <img data-zoomable="" draggable="false" src="static/img/case.png">
-                  <figcaption>
-                    <strong>Fig 7:</strong> Case study. The upper images are generated using the base FLUX.1[dev], whereas the lower images are produced with our fine-tuning method. Each image pair utilizes an identical random seed to ensure consistency in comparison. Note that the displayed prompts are summaries of the original prompts.
-                  </figcaption>
-              </figure>
-            </d-figure>
-        </div>
+ <h2 class="text" style="text-align: center;">Science-T2I-S&C Leaderboard</h2>
+ <div class="has-text-centered">
+ <p>🤩 Submit your LMM/VLM scores now and watch the leaderboard refresh with your achievements! Email us at <a href="mailto:ljl20031007@gmail.com"><i class="fas fa-envelope"></i></a>.
+ </p>
+ <p>Click the button below to view different results!</p>
+ </div>
 
-        <div id="Conclusion">
-            <h1 class="text">Conclusion</h1>
-            <p class="text">
-                <p class="text">
-                    In summary, by leveraging our expert-annotated dataset, Science-T2I, which comprises over 20k adversarial image pairs and 9k prompts, we have developed a comprehensive framework for evaluating and enhancing image realism. Specifically, we introduce SciScore, a novel reward model designed to infuse scientific knowledge into image synthesis. Our results demonstrate that SciScore reaches human-level accuracy in aligning with scientific knowledge. Additionally, we propose a two-stage training framework for T2I models, utilizing SciScore as the reward model. This framework, which combines supervised fine-tuning with online fine-tuning, leads to significant performance improvements in generation tasks that require scientific reasoning.
-                </p>
-            </p>
-        </div>
+ <div style="text-align: center; margin-bottom: 20px;">
+ <button id="showTable1" class="a-button">
+ Science-T2I-S
+ </button>
+ <button id="showTable2" class="a-button">
+ Science-T2I-C
+ </button>
+ </div>
 
-        </d-article>
-        <d-appendix>
-            <h3>BibTeX</h3>
-            <p class="bibtex">
-                @misc{li2025sciencet2iaddressingscientificillusions,<br>
-                &nbsp;&nbsp;title={Science-T2I: Addressing Scientific Illusions in Image Synthesis},<br>
-                &nbsp;&nbsp;author={Jialuo Li and Wenhao Chai and Xingyu Fu and Haiyang Xu and Saining Xie},<br>
-                &nbsp;&nbsp;year={2025},<br>
-                &nbsp;&nbsp;eprint={2504.13129},<br>
-                &nbsp;&nbsp;archivePrefix={arXiv},<br>
-                &nbsp;&nbsp;primaryClass={cs.CV},<br>
-                &nbsp;&nbsp;url={https://arxiv.org/abs/2504.13129},<br>
-                }
-            </p>
+ <div id="table1Container">
+ <div class="leaderboard-main" style="text-align: center">
+ <table id="sortableTable1">
+ <thead><tr><th style="vertical-align: middle; text-align: center;" rowspan="2">#</th><th style="vertical-align: middle; text-align: center;" rowspan="2">Model</th><th colspan="1">Overall</th><th colspan="10">Physics</th><th colspan="4">Chemistry</th><th colspan="5">Biology</th></tr>
+<tr><th onclick="sortTable('sortableTable1', 2)">Acc</th><th onclick="sortTable('sortableTable1', 3)">GR</th><th onclick="sortTable('sortableTable1', 4)">SO</th><th onclick="sortTable('sortableTable1', 5)">ME</th><th onclick="sortTable('sortableTable1', 6)">AB</th><th onclick="sortTable('sortableTable1', 7)">BU</th><th onclick="sortTable('sortableTable1', 8)">DI</th><th onclick="sortTable('sortableTable1', 9)">EL</th><th onclick="sortTable('sortableTable1', 10)">EV</th><th onclick="sortTable('sortableTable1', 11)">LI</th><th onclick="sortTable('sortableTable1', 12)">Avg</th><th onclick="sortTable('sortableTable1', 13)">RU</th><th onclick="sortTable('sortableTable1', 14)">IM</th><th onclick="sortTable('sortableTable1', 15)">FR</th><th onclick="sortTable('sortableTable1', 16)">Avg</th><th onclick="sortTable('sortableTable1', 17)">LR</th><th onclick="sortTable('sortableTable1', 18)">WR</th><th onclick="sortTable('sortableTable1', 19)">SC</th><th onclick="sortTable('sortableTable1', 20)">RI</th><th onclick="sortTable('sortableTable1', 21)">Avg</th></tr></thead>
+ <tbody>
+<tr><td>1</td><td><div style="display: inline-block; text-align: center;"><a href="https://github.com/openai/CLIP">CLIP-H</a><div style="display: block; font-size: 8px; color: #858383;">VLM</div></div></td><td>54.7</td><td>78.3</td><td>40.5</td><td>25.0</td><td>57.1</td><td>63.9</td><td>71.4</td><td>47.6</td><td>26.7</td><td>77.8</td><td>55.1</td><td>16.7</td><td>54.2</td><td>77.8</td><td>52.4</td><td>62.2</td><td>31.1</td><td>81.5</td><td>34.6</td><td>55.9</td></tr>
+<tr><td>2</td><td><div style="display: inline-block; text-align: center;"><a href="https://github.com/salesforce/BLIP">BLIPScore</a><div style="display: block; font-size: 8px; color: #858383;">VLM</div></div></td><td>55.0</td><td>47.5</td><td>44.1</td><td>56.9</td><td>38.1</td><td>50.0</td><td>50.0</td><td>52.4</td><td>20.0</td><td>33.3</td><td>50.4</td><td>42.9</td><td>53.1</td><td>76.7</td><td>43.1</td><td>76.7</td><td>38.9</td><td>58.3</td><td>38.5</td><td>59.9</td></tr>
+<tr><td>3</td><td><div style="display: inline-block; text-align: center;"><a href="https://huggingface.co/docs/transformers/model_doc/siglip">SigLIP</a><div style="display: block; font-size: 8px; color: #858383;">VLM</div></div></td><td>57.2</td><td>78.3</td><td>45.2</td><td>44.4</td><td>57.1</td><td>58.3</td><td>83.3</td><td>47.6</td><td>63.3</td><td>58.3</td><td>59.6</td><td>23.8</td><td>60.4</td><td>62.2</td><td>53.2</td><td>46.7</td><td>33.3</td><td>83.3</td><td>53.9</td><td>55.9</td></tr>
+<tr><td>4</td><td><div style="display: inline-block; text-align: center;"><a href="https://huggingface.co/Qwen/Qwen2-VL-7B-Instruct">Qwen2-VL-7B</a><div style="display: block; font-size: 8px; color: #858383;">LMM</div></div></td><td>63.8</td><td>83.3</td><td>42.9</td><td>26.4</td><td>40.5</td><td>47.2</td><td>70.2</td><td>77.4</td><td>68.3</td><td>84.7</td><td>60.0</td><td>73.8</td><td>66.7</td><td>52.2</td><td>67.0</td><td>57.8</td><td>67.8</td><td>95.4</td><td>34.6</td><td>68.8</td></tr>
+<tr><td>5</td><td><div style="display: inline-block; text-align: center;"><a href="https://huggingface.co/lmms-lab/llava-onevision-qwen2-7b-ov">LLaVA-OV-7B</a><div style="display: block; font-size: 8px; color: #858383;">LMM</div></div></td><td>65.1</td><td>92.5</td><td>56.0</td><td>36.1</td><td>38.1</td><td>45.8</td><td>75.0</td><td>77.4</td><td>100</td><td>95.8</td><td>68.2</td><td>59.5</td><td>55.2</td><td>48.9</td><td>57.8</td><td>51.1</td><td>72.2</td><td>78.7</td><td>46.2</td><td>64.7</td></tr>
+<tr><td>6</td><td><div style="display: inline-block; text-align: center;"><a>Human Eval</a></div></td><td>87.0</td><td>93.0</td><td>86.1</td><td>98.2</td><td>66.7</td><td>74.6</td><td>65.9</td><td>95.6</td><td>100</td><td>82.1</td><td>87.7</td><td>92.9</td><td>77.8</td><td>81.0</td><td>75.9</td><td>96.9</td><td>99.6</td><td>90.7</td><td>94.6</td><td>95.3</td></tr>
+<tr><td>7</td><td><div style="display: inline-block; text-align: center;"><a href="https://huggingface.co/OpenGVLab/InternVL2_5-8B">InternVL2.5-8B</a><div style="display: block; font-size: 8px; color: #858383;">LMM</div></div></td><td>70.8</td><td>96.7</td><td>52.4</td><td>41.7</td><td>47.6</td><td>55.6</td><td>63.1</td><td>72.6</td><td>91.7</td><td>90.3</td><td>67.8</td><td>69.1</td><td>56.3</td><td>52.2</td><td>62.2</td><td>84.4</td><td>90.0</td><td>84.3</td><td>75.0</td><td>84.4</td></tr>
+<tr><td>8</td><td><div style="display: inline-block; text-align: center;"><a href="https://openai.com/index/gpt-4o-mini-advancing-cost-efficient-intelligence/">GPT-4o mini</a><div style="display: block; font-size: 8px; color: #858383;">LMM</div></div></td><td>70.8</td><td>71.3</td><td>35.7</td><td>36.1</td><td>33.3</td><td>56.9</td><td>77.4</td><td>82.1</td><td>100</td><td>76.4</td><td>62.0</td><td>95.2</td><td>65.6</td><td>58.9</td><td>73.8</td><td>96.7</td><td>83.3</td><td>97.2</td><td>53.9</td><td>86.8</td></tr>
+<tr><td>9</td><td><div style="display: inline-block; text-align: center;"><a><strong>SciScore</strong></a><div style="display: block; font-size: 8px; color: #858383;">VLM</div></div></td><td>93.1</td><td>98.3</td><td>90.5</td><td>100</td><td>71.4</td><td>66.7</td><td>97.6</td><td>100</td><td>100</td><td>100</td><td>94.9</td><td>100</td><td>68.8</td><td>97.8</td><td>81.0</td><td>100</td><td>100</td><td>100</td><td>100</td><td>100</td></tr>
 
-            <d-footnote-list></d-footnote-list>
-            <d-citation-list></d-citation-list>
-        </d-appendix>
-        
-        <!-- bibliography will be inlined during Distill pipeline's pre-rendering -->
-        <d-bibliography src="bibliography.bib"></d-bibliography>
-        <script src="./static/js/nav-bar.js"></script>
-        
-        <script type="text/javascript">
-        </script>
-        <script>
-            const showTable1Button = document.getElementById('showTable1');
-            const showTable2Button = document.getElementById('showTable2');
-            const table1Container = document.getElementById('table1Container');
-            const table2Container = document.getElementById('table2Container');
-          
-            showTable1Button.addEventListener('click', () => {
-              table1Container.style.display = 'block';
-              table2Container.style.display = 'none';
-              showTable1Button.classList.add('active'); 
-              showTable2Button.classList.remove('active'); 
-            });
-          
-            showTable2Button.addEventListener('click', () => {
-              table1Container.style.display = 'none';
-              table2Container.style.display = 'block';
-              showTable2Button.classList.add('active'); 
-              showTable1Button.classList.remove('active'); 
-            });
-          
-            showTable1Button.classList.add('active');
-        </script>
-    </body>
+ </tbody>
+ </table>
+ </div>
+ </div>
+
+ <div id="table2Container" style="display: none;">
+ <div class="leaderboard-main" style="text-align: center">
+ <table id="sortableTable2">
+ <thead><tr><th style="vertical-align: middle; text-align: center;" rowspan="2">#</th><th style="vertical-align: middle; text-align: center;" rowspan="2">Model</th><th colspan="1">Overall</th><th colspan="10">Physics</th><th colspan="4">Chemistry</th><th colspan="5">Biology</th></tr>
+<tr><th onclick="sortTable('sortableTable2', 2)">Acc</th><th onclick="sortTable('sortableTable2', 3)">GR</th><th onclick="sortTable('sortableTable2', 4)">SO</th><th onclick="sortTable('sortableTable2', 5)">ME</th><th onclick="sortTable('sortableTable2', 6)">AB</th><th onclick="sortTable('sortableTable2', 7)">BU</th><th onclick="sortTable('sortableTable2', 8)">DI</th><th onclick="sortTable('sortableTable2', 9)">EL</th><th onclick="sortTable('sortableTable2', 10)">EV</th><th onclick="sortTable('sortableTable2', 11)">LI</th><th onclick="sortTable('sortableTable2', 12)">Avg</th><th onclick="sortTable('sortableTable2', 13)">RU</th><th onclick="sortTable('sortableTable2', 14)">IM</th><th onclick="sortTable('sortableTable2', 15)">FR</th><th onclick="sortTable('sortableTable2', 16)">Avg</th><th onclick="sortTable('sortableTable2', 17)">LR</th><th onclick="sortTable('sortableTable2', 18)">WR</th><th onclick="sortTable('sortableTable2', 19)">SC</th><th onclick="sortTable('sortableTable2', 20)">RI</th><th onclick="sortTable('sortableTable2', 21)">Avg</th></tr></thead>
+ <tbody>
+<tr><td>1</td><td><div style="display: inline-block; text-align: center;"><a href="https://github.com/openai/CLIP">CLIP-H</a><div style="display: block; font-size: 8px; color: #858383;">VLM</div></div></td><td>59.5</td><td>75.0</td><td>57.1</td><td>66.7</td><td>64.3</td><td>58.3</td><td>78.6</td><td>21.4</td><td>0.0</td><td>66.7</td><td>56.6</td><td>35.7</td><td>50.0</td><td>46.7</td><td>44.4</td><td>80.0</td><td>60.0</td><td>88.9</td><td>75.0</td><td>76.7</td></tr>
+<tr><td>2</td><td><div style="display: inline-block; text-align: center;"><a href="https://github.com/salesforce/BLIP">BLIPScore</a><div style="display: block; font-size: 8px; color: #858383;">VLM</div></div></td><td>51.5</td><td>40.0</td><td>42.9</td><td>58.3</td><td>50.0</td><td>62.5</td><td>50.0</td><td>28.6</td><td>50.0</td><td>29.2</td><td>49.8</td><td>57.1</td><td>62.5</td><td>60.0</td><td>60.0</td><td>53.3</td><td>46.7</td><td>75.0</td><td>54.2</td><td>58.3</td></tr>
+<tr><td>3</td><td><div style="display: inline-block; text-align: center;"><a href="https://huggingface.co/docs/transformers/model_doc/siglip">SigLIP</a><div style="display: block; font-size: 8px; color: #858383;">VLM</div></div></td><td>61.7</td><td>95.0</td><td>42.9</td><td>58.3</td><td>64.3</td><td>66.7</td><td>85.7</td><td>42.9</td><td>30.0</td><td>41.7</td><td>61.5</td><td>28.6</td><td>62.5</td><td>60.0</td><td>51.1</td><td>46.7</td><td>53.3</td><td>94.4</td><td>83.3</td><td>70.0</td></tr>
+<tr><td>4</td><td><div style="display: inline-block; text-align: center;"><a href="https://huggingface.co/Qwen/Qwen2-VL-7B-Instruct">Qwen2-VL-7B</a><div style="display: block; font-size: 8px; color: #858383;">LMM</div></div></td><td>69.8</td><td>100</td><td>57.1</td><td>41.7</td><td>57.1</td><td>66.7</td><td>64.3</td><td>67.9</td><td>55.0</td><td>70.8</td><td>66.8</td><td>60.7</td><td>53.1</td><td>36.7</td><td>50.0</td><td>93.3</td><td>96.7</td><td>94.4</td><td>75.0</td><td>90.8</td></tr>
+<tr><td>5</td><td><div style="display: inline-block; text-align: center;"><a href="https://huggingface.co/lmms-lab/llava-onevision-qwen2-7b-ov">LLaVA-OV-7B</a><div style="display: block; font-size: 8px; color: #858383;">LMM</div></div></td><td>70.3</td><td>100</td><td>71.4</td><td>45.8</td><td>57.1</td><td>75.0</td><td>71.4</td><td>64.3</td><td>100</td><td>79.2</td><td>74.6</td><td>53.6</td><td>59.4</td><td>36.7</td><td>50.0</td><td>63.3</td><td>86.7</td><td>77.8</td><td>79.2</td><td>76.7</td></tr>
+<tr><td>6</td><td><div style="display: inline-block; text-align: center;"><a>Human Eval</a></div></td><td>86.0</td><td>98.6</td><td>77.6</td><td>91.0</td><td>78.6</td><td>83.3</td><td>66.8</td><td>90.9</td><td>95.7</td><td>76.8</td><td>84.7</td><td>92.9</td><td>86.6</td><td>77.1</td><td>85.4</td><td>88.6</td><td>84.8</td><td>96.8</td><td>83.8</td><td>89.1</td></tr>
+<tr><td>7</td><td><div style="display: inline-block; text-align: center;"><a href="https://huggingface.co/OpenGVLab/InternVL2_5-8B">InternVL2.5-8B</a><div style="display: block; font-size: 8px; color: #858383;">LMM</div></div></td><td>75.3</td><td>97.5</td><td>53.6</td><td>58.3</td><td>57.1</td><td>75.0</td><td>92.9</td><td>57.1</td><td>95.0</td><td>70.8</td><td>73.8</td><td>75.0</td><td>71.9</td><td>50.0</td><td>65.6</td><td>90.0</td><td>93.3</td><td>75.0</td><td>87.5</td><td>85.8</td></tr>
+<tr><td>8</td><td><div style="display: inline-block; text-align: center;"><a href="https://openai.com/index/gpt-4o-mini-advancing-cost-efficient-intelligence/">GPT-4o mini</a><div style="display: block; font-size: 8px; color: #858383;">LMM</div></div></td><td>74.8</td><td>97.5</td><td>50.0</td><td>67.7</td><td>50.0</td><td>54.2</td><td>67.9</td><td>64.3</td><td>90.0</td><td>75.0</td><td>69.3</td><td>89.3</td><td>68.8</td><td>53.3</td><td>70.0</td><td>100</td><td>83.3</td><td>88.9</td><td>87.5</td><td>90.0</td></tr>
+<tr><td>9</td><td><div style="display: inline-block; text-align: center;"><a><strong>SciScore</strong></a><div style="display: block; font-size: 8px; color: #858383;">VLM</div></div></td><td>91.2</td><td>100</td><td>92.9</td><td>100</td><td>71.4</td><td>41.7</td><td>85.7</td><td>85.7</td><td>100</td><td>100</td><td>86.9</td><td>92.9</td><td>81.3</td><td>100</td><td>91.1</td><td>100</td><td>100</td><td>100</td><td>100</td><td>100</td></tr>
+ </tbody>
+ </table>
+ </div>
+ </div>
+ <div class="collapsible-section">
+ <button class="button is-fullwidth toggle-section" aria-controls="benchmark_table" style="background-color: white; width: 150%; margin-left: -20%;">
+ <span>View benchmark</span>
+ <span class="icon is-small">
+ <i class="fas fa-angle-down" aria-hidden="true"></i>
+ </span>
+ </button>
+ <div id="benchmark_table" class="collapse-content text" style="display: none;">
+ <div style="display: flex;">
+ <iframe
+ src="https://huggingface.co/datasets/Jialuo21/Science-T2I-S/embed/viewer/default/test"
+ frameborder="0"
+ style="width: 600%; height: 600px; border: none;"
+ ></iframe>
+ <iframe
+ src="https://huggingface.co/datasets/Jialuo21/Science-T2I-C/embed/viewer/default/test"
+ frameborder="0"
+ style="width: 600%; height: 600px; border: none;"
+ ></iframe>
+ </div>
+ </div>
+ <script>
+ document.addEventListener('DOMContentLoaded', function() {
+ const button = document.querySelector('[aria-controls="benchmark_table"]');
+ if (button) {
+ button.addEventListener('click', function() {
+ const content = document.getElementById('benchmark_table');
+ if (content.style.display === 'none') {
+ content.style.display = 'block';
+ } else {
+ content.style.display = 'none';
+ }
+ });
+ button.click(); // 默认展开
+ }
+ });
+ </script>
+ </div>
+ </div>
+ <div id="sciscore">
+ <h1 class="text">SciScore: Evaluating Scientific Authenticity of Images</h1>
+
+ <p class="text">
+ CLIP aligns textual and visual data effectively for general purposes, but struggles with implicit scientific prompts: it tends to embed implicit prompts closer to their superficial counterparts than their explicit counterparts. We introduce SciScore, a reward model fine-tuned on the Science-T2I training set that extends CLIP-H to assess whether a generated image reflects the scientific principles implied by a prompt.
+ </p>
+
+ <d-figure id="fig-res">
+ <figure>
+ <img data-zoomable="" draggable="false" src="static/img/SciScore_results.jpg">
+ <figcaption>
+ <strong>Tab 1:</strong> (Left) Performance comparison of different models on Science-T2I-S&C across different subjects. (Right) Performance of SciScore in ST and CT.
+ </figcaption>
+ </figure>
+ </d-figure>
+
+ <p class="text">
+ <strong>SciScore surpasses human evaluators.</strong> SciScore achieves 93.14 on Science-T2I-S and 91.19 on Science-T2I-C, surpassing human evaluators (87.01 and 86.02) by roughly 6 and 5 points, respectively. The strong performance on Science-T2I-C is particularly notable, as this split embeds scientific reasoning tasks within diverse environmental contexts not present during training.
+ </p>
+
+ <p class="text">
+ <strong>Subject-oriented tasks remain the primary challenge.</strong> Nearly all failure cases concentrate in subject-oriented tasks, which demand subject-specific knowledge (e.g., which metals produce which flame colors). Condition-oriented tasks, by contrast, involve generalizable visual patterns that transfer more easily across subjects.
+ </p>
+
+ <h2 class="text" style="text-align: center">Benchmarking Image Generation with SciScore</h2>
+
+ <p class="text">
+ <strong>Evaluation Setup.</strong> We evaluate 18 image generation models on the Science-T2I test set using implicit prompts. Each model generates two images per prompt, scored by Qwen3.5-27B using per-tuple grading criteria. We report the normalized Reality Score (0–100) across Physics, Chemistry, and Biology.
+ </p>
+
+ <div class="leaderboard-main" style="text-align: center">
+ <table id="sortableTable3">
+ <thead><tr><th style="vertical-align: middle; text-align: center;" rowspan="2">#</th><th style="vertical-align: middle; text-align: center;" rowspan="2">Model</th><th colspan="1">Overall</th><th colspan="1">Physics</th><th colspan="1">Chemistry</th><th colspan="1">Biology</th></tr>
+<tr><th onclick="sortTable('sortableTable3', 2)">Score</th><th onclick="sortTable('sortableTable3', 3)">Score</th><th onclick="sortTable('sortableTable3', 4)">Score</th><th onclick="sortTable('sortableTable3', 5)">Score</th></tr></thead>
+ <tbody>
+<tr><td>1</td><td>SDXL</td><td>19.60</td><td>16.11</td><td>20.92</td><td>25.56</td></tr>
+<tr><td>2</td><td>FLUX.1[schnell]</td><td>23.72</td><td>23.19</td><td>38.30</td><td>13.33</td></tr>
+<tr><td>3</td><td>LongCat-Image</td><td>23.86</td><td>21.94</td><td>39.01</td><td>15.83</td></tr>
+<tr><td>4</td><td>GLM-Image</td><td>24.23</td><td>22.22</td><td>41.84</td><td>14.44</td></tr>
+<tr><td>5</td><td>SANA</td><td>26.14</td><td>23.89</td><td>46.45</td><td>14.72</td></tr>
+<tr><td>6</td><td>Lumina-Image-2</td><td>26.51</td><td>20.28</td><td>47.87</td><td>22.22</td></tr>
+<tr><td>7</td><td>SD 3.5 Medium</td><td>26.73</td><td>23.06</td><td>39.01</td><td>24.44</td></tr>
+<tr><td>8</td><td>Z-Image</td><td>26.73</td><td>26.53</td><td>32.98</td><td>22.22</td></tr>
+<tr><td>9</td><td>FLUX.1[dev]</td><td>26.87</td><td>22.64</td><td>50.00</td><td>17.22</td></tr>
+<tr><td>10</td><td>SD 3.5 Large</td><td>28.71</td><td>27.64</td><td>44.68</td><td>18.33</td></tr>
+<tr><td>11</td><td>Bagel</td><td>29.00</td><td>25.28</td><td>45.75</td><td>23.33</td></tr>
+<tr><td>12</td><td>FLUX.2[klein-4B-Base]</td><td>29.08</td><td>27.22</td><td>43.97</td><td>21.11</td></tr>
+<tr><td>13</td><td>Z-Image-Turbo</td><td>29.22</td><td>26.81</td><td>36.53</td><td>28.33</td></tr>
+<tr><td>14</td><td>FLUX.2[klein-4B]</td><td>30.84</td><td>28.75</td><td>50.36</td><td>19.72</td></tr>
+<tr><td>15</td><td>FLUX.2[klein-9B-Base]</td><td>31.57</td><td>30.28</td><td>45.75</td><td>23.06</td></tr>
+<tr><td>16</td><td>FLUX.2[klein-9B]</td><td>32.60</td><td>29.44</td><td>57.45</td><td>19.44</td></tr>
+<tr><td>17</td><td>Qwen-Image</td><td>33.99</td><td>34.58</td><td>46.45</td><td>23.06</td></tr>
+<tr><td>18</td><td><strong>FLUX.2[dev]</strong></td><td><strong>47.80</strong></td><td><strong>53.19</strong></td><td><strong>53.55</strong></td><td><strong>32.50</strong></td></tr>
+ </tbody>
+ </table>
+ </div>
+
+ <p class="text">
+ <strong>Current models lack scientific reasoning.</strong> Even the best model (FLUX.2[dev]) scores only 47.80 out of 100, and the majority cluster between 20 and 35. Biology poses the greatest challenge: no model exceeds 33%. When evaluated with explicit prompts that directly describe the intended scientific outcome, scores increase by roughly 35 points on average, confirming that the bottleneck is not in visual rendering but in scientific reasoning.
+ </p>
+ </div>
+
+ <div id="finetuning">
+ <h1 class="text">Reality Alignment: Two-stage Fine-tuning Framework</h1>
+ <p class="text">
+ We combine the Science-T2I training set with SciScore as a reward signal to close the reasoning gap. Our framework proceeds in two stages: SFT exposes the model to scientific visual phenomena it has never encountered during pretraining, and OFT then optimizes for the implicit reasoning ability measured by SciScore.
+ </p>
+
+ <p class="text">
+ <strong>Supervised Fine-tuning.</strong> Pre-trained models have never been exposed to images depicting scientific phenomena, so no amount of preference optimization over existing outputs can teach them what these phenomena look like. We therefore begin with supervised fine-tuning on the Science-T2I training set using FLUX.1[dev] as our base model.
+ </p>
+
+ <p class="text">
+ <strong>Masked Online Fine-tuning.</strong> SFT teaches the model <i>what</i> scientific images look like, but does not directly optimize for the ability to infer the correct visual outcome from an implicit prompt. We apply online fine-tuning with SciScore as the reward signal and a subject-based masking strategy that restricts gradients to the scientifically relevant region.
+ </p>
+
+ <d-figure id="fig-train_pipeline">
+ <figure>
+ <img data-zoomable="" draggable="false" src="static/img/train_pipeline.png">
+ <figcaption>
+ <strong>Fig 5:</strong> Online fine-tuning uses SciScore and subject-based masking to align generation with scientific principles. For each prompt, two images are generated and scored by SciScore to determine preference. GroundingDINO extracts subject masks from each image, restricting gradient propagation to the scientifically relevant regions.
+ </figcaption>
+ </figure>
+ </d-figure>
+
+ <h2 class="text" style="text-align: center;">Experiment & Ablation Study</h2>
+ <p class="text">
+ <strong>Relative Improvement Metric.</strong> To better assess model performance beyond raw evaluations, we observe that explicit prompts consistently yield higher scores than implicit ones, providing an upper-bound performance estimate. To quantify the benefits of finetuning, we introduce the Relative Improvement (RI) metric. Let \(SciScore_B^{IP}\) and \(SciScore_B^{EP}\) represent the SciScore of the base model under implicit and explicit prompts, respectively, and let \(SciScore_F^{IP}\) denote the SciScore of the finetuned model under implicit prompts. The RI is then defined as:
+ \[
+ \begin{equation}
+ RI = \frac{\text{SciScore}_F^{IP}-\text{SciScore}_B^{IP}}{\text{SciScore}_B^{EP}-\text{SciScore}_B^{IP}}
+ \end{equation}
+ \]
+ </p>
+ <d-figure id="fig-exp_tuning">
+ <figure>
+ <img data-zoomable="" draggable="false" src="static/img/exp_tuning.png" style="width: 60%; margin-left: 20%;">
+ <figcaption style="text-align: center; margin: 20px;">
+ <strong>Tab 2:</strong> The two-stage framework improves FLUX.1[dev] by over 50% in RI.
+ </figcaption>
+ </figure>
+ </d-figure>
+
+ <p class="text">
+ <strong>Generalization to Complex Scenes.</strong> While the training set primarily contains images in straightforward scenarios, the fine-tuned model shows clear improvement on Science-T2I-C. This indicates that the model has internalized underlying scientific principles rather than memorizing training examples.
+ </p>
+
+ <d-figure id="fig-ablation">
+ <figure>
+ <img data-zoomable="" draggable="false" src="static/img/score_averages.png" style="width: 70%; margin-left: 15%;">
+ <figcaption style="text-align: center; margin: 20px;">
+ <strong>Fig 6:</strong> Ablation study of two-stage training.
+ </figcaption>
+ </figure>
+ </d-figure>
+
+ <p class="text">
+ <strong>OFT without SFT fails.</strong> Without the scientific knowledge base provided by SFT (purple curve), the model receives two scientifically incorrect images; the preference signal between two poor samples provides insufficient gradient information for meaningful learning.
+ </p>
+
+ <p class="text">
+ <strong>Masking suppresses noise from irrelevant features.</strong> Without masking (yellow curve), the model collapses because it tries to match all visual features of the preferred image. Halving the learning rate (red) prevents collapse but fails to improve SciScore. The masked configuration (blue) produces stable and consistent improvement.
+ </p>
+
+ <d-figure id="fig-case">
+ <figure>
+ <img data-zoomable="" draggable="false" src="static/img/case.png">
+ <figcaption>
+ <strong>Fig 7:</strong> The two-stage framework corrects scientific errors while preserving visual quality. Upper row: base FLUX.1[dev]. Lower row: our fine-tuned model. Each pair uses an identical random seed. Displayed prompts are simplified summaries.
+ </figcaption>
+ </figure>
+ </d-figure>
+ </div>
+
+ <div id="Conclusion">
+ <h1 class="text">Conclusion</h1>
+ <p class="text">
+ We investigate the gap between visual fidelity and scientific realism in image generation. We construct Science-T2I, an expert-annotated dataset of over 20k adversarial image pairs spanning 16 scientific domains, and use its test set to benchmark 18 recent models. We find that no model scores above 50 under implicit prompts, confirming that the bottleneck is not in visual rendering but in scientific reasoning. To address this, we develop SciScore, a reward model that surpasses LMMs and human evaluators by roughly 5 points. Building on SciScore, we propose a two-stage alignment framework that yields over 50% relative improvement on FLUX.1[dev]. These results demonstrate that scientific reasoning in image generation is not an inherent limitation but a consequence of missing data and misaligned training objectives.
+ </p>
+ </div>
+
+ </d-article>
+ <d-appendix>
+ <h3>BibTeX</h3>
+ <p class="bibtex">
+ @misc{li2025sciencet2iaddressingscientificillusions,<br>
+ &nbsp;&nbsp;title={Science-T2I: Addressing Scientific Illusions in Image Synthesis},<br>
+ &nbsp;&nbsp;author={Jialuo Li and Wenhao Chai and Xingyu Fu and Haiyang Xu and Saining Xie},<br>
+ &nbsp;&nbsp;year={2025},<br>
+ &nbsp;&nbsp;eprint={2504.13129},<br>
+ &nbsp;&nbsp;archivePrefix={arXiv},<br>
+ &nbsp;&nbsp;primaryClass={cs.CV},<br>
+ &nbsp;&nbsp;url={https://arxiv.org/abs/2504.13129},<br>
+ }
+ </p>
+
+ <d-footnote-list></d-footnote-list>
+ <d-citation-list></d-citation-list>
+ </d-appendix>
+
+ <d-bibliography src="bibliography.bib"></d-bibliography>
+ <script src="./static/js/nav-bar.js"></script>
+
+ <script type="text/javascript">
+ </script>
+ <script>
+ const showTable1Button = document.getElementById('showTable1');
+ const showTable2Button = document.getElementById('showTable2');
+ const table1Container = document.getElementById('table1Container');
+ const table2Container = document.getElementById('table2Container');
+
+ showTable1Button.addEventListener('click', () => {
+ table1Container.style.display = 'block';
+ table2Container.style.display = 'none';
+ showTable1Button.classList.add('active');
+ showTable2Button.classList.remove('active');
+ });
+
+ showTable2Button.addEventListener('click', () => {
+ table1Container.style.display = 'none';
+ table2Container.style.display = 'block';
+ showTable2Button.classList.add('active');
+ showTable1Button.classList.remove('active');
+ });
+
+ showTable1Button.classList.add('active');
+ </script>
+ </body>
 </html>
