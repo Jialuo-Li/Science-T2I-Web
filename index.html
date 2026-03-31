@@ -196,17 +196,20 @@
  </p>
  <div class="icon-row">
  <a href="#science-t2i" class="icon-link">
- <img src="static/img/icon/dataset.svg" alt="Science-T2I Logo" class="icon-jump">
- Science-T2I
+ <img src="static/img/icon/dataset.svg" alt="Dataset" class="icon-jump">
+ Dataset
  </a>
-
+ <a href="#benchmarking" class="icon-link">
+ <img src="static/img/icon/dataset.svg" alt="Benchmark" class="icon-jump">
+ Benchmark
+ </a>
  <a href="#sciscore" class="icon-link">
- <img src="static/img/icon/sciscore.svg" alt="Generalization Analysis Logo" class="icon-jump">
+ <img src="static/img/icon/sciscore.svg" alt="SciScore" class="icon-jump">
  SciScore
  </a>
  <a href="#finetuning" class="icon-link">
- <img src="static/img/icon/tuning.svg" alt="Generalization Analysis Logo" class="icon-jump">
- Reality<br>Alignment
+ <img src="static/img/icon/tuning.svg" alt="Alignment" class="icon-jump">
+ Alignment
  </a>
  </div>
  <p class="click-hint2" style="width: 85%; display: flex; align-items: center; justify-content: center;">
@@ -301,6 +304,10 @@
  <div><img src="static/img/cases/water.png" style="width:90%;margin-left:50px"></div>
  </div>
  <br>
+ </div>
+
+ <div id="benchmarking">
+ <h1 class="text">Benchmarking Scientific Image Synthesis</h1>
 
  <p class="text">
  <strong>Test Splits.</strong> We construct two manually annotated test sets covering the same scientific domains as the training data but containing no overlapping samples:
@@ -408,38 +415,13 @@
  });
  </script>
  </div>
- </div>
- <div id="sciscore">
- <h1 class="text">SciScore: Evaluating Scientific Authenticity of Images</h1>
 
- <p class="text">
- CLIP aligns textual and visual data effectively for general purposes, but struggles with implicit scientific prompts: it tends to embed implicit prompts closer to their superficial counterparts than their explicit counterparts. We introduce SciScore, a reward model fine-tuned on the Science-T2I training set that extends CLIP-H to assess whether a generated image reflects the scientific principles implied by a prompt.
- </p>
-
- <d-figure id="fig-res">
- <figure>
- <img data-zoomable="" draggable="false" src="static/img/SciScore_results.jpg">
- <figcaption>
- <strong>Tab 1:</strong> (Left) Performance comparison of different models on Science-T2I-S&C across different subjects. (Right) Performance of SciScore in ST and CT.
- </figcaption>
- </figure>
- </d-figure>
-
- <p class="text">
- <strong>SciScore surpasses human evaluators.</strong> SciScore achieves 93.14 on Science-T2I-S and 91.19 on Science-T2I-C, surpassing human evaluators (87.01 and 86.02) by roughly 6 and 5 points, respectively. The strong performance on Science-T2I-C is particularly notable, as this split embeds scientific reasoning tasks within diverse environmental contexts not present during training.
- </p>
-
- <p class="text">
- <strong>Subject-oriented tasks remain the primary challenge.</strong> Nearly all failure cases concentrate in subject-oriented tasks, which demand subject-specific knowledge (e.g., which metals produce which flame colors). Condition-oriented tasks, by contrast, involve generalizable visual patterns that transfer more easily across subjects.
- </p>
-
- <h2 class="text" style="text-align: center">Benchmarking Image Generation with SciScore</h2>
-
+ <h2 class="text" style="text-align: center">Image Generation Benchmark</h2>
  <p class="text">
  <strong>Evaluation Setup.</strong> We evaluate 18 image generation models on the Science-T2I test set using implicit prompts. Each model generates two images per prompt, scored by Qwen3.5-27B using per-tuple grading criteria. We report the normalized Reality Score (0–100) across Physics, Chemistry, and Biology.
  </p>
 
- <div class="leaderboard-main" style="text-align: center">
+ <div class="leaderboard-main" style="text-align: center; width: 120%; margin-left: -10%;">
  <table id="sortableTable3">
  <thead><tr><th>#</th><th>Model</th><th onclick="sortTable('sortableTable3', 2)">Overall</th><th onclick="sortTable('sortableTable3', 3)">Physics</th><th onclick="sortTable('sortableTable3', 4)">Chemistry</th><th onclick="sortTable('sortableTable3', 5)">Biology</th></tr></thead>
  <tbody>
@@ -467,6 +449,27 @@
 
  <p class="text">
  <strong>Current models lack scientific reasoning.</strong> Even the best model (FLUX.2[dev]) scores only 47.80 out of 100, and the majority cluster between 20 and 35. Biology poses the greatest challenge: no model exceeds 33%. When evaluated with explicit prompts that directly describe the intended scientific outcome, scores increase by roughly 35 points on average, confirming that the bottleneck is not in visual rendering but in scientific reasoning.
+ </p>
+ </div>
+
+ <div id="sciscore">
+ <h1 class="text">SciScore: A Reward Model for Scientific Image Assessment</h1>
+ <p class="text">
+ CLIP aligns textual and visual data effectively for general purposes, but struggles with implicit scientific prompts: it tends to embed implicit prompts closer to their superficial counterparts than their explicit counterparts. We introduce SciScore, a reward model fine-tuned on the Science-T2I training set that extends CLIP-H to assess whether a generated image reflects the scientific principles implied by a prompt.
+ </p>
+ <d-figure id="fig-res">
+ <figure>
+ <img data-zoomable="" draggable="false" src="static/img/SciScore_results.jpg">
+ <figcaption>
+ <strong>Tab 1:</strong> (Left) SciScore surpasses all VLMs, LMMs, and human evaluators on both test splits. (Right) Nearly all failures concentrate in subject-oriented tasks.
+ </figcaption>
+ </figure>
+ </d-figure>
+ <p class="text">
+ <strong>SciScore surpasses human evaluators.</strong> SciScore achieves 93.14 on Science-T2I-S and 91.19 on Science-T2I-C, surpassing human evaluators (87.01 and 86.02) by roughly 6 and 5 points, respectively. The strong performance on Science-T2I-C is particularly notable, as this split embeds scientific reasoning tasks within diverse environmental contexts not present during training.
+ </p>
+ <p class="text">
+ <strong>Subject-oriented tasks remain the primary challenge.</strong> Nearly all failure cases concentrate in subject-oriented tasks, which demand subject-specific knowledge (e.g., which metals produce which flame colors). Condition-oriented tasks, by contrast, involve generalizable visual patterns that transfer more easily across subjects.
  </p>
  </div>
 
