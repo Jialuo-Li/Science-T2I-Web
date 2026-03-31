@@ -219,68 +219,69 @@
  <hr>
 
  <div id="science-t2i">
- <h1 class="text">Science-T2I: An Adversarial Scientific Dataset</h1>
+ <h1 class="text">Science-T2I: Bridging Visual Imagination and Scientific Realism</h1>
  <p class="text">
- <strong>Task Overview.</strong> Science-T2I consists of 16 tasks spanning physics, chemistry and biology that require the model to infer or visualize concepts not explicitly stated in the prompts but rooted in underlying scientific principles.
+ Current image generation models produce visually plausible but scientifically incorrect outputs when prompted with descriptions that require physical reasoning. We identify two root causes: (1) existing training data rarely pairs scientific concepts with their correct visual manifestations, and (2) standard evaluation protocols do not test whether a model understands the science behind a prompt. To address both issues, we introduce Science-T2I, a dataset that challenges models to perform implicit scientific reasoning.
+ </p>
+ <p class="text">
+ <strong>Task overview.</strong> As shown below, Science-T2I consists of 16 tasks spanning physics, chemistry, and biology. Each task requires the model to infer or visualize a concept not explicitly stated in the prompt but rooted in an underlying scientific principle.
  </p>
 
  <d-figure id="fig-data-stat">
  <figure>
  <img data-zoomable="" draggable="false" src="static/img/data_stat.png">
  <figcaption style="text-align: center; margin: 20px;">
- <strong>Fig 2:</strong> Data statistics (left) of and wordcloud (right) of Science-T2I.
+ <strong>Fig 2:</strong> (Left) Science-T2I is organized into three scientific fields, each divided into specific categories. (Right) Word cloud of structured prompts in Science-T2I.
  </figcaption>
  </figure>
  </d-figure>
 
  <p class="text">
- <strong>Task Classification.</strong> Beyond a classification based on scientific disciplines, the tasks can be categorized into two distinct groups:
+ <strong>Task classification.</strong> Beyond scientific discipline, the tasks naturally fall into two categories that reveal distinct reasoning demands:
  </p>
-
  <p class="text">
- 1. <strong>Subject-oriented Task (ST)</strong> require scientific reasoning to discern how inherent differences between subjects lead to varying visual features under identical conditions.
+ 1. <strong>Subject-oriented Tasks (ST)</strong> require reasoning about how inherent differences between subjects lead to varying visual features under identical conditions. For example, different metals produce different flame colors.
  </p>
-
  <p class="text">
- 2. <strong>Condition-oriented Task (CT)</strong> focus on how a single condition affects various subjects. Scientific reasoning in these tasks centers on the applied condition, not the subject's individual properties.
+ 2. <strong>Condition-oriented Tasks (CT)</strong> focus on how a single condition affects the visual appearance of various subjects. Here, scientific reasoning centers on the applied condition rather than the subject's individual properties. For example, all objects float in the absence of gravity.
  </p>
 
  <d-figure id="fig-classification">
  <figure>
  <img data-zoomable="" draggable="false" src="static/img/classification.png">
  <figcaption style="text-align: center; margin: 20px;">
- <strong>Fig 3:</strong> Task classification of Science-T2I.
+ <strong>Fig 3:</strong> Subject-oriented vs. condition-oriented task classification. Ten tasks are condition-oriented and six are subject-oriented.
  </figcaption>
  </figure>
  </d-figure>
 
  <p class="text">
- <strong>Prompt Design.</strong> In Science-T2I, we categorize prompts into three types based on their use in scientific reasoning:
+ <strong>Prompt design.</strong> A central design choice is the three-tier prompt structure, which disentangles a model's scientific reasoning ability from its compositional rendering ability. For each task, we construct a tuple of three prompts:
  </p>
-
  <p class="text">
- 1. <strong>Implicit Prompt (IP)</strong> refers to prompts that imply visual characteristics or phenomena requiring scientific interpretation. For example, "an unripe apple" suggests the apple's color is green, but this is not explicitly stated.
+ 1. <strong>Implicit Prompt (IP)</strong> contains terms that imply certain visual characteristics requiring interpretative reasoning based on scientific knowledge. For example, "an unripe apple" suggests greenness without explicitly stating it.
  </p>
-
  <p class="text">
- 2. <strong>Explicit Prompt (EP)</strong> reformulates the IP into a clear, descriptive statement that results in a scientifically accurate depiction. For instance, "a green apple" explicitly conveys the apple's immaturity.
+ 2. <strong>Explicit Prompt (EP)</strong> reformulates the implicit prompt into a clear, descriptive statement that directly conveys the intended visual outcome. For instance, "a green apple" makes the expected appearance explicit.
  </p>
-
  <p class="text">
- 3. <strong>Superficial Prompt (SP)</strong> provides explicit but scientifically inaccurate descriptions, focusing on surface-level interpretations. For example, interpreting "an unripe apple" as "a red apple" is a superficial interpretation that lacks scientific accuracy.
+ 3. <strong>Superficial Prompt (SP)</strong> provides a plausible but scientifically incorrect interpretation, focusing only on surface-level associations. For example, "a red apple" interprets "unripe" based on the default visual prototype rather than the scientific implication.
+ </p>
+ <p class="text">
+ Together, the three prompt types serve complementary roles: the IP tests implicit reasoning, the EP establishes an upper bound on what the model can render when given direct instructions, and the SP provides a hard negative for preference-based training.
  </p>
 
  <d-figure id="fig-data-pipeline">
  <figure>
  <img data-zoomable="" draggable="false" src="static/img/dataset_pipeline.png">
  <figcaption style="text-align: center; margin: 20px;">
- <strong>Fig 4:</strong> Data curation pipeline of Science-T2I.
+ <strong>Fig 4:</strong> Data curation pipeline. GPT-4o generates structured templates, then expands each implicit prompt into explicit and superficial counterparts, guiding the synthesis of corresponding images.
  </figcaption>
  </figure>
  </d-figure>
 
  <p class="text">
- <strong>Data Curation.</strong> We utilize GPT-4o to create templates and generate corresponding prompts during the data curation process. These outputs are then used to guide T2I models for image generation. Following this, human annotators review and filter the data, incorporating insights from an additional website knowledgebase to ensure the reliability and accuracy of the final dataset.
+ <strong>Data curation.</strong> We leverage GPT-4o to generate structured templates and corresponding prompts for each task. The pipeline first produces implicit prompts from task-specific templates, then expands each into its explicit and superficial counterparts. These prompts are used to generate image pairs via image generation models. All generated data undergoes manual verification by domain experts, who cross-reference each tuple against established scientific knowledge.
  </p>
 
  <h2 class="text" style="text-align: center;">Science-T2I Examples</h2>
@@ -496,14 +497,19 @@
  </figure>
  </d-figure>
 
- <h2 class="text" style="text-align: center;">Experiment & Ablation Study</h2>
+ <h2 class="text" style="text-align: center;">Results and Ablation</h2>
  <p class="text">
- <strong>Relative Improvement Metric.</strong> To better assess model performance beyond raw evaluations, we observe that explicit prompts consistently yield higher scores than implicit ones, providing an upper-bound performance estimate. To quantify the benefits of finetuning, we introduce the Relative Improvement (RI) metric. Let \(SciScore_B^{IP}\) and \(SciScore_B^{EP}\) represent the SciScore of the base model under implicit and explicit prompts, respectively, and let \(SciScore_F^{IP}\) denote the SciScore of the finetuned model under implicit prompts. The RI is then defined as:
+ <strong>Relative improvement metric.</strong> Raw SciScore values are useful for comparing models but do not reveal how close a fine-tuned model is to its own ceiling. We observe that SciScore under explicit prompts consistently surpasses that under implicit prompts, providing a natural upper bound. To quantify progress toward this ceiling, we define the Relative Improvement (RI) metric:
  \[
  \begin{equation}
  RI = \frac{\text{SciScore}_F^{IP}-\text{SciScore}_B^{IP}}{\text{SciScore}_B^{EP}-\text{SciScore}_B^{IP}}
  \end{equation}
  \]
+ An RI of 100% would indicate that fine-tuning has fully closed the gap between implicit and explicit prompts.
+ </p>
+
+ <p class="text">
+ <strong>SFT and OFT together exceed the baseline by over 50%.</strong> The combined two-stage framework increases the score from 23.56 to 28.52 on Science-T2I-S (RI = 53.39%) and from 27.26 to 30.11 on Science-T2I-C (RI = 38.31%). SFT contributes the larger share of the improvement: it provides the foundational knowledge of what scientific images look like, while OFT refines the model's ability to activate that knowledge from implicit prompts.
  </p>
  <d-figure id="fig-exp_tuning">
  <figure>
@@ -522,7 +528,7 @@
  <figure>
  <img data-zoomable="" draggable="false" src="static/img/score_averages.png" style="width: 70%; margin-left: 15%;">
  <figcaption style="text-align: center; margin: 20px;">
- <strong>Fig 6:</strong> Ablation study of two-stage training.
+ <strong>Fig 6:</strong> SFT is essential before OFT, and masking stabilizes training. Without prior SFT (purple), OFT fails to improve SciScore. Without masking (yellow/red), performance becomes erratic or stalls.
  </figcaption>
  </figure>
  </d-figure>
