@@ -737,110 +737,41 @@ a:hover::after {
     font-size: 1.2rem;
   }
 /* ===== sortableTable3: Science-T2I Benchmark Leaderboard ===== */
-#sortableTable3 {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: #fff;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
-    font-size: 18px;
-}
-#sortableTable3 th, #sortableTable3 td {
-    padding: 8px;
-    transition: all 0.2s ease;
-}
-#sortableTable3 th {
-    cursor: pointer;
-    background-color: #4a5568;
-    color: white;
-    position: relative;
-    transition: all 0.3s ease;
-}
-#sortableTable3 th.sorted-asc::after {
-    content: " ▲";
-    position: absolute;
-    right: 0;
-    animation: fadeIn 0.5s ease;
-}
-#sortableTable3 th.sorted-desc::after {
-    content: " ▼";
-    position: absolute;
-    right: 0;
-    animation: fadeIn 0.5s ease;
-}
-#sortableTable3 tr:nth-child(even) {
-    background-color: #f7f9fc;
-}
-#sortableTable3 tr:hover {
-    background-color: #e8f4f8;
-    transform: scale(1.02);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
+/* Narrower container for table3 (only 6 columns) */
+#sortableTable3 { width: 100%; border-collapse: collapse; background-color: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.1); font-size: 18px; }
+#sortableTable3 th, #sortableTable3 td { padding: 8px; text-align: center; }
+#sortableTable3 th { cursor: pointer; color: white; position: relative; }
+#sortableTable3 th.sorted-asc::after { content: " ▲"; position: absolute; right: 0; }
+#sortableTable3 th.sorted-desc::after { content: " ▼"; position: absolute; right: 0; }
+#sortableTable3 tr:nth-child(even) { background-color: #f7f9fc; }
+#sortableTable3 tr:hover { background-color: #e8f4f8; transform: scale(1.01); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
 
-/* Cell colors by column */
+/* Cell colors: #=gray, Model=blue-gray, Overall=gray, Physics=blue, Chemistry=red, Biology=green */
 #sortableTable3 td:nth-child(1) { background-color: #f8fafc; }
 #sortableTable3 td:nth-child(2) { background-color: #e8eef9; }
 #sortableTable3 td:nth-child(3) { background-color: #edf2f7; }
 #sortableTable3 td:nth-child(4) { background-color: #F0F8FF; }
 #sortableTable3 td:nth-child(5) { background-color: #fff1f0; }
 #sortableTable3 td:nth-child(6) { background-color: #e6ffed; }
-
 #sortableTable3 tr:nth-child(odd) td { filter: brightness(0.98); }
-#sortableTable3 tr:hover td { filter: brightness(0.95); transition: all 0.3s ease; }
+#sortableTable3 tr:hover td { filter: brightness(0.95); }
 
-/* Header styles */
-#sortableTable3 thead th {
-    padding: 12px;
-    font-weight: 500;
-    text-align: center;
-    border: none;
-    position: sticky;
-    top: 0;
-    z-index: 1;
-    color: white;
-}
-#sortableTable3 thead tr:first-child th:nth-child(1),
-#sortableTable3 thead tr:first-child th:nth-child(2) {
-    background-color: #1a202c;
-}
-#sortableTable3 thead tr:first-child th[colspan="4"] {
-    background-color: #4a5568;
-}
-#sortableTable3 thead tr:nth-child(2) th:nth-child(1) { background-color: #4a5568; }
-#sortableTable3 thead tr:nth-child(2) th:nth-child(2) { background-color: #3C64AB; }
-#sortableTable3 thead tr:nth-child(2) th:nth-child(3) { background-color: #ab3c3c; }
-#sortableTable3 thead tr:nth-child(2) th:nth-child(4) { background-color: #4ca56f; }
+/* Single-row header: color per column */
+#sortableTable3 thead th { padding: 12px; font-weight: 500; border: none; position: sticky; top: 0; z-index: 1; }
+#sortableTable3 thead th:nth-child(1) { background-color: #1a202c; }
+#sortableTable3 thead th:nth-child(2) { background-color: #1a202c; }
+#sortableTable3 thead th:nth-child(3) { background-color: #4a5568; }
+#sortableTable3 thead th:nth-child(4) { background-color: #3C64AB; }
+#sortableTable3 thead th:nth-child(5) { background-color: #ab3c3c; }
+#sortableTable3 thead th:nth-child(6) { background-color: #4ca56f; }
+#sortableTable3 thead th:hover { filter: brightness(1.1); }
 
-#sortableTable3 thead th:hover {
-    filter: brightness(1.1);
-    transition: all 0.3s ease;
-}
-#sortableTable3 th.sorted-asc::after,
-#sortableTable3 th.sorted-desc::after {
-    margin-left: 8px;
-    font-size: 0.8em;
-}
-#sortableTable3 { border-collapse: collapse; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-#sortableTable3 th:hover { transform: none; background-color: inherit; }
-#sortableTable3 tbody tr { transition: all 0.3s ease; }
-
-/* Top 3 rows styling */
-#sortableTable3 tbody tr:nth-child(1) {
-    height: 80px;
-    background: linear-gradient(to bottom, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
-}
+/* Top 3 rows emphasis */
+#sortableTable3 tbody tr:nth-child(1) { height: 80px; }
 #sortableTable3 tbody tr:nth-child(1) td { font-size: 17px; font-weight: 525; color: #000; }
 #sortableTable3 tbody tr:nth-child(2) { height: 65px; }
 #sortableTable3 tbody tr:nth-child(2) td { font-size: 16px; font-weight: 500; color: #1a1a1a; }
 #sortableTable3 tbody tr:nth-child(3) { height: 50px; }
 #sortableTable3 tbody tr:nth-child(3) td { font-size: 15px; font-weight: 450; color: #333; }
-
-#sortableTable3 tbody tr { height: 40px; transition: all 0.3s ease; }
-#sortableTable3 tbody tr td {
-    font-size: 14px;
-    font-weight: 400;
-    color: #444;
-    vertical-align: middle;
-    transition: all 0.3s ease;
-}
-#sortableTable3 tbody td { vertical-align: middle; }
+#sortableTable3 tbody tr { height: 40px; }
+#sortableTable3 tbody tr td { font-size: 14px; font-weight: 400; color: #444; vertical-align: middle; }

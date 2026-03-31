@@ -35,8 +35,14 @@ function sortTable(tableId, columnIndex) {
     for (let header of headers) {
         header.classList.remove("sorted-asc", "sorted-desc");
     }
-    const clickedHeader = table.rows[1].cells[columnIndex-2];
-    clickedHeader.classList.add(isAscending ? "sorted-desc" : "sorted-asc");
+    const headerRows = table.tHead.rows;
+    if (headerRows.length > 1) {
+        const clickedHeader = headerRows[1].cells[columnIndex-2];
+        if (clickedHeader) clickedHeader.classList.add(isAscending ? "sorted-desc" : "sorted-asc");
+    } else {
+        const clickedHeader = headerRows[0].cells[columnIndex];
+        if (clickedHeader) clickedHeader.classList.add(isAscending ? "sorted-desc" : "sorted-asc");
+    }
 }
 
 function adjustFontSize(action) {
